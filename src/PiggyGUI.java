@@ -8,7 +8,7 @@ import javax.swing.border.LineBorder;
 
 /**
  * The following class represents a GUI for the Easter Egg.
- *
+ * Random change 2
  * @author Arwain Karlin
  * @version 1.0
  */
