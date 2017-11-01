@@ -61,6 +61,9 @@ public class PiggyGUI implements PropertyChangeListener {
                 "1/2 cup chocolate chips.\n Mix thoroughly to combine, bake at 360 for 21 minutes");
         jlabel2.setFont(new Font("Verdana", 1, 10));
         panel.add(jlabel3);
+        JLabel jlabel8 = new JLabel("Kerry Ferguson - ....");
+        jlabel8.setFont(new Font("Papyrus", 1, 10));
+        panel.add(jlabel8);
         panel.setBorder(new LineBorder(Color.BLACK)); // make it easy to see
         myWindow.add(panel);
 
