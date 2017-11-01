@@ -77,6 +77,10 @@ public class PiggyGUI implements PropertyChangeListener {
         varikLabel.setFont(new Font("Papyrus", 1, 14));
         panel.add(varikLabel);
         
+        JLabel jlabel8 = new JLabel("Kerry Ferguson - ....");
+        jlabel8.setFont(new Font("Papyrus", 1, 10));
+        panel.add(jlabel8);
+
         panel.setBorder(new LineBorder(Color.BLACK)); // make it easy to see
         myWindow.add(panel);
 
