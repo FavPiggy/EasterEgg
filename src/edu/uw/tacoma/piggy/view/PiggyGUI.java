@@ -1,3 +1,4 @@
+package edu.uw.tacoma.piggy.view;
 
 import java.awt.*;
 import java.awt.event.WindowEvent;
@@ -60,9 +61,6 @@ public class PiggyGUI implements PropertyChangeListener {
                 "1/2 cup chocolate chips.\n Mix thoroughly to combine, bake at 360 for 21 minutes");
         jlabel2.setFont(new Font("Verdana", 1, 10));
         panel.add(jlabel3);
-        JLabel jlabel9 = new JLabel("Varik Hoang - Zz.Zz.z.z..!\n");
-        jlabel9.setFont(new Font("Papyrus", 1, 30));
-        panel.add(jlabel9);
         panel.setBorder(new LineBorder(Color.BLACK)); // make it easy to see
         myWindow.add(panel);
 
