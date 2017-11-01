@@ -51,19 +51,36 @@ public class PiggyGUI implements PropertyChangeListener {
         JPanel panel = new JPanel();
         panel.getUI();
         panel.setLayout(new BoxLayout(panel, BoxLayout.PAGE_AXIS));
+        
         JLabel jlabel = new JLabel("We are Favorite Piggy!\n");
         jlabel.setFont(new Font("Verdana", 1, 20));
         panel.add(jlabel);
+        
+        //
         JLabel jlabel2 = new JLabel("Arwain Karlin - Coder for hire!\n");
-        jlabel2.setFont(new Font("Papyrus", 1, 10));
+        jlabel2.setFont(new Font("Papyrus", 1, 16));
         panel.add(jlabel2);
+        
+        //
         JLabel jlabel3 = new JLabel("Kirtwinder Gulati - 1/2 cup coder, 2 cups baker, 1 tsp vanilla and " +
                 "1/2 cup chocolate chips.\n Mix thoroughly to combine, bake at 360 for 21 minutes");
-        jlabel2.setFont(new Font("Verdana", 1, 10));
+        jlabel3.setFont(new Font("Papyrus", 1, 16));
         panel.add(jlabel3);
+        
+        //Cuong's Message
+        JLabel cuongMess = new JLabel("Cuong Tran - Coffee for Life!\n");
+        cuongMess.setFont(new Font("Papyrus", 1, 16));
+        panel.add(cuongMess);
+        
+      //Varik Message
+        JLabel varikLabel = new JLabel("Varik Hoang - Zz.Zz.z.z...");
+        varikLabel.setFont(new Font("Papyrus", 1, 14));
+        panel.add(varikLabel);
+        
         JLabel jlabel8 = new JLabel("Kerry Ferguson - ....");
         jlabel8.setFont(new Font("Papyrus", 1, 10));
         panel.add(jlabel8);
+
         panel.setBorder(new LineBorder(Color.BLACK)); // make it easy to see
         myWindow.add(panel);
 
