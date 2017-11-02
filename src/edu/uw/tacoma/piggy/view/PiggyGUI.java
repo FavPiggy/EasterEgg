@@ -83,7 +83,7 @@ public class PiggyGUI implements PropertyChangeListener {
         panel.add(jlabel8);
 
         // Mahad Message
-        JLabel jlabel9 = new JLabel("Mahad Kaboweyne - *insert cool fact here*");
+        JLabel jlabel9 = new JLabel("Mahad Kaboweyne -  *insert cool fact here*");
         jlabel9.setFont(new Font("Courier", 1, 16));
         panel.add(jlabel9);
 
