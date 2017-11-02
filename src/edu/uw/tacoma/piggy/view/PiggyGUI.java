@@ -53,7 +53,7 @@ public class PiggyGUI implements PropertyChangeListener {
         panel.setLayout(new BoxLayout(panel, BoxLayout.PAGE_AXIS));
         
         JLabel jlabel = new JLabel("We are Favorite Piggy!\n");
-        jlabel.setFont(new Font("Verdana", 1, 20));
+        jlabel.setFont(new Font("Papyrus", 1, 22));
         panel.add(jlabel);
         
         //
@@ -74,12 +74,18 @@ public class PiggyGUI implements PropertyChangeListener {
         
       //Varik Message
         JLabel varikLabel = new JLabel("Varik Hoang - Zz.Zz.z.z...");
-        varikLabel.setFont(new Font("Papyrus", 1, 14));
+        varikLabel.setFont(new Font("Papyrus", 1, 16));
         panel.add(varikLabel);
-        
+
+        // Kerry Message
         JLabel jlabel8 = new JLabel("Kerry Ferguson - ....");
-        jlabel8.setFont(new Font("Papyrus", 1, 10));
+        jlabel8.setFont(new Font("Papyrus", 1, 16));
         panel.add(jlabel8);
+
+        // Kerry Message
+        JLabel jlabel9 = new JLabel("Mahad Kaboweyne - Awesome coder!");
+        jlabel9.setFont(new Font("Papyrus", 1, 16));
+        panel.add(jlabel9);
 
         panel.setBorder(new LineBorder(Color.BLACK)); // make it easy to see
         myWindow.add(panel);
