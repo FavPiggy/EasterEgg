@@ -1,6 +1,9 @@
+package edu.uw.tacoma.piggy;
 import javax.swing.*;
 
-public class main {
+import edu.uw.tacoma.piggy.view.PiggyGUI;
+
+public class PiggyMain {
 
     public static void main(String[] happiness){
         for (final UIManager.LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
