@@ -20,7 +20,7 @@ public class UserEntity
 	/**
 	 * The field FirstName
 	 */
-	private Integer _FirstName;
+	private String _FirstName;
 	/**
 	 * The field LastName
 	 */
@@ -44,12 +44,12 @@ public class UserEntity
 	/**
 	 * The getter method for FirstName
 	 */
-	public Integer getFirstName() { return _FirstName; }
+	public String getFirstName() { return _FirstName; }
 	
 	/**
 	 * The setter method for FirstName
 	 */
-	public void setFirstName(Integer _FirstName) { this._FirstName = _FirstName; }
+	public void setFirstName(String _FirstName) { this._FirstName = _FirstName; }
 
 	/**
 	 * The getter method for LastName
@@ -78,7 +78,7 @@ public class UserEntity
 	public void initialUser()
 	{
 		setUserID(0);
-		setFirstName(0);
+		setFirstName("");
 		setLastName("");
 		setPhoneNumber("");
 	}
@@ -93,7 +93,7 @@ public class UserEntity
 	 * @author Cuong_Tran
 	 * The constructor with given fields' values for User
 	 */
-	public UserEntity(Integer _UserID,Integer _FirstName,String _LastName,String _PhoneNumber) // need to be data type default value
+	public UserEntity(Integer _UserID,String _FirstName,String _LastName,String _PhoneNumber) // need to be data type default value
 	{
 		initialUser();
 		setUserID(_UserID);
