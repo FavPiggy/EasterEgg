@@ -1,12 +1,8 @@
 package edu.uw.tacoma.piggy.model.entity;
 
 
-import java.sql.*;
 import java.io.FileOutputStream;
 import java.io.ObjectOutputStream;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 
 /**
  * This class represents for a MemberRole
