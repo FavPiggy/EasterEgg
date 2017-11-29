@@ -96,7 +96,6 @@ public class PiggyGUI implements PropertyChangeListener {
     /**
      * Below initializes an exit action when the quit button is pushed.
      */
-    @Override
     public void propertyChange(final PropertyChangeEvent theEvent) {
         if ("Goodbye".equals(theEvent.getPropertyName())) {
             myWindow.dispatchEvent(new WindowEvent(myWindow, WindowEvent.WINDOW_CLOSING));
