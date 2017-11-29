@@ -7,7 +7,7 @@ import java.sql.Statement;
 import java.util.List;
 import java.util.ArrayList;
 
-import edu.uw.tacoma.piggy.PiggyConst;
+import edu.uw.tacoma.piggy.PiggyUtilities;
 import static edu.uw.tacoma.piggy.PiggyMain.DateFormatter;
 import edu.uw.tacoma.piggy.model.entity.CategoryEntity;
 
@@ -35,14 +35,14 @@ public class CategoryDAO
 			// Create a connection. The first command line parameter is
 			// the directory containing the .csv files.
 			// A single connection is thread-safe for use by several threads.
-			Connection conn = DriverManager.getConnection(PiggyConst.DRIVER_PATH);
+			Connection conn = DriverManager.getConnection(PiggyUtilities.getDriver());
 
 			// Create a Statement object to execute the query with.
 			// A Statement is not thread-safe.
 			Statement stmt = conn.createStatement();
 
 			// Select the ID and NAME columns from sample.csv
-			ResultSet results = stmt.executeQuery("select * from Category");
+			ResultSet results = stmt.executeQuery("select * from category");
 			while (results.next())
 			{
 				CategoryEntity entity = new CategoryEntity();
@@ -84,14 +84,14 @@ public class CategoryDAO
 			// Create a connection. The first command line parameter is
 			// the directory containing the .csv files.
 			// A single connection is thread-safe for use by several threads.
-			Connection conn = DriverManager.getConnection(PiggyConst.DRIVER_PATH);
+			Connection conn = DriverManager.getConnection(PiggyUtilities.getDriver());
 
 			// Create a Statement object to execute the query with.
 			// A Statement is not thread-safe.
 			Statement stmt = conn.createStatement();
 
 			// Select the ID and NAME columns from sample.csv
-			ResultSet results = stmt.executeQuery("select * from Category where " + field + " = '" + value + "'");
+			ResultSet results = stmt.executeQuery("select * from category where " + field + " = '" + value + "'");
 			while (results.next())
 			{
 				CategoryEntity entity = new CategoryEntity();

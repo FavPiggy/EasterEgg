@@ -22,11 +22,9 @@
 			<scope>test</scope>
 		</dependency>
 		<dependency>
-			<groupId>csvjdbc</groupId>
+			<groupId>net.sourceforge.csvjdbc</groupId>
 			<artifactId>csvjdbc</artifactId>
-			<scope>system</scope>
-			<version>1.0-34</version>
-			<systemPath>${basedir}/lib/csvjdbc-1.0-34.jar</systemPath>
+			<version>1.0.28</version>
 		</dependency>
 	</dependencies>
 
