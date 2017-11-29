@@ -7,6 +7,8 @@ import java.sql.Statement;
 import java.util.List;
 import java.util.ArrayList;
 
+import edu.uw.tacoma.piggy.PiggyConst;
+import static edu.uw.tacoma.piggy.PiggyMain.DateFormatter;
 import edu.uw.tacoma.piggy.model.entity.CategoryEntity;
 
 /**
@@ -33,7 +35,7 @@ public class CategoryDAO
 			// Create a connection. The first command line parameter is
 			// the directory containing the .csv files.
 			// A single connection is thread-safe for use by several threads.
-			Connection conn = DriverManager.getConnection("jdbc:relique:csv:db");
+			Connection conn = DriverManager.getConnection(PiggyConst.DRIVER_PATH);
 
 			// Create a Statement object to execute the query with.
 			// A Statement is not thread-safe.
@@ -47,7 +49,7 @@ public class CategoryDAO
 				entity.setCatID(results.getInt(1));
 				entity.setCatName(results.getString(2));
 				entity.setDescription(results.getString(3));
-				entity.setDateCreated(results.getDate(4));
+				entity.setDateCreated(DateFormatter.parse(results.getString(4)));
 				list.add(entity);
 			}
 
@@ -55,6 +57,7 @@ public class CategoryDAO
 		}
 		catch (Exception ex)
 		{
+			ex.printStackTrace();
 		}
 
 		return list;
@@ -81,7 +84,7 @@ public class CategoryDAO
 			// Create a connection. The first command line parameter is
 			// the directory containing the .csv files.
 			// A single connection is thread-safe for use by several threads.
-			Connection conn = DriverManager.getConnection("jdbc:relique:csv:db");
+			Connection conn = DriverManager.getConnection(PiggyConst.DRIVER_PATH);
 
 			// Create a Statement object to execute the query with.
 			// A Statement is not thread-safe.
@@ -95,7 +98,7 @@ public class CategoryDAO
 				entity.setCatID(results.getInt(1));
 				entity.setCatName(results.getString(2));
 				entity.setDescription(results.getString(3));
-				entity.setDateCreated(results.getDate(4));
+				entity.setDateCreated(DateFormatter.parse(results.getString(4)));
 				list.add(entity);
 			}
 
@@ -103,6 +106,7 @@ public class CategoryDAO
 		}
 		catch (Exception ex)
 		{
+			ex.printStackTrace();
 		}
 
 		return list;
