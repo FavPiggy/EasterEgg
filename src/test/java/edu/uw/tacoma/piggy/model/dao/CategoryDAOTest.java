@@ -24,4 +24,17 @@ extends TestCase
 		List<CategoryEntity> list = CategoryDAO.listCategory("ID", "0");
 		Assert.assertEquals("The test list category method failed ", 1, list.size());
 	}
+	
+	public void testListCategoryName()
+	{
+		List<CategoryEntity> list = CategoryDAO.listCategory("Name", "Internal Project");
+		Assert.assertEquals("The test list category method failed ", 1, list.size());
+	}
+	
+	public void testListDescription()
+	{
+		List<CategoryEntity> list = CategoryDAO.listCategory("Description", 
+				"The projects are sent to other countries ...");
+		Assert.assertEquals("The test list category method failed ", 1, list.size());
+	}
 }

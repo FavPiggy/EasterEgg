@@ -7,11 +7,12 @@ import java.sql.Statement;
 import java.util.List;
 import java.util.ArrayList;
 
+import edu.uw.tacoma.piggy.PiggyUtilities;
 import edu.uw.tacoma.piggy.model.entity.TaskEntity;
 
 /**
  * This class contains static method to check DAO for Task.
- * @author Cuong Tran
+ * @author Cuong Tran, Varik Hoang
  */
 public class TaskDAO
 {
@@ -33,7 +34,7 @@ public class TaskDAO
 			// Create a connection. The first command line parameter is
 			// the directory containing the .csv files.
 			// A single connection is thread-safe for use by several threads.
-			Connection conn = DriverManager.getConnection("jdbc:relique:csv:db");
+			Connection conn = DriverManager.getConnection(PiggyUtilities.getDriver());
 
 			// Create a Statement object to execute the query with.
 			// A Statement is not thread-safe.
@@ -85,7 +86,7 @@ public class TaskDAO
 			// Create a connection. The first command line parameter is
 			// the directory containing the .csv files.
 			// A single connection is thread-safe for use by several threads.
-			Connection conn = DriverManager.getConnection("jdbc:relique:csv:db");
+			Connection conn = DriverManager.getConnection(PiggyUtilities.getDriver());
 
 			// Create a Statement object to execute the query with.
 			// A Statement is not thread-safe.

@@ -42,17 +42,17 @@ extends TestCase
 	
 	public void testGetCatID()
 	{
-		Assert.assertEquals("The test setCatID method failed ", 0, new CategoryEntity().getCatID().intValue());
+		Assert.assertEquals("The test getCatID method failed ", 0, new CategoryEntity().getCatID().intValue());
 	}
 	
 	public void testGetCatName()
 	{
-		Assert.assertEquals("The test setCatID method failed ", "", new CategoryEntity().getCatName());
+		Assert.assertEquals("The test getCatName method failed ", "", new CategoryEntity().getCatName());
 	}
 	
 	public void testGetDescription()
 	{
-		Assert.assertEquals("The test setCatID method failed ", "", new CategoryEntity().getDescription());
+		Assert.assertEquals("The test getDescription method failed ", "", new CategoryEntity().getDescription());
 	}
 	
 	public void testSetCatID()
@@ -64,12 +64,12 @@ extends TestCase
 	public void testSetCatName()
 	{
 		CategoryEntity entity = new CategoryEntity(10, "Internal Project", "...", new Date());
-		Assert.assertEquals("The test setCatID method failed ", "Internal Project", entity.getCatName());
+		Assert.assertEquals("The test setCatName method failed ", "Internal Project", entity.getCatName());
 	}
 	
 	public void testSetDescription()
 	{
 		CategoryEntity entity = new CategoryEntity(10, "Internal Project", "...", new Date());
-		Assert.assertEquals("The test setCatID method failed ", "...", entity.getDescription());
+		Assert.assertEquals("The test setDescription method failed ", "...", entity.getDescription());
 	}
 }
