@@ -1,0 +1,7 @@
+RoleID,RoleName,Description,DateCreated
+1,"Plumbing","Working with water and plumbing ...",2017-01-01
+2,"Electric","Working with circuits and outlets ...",2017-01-01
+3,"Carpenter","Working with shaping wood ...",2017-01-01
+4,"Roofing","Working with fixing and building roofs ...",2017-01-01
+5,"Foundation","Working with creating stable foundation for buildings ...",2017-01-01
+6,"Landscaping","Working and customizing the land ...",2017-01-01
