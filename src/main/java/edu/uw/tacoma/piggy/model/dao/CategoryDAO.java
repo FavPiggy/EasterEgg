@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.ArrayList;
 
 import edu.uw.tacoma.piggy.PiggyUtilities;
-import static edu.uw.tacoma.piggy.PiggyMain.DateFormatter;
+import static edu.uw.tacoma.piggy.PiggyUtilities.DateFormatter;
 import edu.uw.tacoma.piggy.model.entity.CategoryEntity;
 
 /**
