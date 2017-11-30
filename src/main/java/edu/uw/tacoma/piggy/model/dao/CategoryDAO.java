@@ -13,7 +13,7 @@ import edu.uw.tacoma.piggy.model.entity.CategoryEntity;
 
 /**
  * This class contains static method to check DAO for Category.
- * @author Cuong Tran
+ * @author Cuong Tran, Varik Hoang
  */
 public class CategoryDAO
 {

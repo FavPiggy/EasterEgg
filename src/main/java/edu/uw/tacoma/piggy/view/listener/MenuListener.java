@@ -5,6 +5,10 @@ import java.awt.event.ActionListener;
 
 import edu.uw.tacoma.piggy.view.PiggyViewConst;
 
+/**
+ * The class for menu listener
+ * @author Varik Hoang
+ */
 public class MenuListener
 implements ActionListener
 {
