@@ -2,7 +2,9 @@ package edu.uw.tacoma.piggy.model.entity;
 
 import java.io.FileOutputStream;
 import java.io.ObjectOutputStream;
-import java.util.Date;
+
+import java.util.Calendar;
+import java.sql.Date;
 
 /**
  * This class represents for a Project
@@ -111,8 +113,7 @@ public class ProjectEntity
 	public void setDateCreated(Date _DateCreated) { this._DateCreated = _DateCreated; }
 
 	/**
-	 * @author Varik Hoang
-	 * The method initialize the default value for fields
+	 * The method initializes fields
 	 */
 	public void initialProject()
 	{
@@ -120,11 +121,11 @@ public class ProjectEntity
 		setProjectName("");
 		setProjectAbbr("");
 		setDescription("");
-		setStartDate(null);
+		setStartDate(new Date(Calendar.getInstance().getTime().getTime()));
 		setCategoryID(0);
-		setDateCreated(null);
+		setDateCreated(new Date(Calendar.getInstance().getTime().getTime()));
 	}
-
+	
 	/**
 	 * @author Cuong_Tran
 	 * The default constructor for Project
@@ -137,7 +138,6 @@ public class ProjectEntity
 	 */
 	public ProjectEntity(Integer _ProjectID,String _ProjectName,String _ProjectAbbr,String _Description,Date _StartDate,Integer _CategoryID,Date _DateCreated) // need to be data type default value
 	{
-		initialProject();
 		setProjectID(_ProjectID);
 		setProjectName(_ProjectName);
 		setProjectAbbr(_ProjectAbbr);

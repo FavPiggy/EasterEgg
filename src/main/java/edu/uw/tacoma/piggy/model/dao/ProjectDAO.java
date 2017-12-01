@@ -9,25 +9,25 @@ import java.util.List;
 import java.util.ArrayList;
 
 import edu.uw.tacoma.piggy.PiggyUtilities;
-import edu.uw.tacoma.piggy.model.entity.CategoryEntity;
+import edu.uw.tacoma.piggy.model.entity.ProjectEntity;
 
 /**
- * This class contains static method to check DAO for Category.
+ * This class contains static method to check DAO for Project.
  * @author Varik Hoang
  */
-public class CategoryDAO
+public class ProjectDAO
 {
-	private static final String SELECT = "select * from Category ";
+	private static final String SELECT = "select * from Project ";
 	
 	/**
-	 * The method return a list of Category.
+	 * The method return a list of Project.
 	 * @author Varik Hoang
-	 * @return return a list of Category
+	 * @return return a list of Project
 	 * @throws SQLException
 	 */
-	public static List<CategoryEntity> listCategory()
+	public static List<ProjectEntity> listProject()
 	{
-		List<CategoryEntity> list = new ArrayList<CategoryEntity>();
+		List<ProjectEntity> list = new ArrayList<ProjectEntity>();
 		
 		try
 		{
@@ -37,10 +37,13 @@ public class CategoryDAO
 			
 			while(resultset.next())
 			{
-				CategoryEntity entity = new CategoryEntity();
-				entity.setCatID(resultset.getInt("CatID"));
-				entity.setCatName(resultset.getString("CatName"));
+				ProjectEntity entity = new ProjectEntity();
+				entity.setProjectID(resultset.getInt("ProjectID"));
+				entity.setProjectName(resultset.getString("ProjectName"));
+				entity.setProjectAbbr(resultset.getString("ProjectAbbr"));
 				entity.setDescription(resultset.getString("Description"));
+				entity.setStartDate(resultset.getDate("StartDate"));
+				entity.setCategoryID(resultset.getInt("CategoryID"));
 				entity.setDateCreated(resultset.getDate("DateCreated"));
 				list.add(entity);
             }
@@ -51,14 +54,14 @@ public class CategoryDAO
 	}
 	
 	/**
-	 * The method returns a list of Category with condition
+	 * The method returns a list of Project with condition
 	 * @author Varik Hoang
-	 * @return return a list of Category with condition
+	 * @return return a list of Project with condition
 	 * @throws SQLException
 	 */
-	public static List<CategoryEntity> listCategory(String condition)
+	public static List<ProjectEntity> listProject(String condition)
 	{
-		List<CategoryEntity> list = new ArrayList<CategoryEntity>();
+		List<ProjectEntity> list = new ArrayList<ProjectEntity>();
 		
 		try
 		{
@@ -68,10 +71,13 @@ public class CategoryDAO
 			
 			while(resultset.next())
 			{
-				CategoryEntity entity = new CategoryEntity();
-				entity.setCatID(resultset.getInt("CatID"));
-				entity.setCatName(resultset.getString("CatName"));
+				ProjectEntity entity = new ProjectEntity();
+				entity.setProjectID(resultset.getInt("ProjectID"));
+				entity.setProjectName(resultset.getString("ProjectName"));
+				entity.setProjectAbbr(resultset.getString("ProjectAbbr"));
 				entity.setDescription(resultset.getString("Description"));
+				entity.setStartDate(resultset.getDate("StartDate"));
+				entity.setCategoryID(resultset.getInt("CategoryID"));
 				entity.setDateCreated(resultset.getDate("DateCreated"));
 				list.add(entity);
             }
@@ -82,12 +88,12 @@ public class CategoryDAO
 	}
 	
 	/**
-	 * The method inserts a Category
+	 * The method inserts a Project
 	 * @author Varik Hoang
 	 * @return return true if inserting successfully
 	 * @throws SQLException
 	 */
-	public static boolean insert(CategoryEntity entity)
+	public static boolean insert(ProjectEntity entity)
 	{
 		int resultset = 0;
 		
@@ -97,10 +103,13 @@ public class CategoryDAO
 			Statement statement = conn.createStatement();
 			
 			StringBuilder builder = new StringBuilder();
-			builder.append("insert into Category values(");
-			builder.append("").append(entity.getCatID()).append(",");
-			builder.append("'").append(entity.getCatName()).append("',");
+			builder.append("insert into Project values(");
+			builder.append("").append(entity.getProjectID()).append(",");
+			builder.append("'").append(entity.getProjectName()).append("',");
+			builder.append("'").append(entity.getProjectAbbr()).append("',");
 			builder.append("'").append(entity.getDescription()).append("',");
+			builder.append("#").append(entity.getStartDate()).append("#,");
+			builder.append("").append(entity.getCategoryID()).append(",");
 			builder.append("#").append(entity.getDateCreated()).append("#,");
 			builder.delete(builder.length() - 1, builder.length());
 			builder.append(");");
@@ -113,12 +122,12 @@ public class CategoryDAO
 	}
 	
 	/**
-	 * The method updates a Category
+	 * The method updates a Project
 	 * @author Varik Hoang
 	 * @return return true if updating successfully
 	 * @throws SQLException
 	 */
-	public static boolean update(CategoryEntity entity)
+	public static boolean update(ProjectEntity entity)
 	{
 		int resultset = 0;
 		
@@ -128,15 +137,18 @@ public class CategoryDAO
 			Statement statement = conn.createStatement();
 			
 			StringBuilder builder = new StringBuilder();
-			builder.append("update Category set ");
-			builder.append("CatID=").append("").append(entity.getCatID()).append(", ");
-			builder.append("CatName=").append("'").append(entity.getCatName()).append("', ");
+			builder.append("update Project set ");
+			builder.append("ProjectID=").append("").append(entity.getProjectID()).append(", ");
+			builder.append("ProjectName=").append("'").append(entity.getProjectName()).append("', ");
+			builder.append("ProjectAbbr=").append("'").append(entity.getProjectAbbr()).append("', ");
 			builder.append("Description=").append("'").append(entity.getDescription()).append("', ");
+			builder.append("StartDate=").append("#").append(entity.getStartDate()).append("#, ");
+			builder.append("CategoryID=").append("").append(entity.getCategoryID()).append(", ");
 			builder.append("DateCreated=").append("#").append(entity.getDateCreated()).append("#, ");
 			
 			builder.delete(builder.length() - 2, builder.length());
 			builder.append(" where");
-			builder.append(" CatID=").append(entity.getCatID()).append(" and");
+			builder.append(" ProjectID=").append(entity.getProjectID()).append(" and");
 			
 			builder.delete(builder.length() - 4, builder.length());
 			builder.append(";");
@@ -149,12 +161,12 @@ public class CategoryDAO
 	}
 	
 	/**
-	 * The method deletes a Category
+	 * The method deletes a Project
 	 * @author Varik Hoang
 	 * @return return true if deleting successfully
 	 * @throws SQLException
 	 */
-	public static boolean delete(CategoryEntity entity)
+	public static boolean delete(ProjectEntity entity)
 	{
 		int resultset = 0;
 		
@@ -164,9 +176,9 @@ public class CategoryDAO
 			Statement statement = conn.createStatement();
 			
 			StringBuilder builder = new StringBuilder();
-			builder.append("delete from Category");
+			builder.append("delete from Project");
 			builder.append(" where");
-			builder.append(" CatID=").append(entity.getCatID()).append(" and");
+			builder.append(" ProjectID=").append(entity.getProjectID()).append(" and");
 			
 			builder.delete(builder.length() - 4, builder.length());
 			builder.append(";");

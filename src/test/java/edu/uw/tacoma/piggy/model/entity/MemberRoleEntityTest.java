@@ -7,10 +7,10 @@ import junit.framework.Assert;
 import junit.framework.TestCase;
 
 /**
- * The test case for the Category entity
+ * The test case for the MemberRole entity
  * @author Kirtwinder Gulati
  */
-public class CategoryEntityTest
+public class MemberRoleEntityTest
 extends TestCase
 {
 	public void testConstructor()
@@ -19,7 +19,7 @@ extends TestCase
 		
 		try
 		{
-			new CategoryEntity();
+			new MemberRoleEntity();
 			succeed = true;
 		}
 		catch (Exception ex) {}
@@ -33,10 +33,9 @@ extends TestCase
 		
 		try
 		{
-			CategoryEntity entity = new CategoryEntity();
-			entity.setCatID(0);
-			entity.setCatName("");
-			entity.setDescription("");
+			MemberRoleEntity entity = new MemberRoleEntity();
+			entity.setMemberID(0);
+			entity.setRoleID(0);
 			entity.setDateCreated(new Date(Calendar.getInstance().getTime().getTime()));
 			succeed = true;
 		}

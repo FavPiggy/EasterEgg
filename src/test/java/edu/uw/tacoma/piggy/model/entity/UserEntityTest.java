@@ -1,16 +1,13 @@
 package edu.uw.tacoma.piggy.model.entity;
 
-import java.util.Calendar;
-import java.sql.Date;
-
 import junit.framework.Assert;
 import junit.framework.TestCase;
 
 /**
- * The test case for the Category entity
+ * The test case for the User entity
  * @author Kirtwinder Gulati
  */
-public class CategoryEntityTest
+public class UserEntityTest
 extends TestCase
 {
 	public void testConstructor()
@@ -19,7 +16,7 @@ extends TestCase
 		
 		try
 		{
-			new CategoryEntity();
+			new UserEntity();
 			succeed = true;
 		}
 		catch (Exception ex) {}
@@ -33,11 +30,11 @@ extends TestCase
 		
 		try
 		{
-			CategoryEntity entity = new CategoryEntity();
-			entity.setCatID(0);
-			entity.setCatName("");
-			entity.setDescription("");
-			entity.setDateCreated(new Date(Calendar.getInstance().getTime().getTime()));
+			UserEntity entity = new UserEntity();
+			entity.setUserID(0);
+			entity.setFirstName("");
+			entity.setLastName("");
+			entity.setPhoneNumber("");
 			succeed = true;
 		}
 		catch (Exception ex) {}

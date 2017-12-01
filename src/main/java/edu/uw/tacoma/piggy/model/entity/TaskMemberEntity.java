@@ -3,28 +3,32 @@ package edu.uw.tacoma.piggy.model.entity;
 import java.io.FileOutputStream;
 import java.io.ObjectOutputStream;
 
-import java.util.Calendar;
-import java.sql.Date;
 
 /**
- * This class represents for a MemberRole
+ * This class represents for a TaskMember
  * @author Cuong Tran
  */
-public class MemberRoleEntity
+public class TaskMemberEntity
 {
+	/**
+	 * The field TaskID
+	 */
+	private Integer _TaskID;
 	/**
 	 * The field MemberID
 	 */
 	private Integer _MemberID;
-	/**
-	 * The field RoleID
-	 */
-	private Integer _RoleID;
-	/**
-	 * The field DateCreated
-	 */
-	private Date _DateCreated;
 
+
+	/**
+	 * The getter method for TaskID
+	 */
+	public Integer getTaskID() { return _TaskID; }
+	
+	/**
+	 * The setter method for TaskID
+	 */
+	public void setTaskID(Integer _TaskID) { this._TaskID = _TaskID; }
 
 	/**
 	 * The getter method for MemberID
@@ -37,50 +41,28 @@ public class MemberRoleEntity
 	public void setMemberID(Integer _MemberID) { this._MemberID = _MemberID; }
 
 	/**
-	 * The getter method for RoleID
-	 */
-	public Integer getRoleID() { return _RoleID; }
-	
-	/**
-	 * The setter method for RoleID
-	 */
-	public void setRoleID(Integer _RoleID) { this._RoleID = _RoleID; }
-
-	/**
-	 * The getter method for DateCreated
-	 */
-	public Date getDateCreated() { return _DateCreated; }
-	
-	/**
-	 * The setter method for DateCreated
-	 */
-	public void setDateCreated(Date _DateCreated) { this._DateCreated = _DateCreated; }
-
-	/**
 	 * The method initializes fields
 	 */
-	public void initialMemberRole()
+	public void initialTaskMember()
 	{
+		setTaskID(0);
 		setMemberID(0);
-		setRoleID(0);
-		setDateCreated(new Date(Calendar.getInstance().getTime().getTime()));
 	}
 	
 	/**
 	 * @author Cuong_Tran
-	 * The default constructor for MemberRole
+	 * The default constructor for TaskMember
 	 */
-	public MemberRoleEntity() { initialMemberRole(); }
+	public TaskMemberEntity() { initialTaskMember(); }
 	
 	/**
 	 * @author Cuong_Tran
-	 * The constructor with given fields' values for MemberRole
+	 * The constructor with given fields' values for TaskMember
 	 */
-	public MemberRoleEntity(Integer _MemberID,Integer _RoleID,Date _DateCreated) // need to be data type default value
+	public TaskMemberEntity(Integer _TaskID,Integer _MemberID) // need to be data type default value
 	{
+		setTaskID(_TaskID);
 		setMemberID(_MemberID);
-		setRoleID(_RoleID);
-		setDateCreated(_DateCreated);
 	}
 	
 	/**
@@ -100,7 +82,7 @@ public class MemberRoleEntity
 	public void export (String name) 
 	{
 		if (name == null)
-			name = "MemberRole";
+			name = "TaskMember";
 		
 		ObjectOutputStream oos = null;
 		FileOutputStream fout = null;
@@ -123,14 +105,13 @@ public class MemberRoleEntity
 
 	/**
 	 * @author Cuong_Tran
-	 * The method represent MemberRole as string.
+	 * The method represent TaskMember as string.
 	 */
 	public String toString()
 	{
 		StringBuilder result = new StringBuilder();
+		result.append("TaskID=").append(getTaskID() == null ? "NULL" : getTaskID()).append(",");
 		result.append("MemberID=").append(getMemberID() == null ? "NULL" : getMemberID()).append(",");
-		result.append("RoleID=").append(getRoleID() == null ? "NULL" : getRoleID()).append(",");
-		result.append("DateCreated=").append(getDateCreated() == null ? "NULL" : getDateCreated()).append(",");
 		// result = result.substring(0, result.length() - 1);
 		return "{" + result.toString() + "}";
 	}

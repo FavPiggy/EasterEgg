@@ -9,25 +9,25 @@ import java.util.List;
 import java.util.ArrayList;
 
 import edu.uw.tacoma.piggy.PiggyUtilities;
-import edu.uw.tacoma.piggy.model.entity.CategoryEntity;
+import edu.uw.tacoma.piggy.model.entity.TaskMemberEntity;
 
 /**
- * This class contains static method to check DAO for Category.
+ * This class contains static method to check DAO for TaskMember.
  * @author Varik Hoang
  */
-public class CategoryDAO
+public class TaskMemberDAO
 {
-	private static final String SELECT = "select * from Category ";
+	private static final String SELECT = "select * from TaskMember ";
 	
 	/**
-	 * The method return a list of Category.
+	 * The method return a list of TaskMember.
 	 * @author Varik Hoang
-	 * @return return a list of Category
+	 * @return return a list of TaskMember
 	 * @throws SQLException
 	 */
-	public static List<CategoryEntity> listCategory()
+	public static List<TaskMemberEntity> listTaskMember()
 	{
-		List<CategoryEntity> list = new ArrayList<CategoryEntity>();
+		List<TaskMemberEntity> list = new ArrayList<TaskMemberEntity>();
 		
 		try
 		{
@@ -37,11 +37,9 @@ public class CategoryDAO
 			
 			while(resultset.next())
 			{
-				CategoryEntity entity = new CategoryEntity();
-				entity.setCatID(resultset.getInt("CatID"));
-				entity.setCatName(resultset.getString("CatName"));
-				entity.setDescription(resultset.getString("Description"));
-				entity.setDateCreated(resultset.getDate("DateCreated"));
+				TaskMemberEntity entity = new TaskMemberEntity();
+				entity.setTaskID(resultset.getInt("TaskID"));
+				entity.setMemberID(resultset.getInt("MemberID"));
 				list.add(entity);
             }
 		}
@@ -51,14 +49,14 @@ public class CategoryDAO
 	}
 	
 	/**
-	 * The method returns a list of Category with condition
+	 * The method returns a list of TaskMember with condition
 	 * @author Varik Hoang
-	 * @return return a list of Category with condition
+	 * @return return a list of TaskMember with condition
 	 * @throws SQLException
 	 */
-	public static List<CategoryEntity> listCategory(String condition)
+	public static List<TaskMemberEntity> listTaskMember(String condition)
 	{
-		List<CategoryEntity> list = new ArrayList<CategoryEntity>();
+		List<TaskMemberEntity> list = new ArrayList<TaskMemberEntity>();
 		
 		try
 		{
@@ -68,11 +66,9 @@ public class CategoryDAO
 			
 			while(resultset.next())
 			{
-				CategoryEntity entity = new CategoryEntity();
-				entity.setCatID(resultset.getInt("CatID"));
-				entity.setCatName(resultset.getString("CatName"));
-				entity.setDescription(resultset.getString("Description"));
-				entity.setDateCreated(resultset.getDate("DateCreated"));
+				TaskMemberEntity entity = new TaskMemberEntity();
+				entity.setTaskID(resultset.getInt("TaskID"));
+				entity.setMemberID(resultset.getInt("MemberID"));
 				list.add(entity);
             }
 		}
@@ -82,12 +78,12 @@ public class CategoryDAO
 	}
 	
 	/**
-	 * The method inserts a Category
+	 * The method inserts a TaskMember
 	 * @author Varik Hoang
 	 * @return return true if inserting successfully
 	 * @throws SQLException
 	 */
-	public static boolean insert(CategoryEntity entity)
+	public static boolean insert(TaskMemberEntity entity)
 	{
 		int resultset = 0;
 		
@@ -97,11 +93,9 @@ public class CategoryDAO
 			Statement statement = conn.createStatement();
 			
 			StringBuilder builder = new StringBuilder();
-			builder.append("insert into Category values(");
-			builder.append("").append(entity.getCatID()).append(",");
-			builder.append("'").append(entity.getCatName()).append("',");
-			builder.append("'").append(entity.getDescription()).append("',");
-			builder.append("#").append(entity.getDateCreated()).append("#,");
+			builder.append("insert into TaskMember values(");
+			builder.append("").append(entity.getTaskID()).append(",");
+			builder.append("").append(entity.getMemberID()).append(",");
 			builder.delete(builder.length() - 1, builder.length());
 			builder.append(");");
 			
@@ -113,12 +107,12 @@ public class CategoryDAO
 	}
 	
 	/**
-	 * The method updates a Category
+	 * The method updates a TaskMember
 	 * @author Varik Hoang
 	 * @return return true if updating successfully
 	 * @throws SQLException
 	 */
-	public static boolean update(CategoryEntity entity)
+	public static boolean update(TaskMemberEntity entity)
 	{
 		int resultset = 0;
 		
@@ -128,15 +122,14 @@ public class CategoryDAO
 			Statement statement = conn.createStatement();
 			
 			StringBuilder builder = new StringBuilder();
-			builder.append("update Category set ");
-			builder.append("CatID=").append("").append(entity.getCatID()).append(", ");
-			builder.append("CatName=").append("'").append(entity.getCatName()).append("', ");
-			builder.append("Description=").append("'").append(entity.getDescription()).append("', ");
-			builder.append("DateCreated=").append("#").append(entity.getDateCreated()).append("#, ");
+			builder.append("update TaskMember set ");
+			builder.append("TaskID=").append("").append(entity.getTaskID()).append(", ");
+			builder.append("MemberID=").append("").append(entity.getMemberID()).append(", ");
 			
 			builder.delete(builder.length() - 2, builder.length());
 			builder.append(" where");
-			builder.append(" CatID=").append(entity.getCatID()).append(" and");
+			builder.append(" TaskID=").append(entity.getTaskID()).append(" and");
+			builder.append(" MemberID=").append(entity.getMemberID()).append(" and");
 			
 			builder.delete(builder.length() - 4, builder.length());
 			builder.append(";");
@@ -149,12 +142,12 @@ public class CategoryDAO
 	}
 	
 	/**
-	 * The method deletes a Category
+	 * The method deletes a TaskMember
 	 * @author Varik Hoang
 	 * @return return true if deleting successfully
 	 * @throws SQLException
 	 */
-	public static boolean delete(CategoryEntity entity)
+	public static boolean delete(TaskMemberEntity entity)
 	{
 		int resultset = 0;
 		
@@ -164,9 +157,10 @@ public class CategoryDAO
 			Statement statement = conn.createStatement();
 			
 			StringBuilder builder = new StringBuilder();
-			builder.append("delete from Category");
+			builder.append("delete from TaskMember");
 			builder.append(" where");
-			builder.append(" CatID=").append(entity.getCatID()).append(" and");
+			builder.append(" TaskID=").append(entity.getTaskID()).append(" and");
+			builder.append(" MemberID=").append(entity.getMemberID()).append(" and");
 			
 			builder.delete(builder.length() - 4, builder.length());
 			builder.append(";");
