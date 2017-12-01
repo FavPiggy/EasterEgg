@@ -39,9 +39,10 @@ extends Observable
 		listTask.remove(ent);
 	}
 	
-	public TaskEntity getEntity() {
+	public TaskEntity getEntity(int index) {
+		final TaskEntity entity = listTask.get(index);
 		
-		return null;
+		return entity;
 	}
 	
 	/**

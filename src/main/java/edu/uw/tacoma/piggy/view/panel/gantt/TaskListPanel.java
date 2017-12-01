@@ -79,7 +79,7 @@ extends JPanel
 		//access.setActivity(AccountConst.SELECT_ALL);
 		//entities = access.executeQuery(new AccountEntity());
 		for(int i =0; i < myData.sizeOfList(); i++) {
-			addRow(myData.getEntity());
+			addRow(myData.getEntity(i));
 		}
 	}
 	
