@@ -1,0 +1,6 @@
+ProjectID,ProjectName,ProjectAbbr,Description,StartDate,CategoryID,UserCreated
+1,"Church Roofing","CR","Roofing to fix the leaks in St. Martins Church ...",2017-10-22,2,2017-10-22
+2,"Varik Flooring","VF","Flooring to fix Varik's floor because he flooded it ...",2017-09-22,1,2017-10-22
+3,"Varik Toilet","VT","Varik takes huge dumps on the daily and broke the toilet ...",2017-09-02,1,2017-09-02
+4,"Varik Bed","VB","For some reason Varik's bed broke one day ;) ...",2017-10-11,1,2017-10-11
+5,"Hurricane Japan","HJ","Charity work for Japan in aiding recovering houses that were damaged in the hurricane ...",2017-05-15,0,2017-04-10

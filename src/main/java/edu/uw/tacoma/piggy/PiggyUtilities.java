@@ -1,5 +1,7 @@
 package edu.uw.tacoma.piggy;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Locale;
 
 /**
@@ -51,4 +53,9 @@ public class PiggyUtilities
 	{
 		Windows, MacOS, Linux, Other
 	};
+	
+	/**
+	 * The date formatter
+	 */
+	public static final DateFormat DateFormatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 }

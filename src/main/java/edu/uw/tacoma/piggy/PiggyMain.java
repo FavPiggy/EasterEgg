@@ -1,50 +1,29 @@
 package edu.uw.tacoma.piggy;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-
-import javax.swing.*;
-
+import java.awt.EventQueue;
 import edu.uw.tacoma.piggy.view.PiggyGUI;
 
-public class PiggyMain 
+public class PiggyMain
 {
 	/**
-	 * The date formatter
+	 * Launch the application.
 	 */
-	public static final DateFormat DateFormatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-	
-	public static void main(String[] happiness)
+	public static void main(String[] args)
 	{
-		for (final UIManager.LookAndFeelInfo info : UIManager.getInstalledLookAndFeels())
+		EventQueue.invokeLater(new Runnable()
 		{
-			if ("Motif".equals(info.getName())) {
+			public void run()
+			{
 				try
 				{
-					UIManager.setLookAndFeel(info.getClassName());
+					PiggyGUI window = new PiggyGUI();
+					window.setVisible(true);
 				}
-				catch (final ClassNotFoundException e)
+				catch (Exception e)
 				{
 					e.printStackTrace();
 				}
-				catch (final InstantiationException e)
-				{
-					e.printStackTrace();
-				}
-				catch (final IllegalAccessException e)
-				{
-					e.printStackTrace();
-				}
-				catch (final UnsupportedLookAndFeelException e)
-				{
-					e.printStackTrace();
-				}
-				
-				break;
 			}
-		}
-
-		PiggyGUI gui = new PiggyGUI();
-		gui.start();
+		});
 	}
 }

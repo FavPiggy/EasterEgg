@@ -1,149 +1,80 @@
 package edu.uw.tacoma.piggy.view;
 
-import java.awt.*;
-import java.awt.event.WindowEvent;
-import java.beans.PropertyChangeEvent;
-import java.beans.PropertyChangeListener;
-import javax.swing.*;
-import javax.swing.border.LineBorder;
-
-import edu.uw.tacoma.piggy.view.panel.GanttChartPanel;
+import java.awt.EventQueue;
 
 /**
- * The following class represents a GUI for the Easter Egg.
- * Random change 3
- * @author Arwain Karlin
- * @version 1.0
+ * The GUI class for the application
+ * @author Varik Hoang
  */
-public class PiggyGUI implements PropertyChangeListener {
+@SuppressWarnings("serial")
+public class PiggyGUI
+extends JFrame
+{
+	PiggyMenu piggyMenu;
+	JTabbedPane tabbedPane;
+	ManagementPanel managementPanel;
+	GanttChartPanel ganttchartPanel;
+	
+	/**
+	 * Launch the application.
+	 */
+	public static void main(String[] args)
+	{
+		EventQueue.invokeLater(new Runnable()
+		{
+			public void run()
+			{
+				try
+				{
+					PiggyGUI window = new PiggyGUI();
+					window.setVisible(true);
+				}
+				catch (Exception e)
+				{
+					e.printStackTrace();
+				}
+			}
+		});
+	}
 
-    /**
-     * A JFrame for the GUI.
-     */
-    private final JFrame myWindow;
-    /**
-     * Logo for Piggy.
-     */
-    private final ImageIcon myPiggyLogo = new ImageIcon("./src/piggy.jpg");
-    /**
-     * Graphic for Gantt Chart.
-     */
-    private final GanttChartPanel myGanttPanel;
-    /**
-     * A default constructor for the GUI.
-     */
-    public PiggyGUI() {
-    	
-        myWindow = new JFrame("Favorite Piggy");
-        myGanttPanel = new GanttChartPanel(this);
-        setup();
-        myWindow.setIconImage(myPiggyLogo.getImage());
-        myWindow.pack();
-    }
-    
-    /**
-     * @author Cuong_Tran
-     * @return return an int represent for the height of main window.
-     */
-    public int getHeight() {
-    	return myWindow.getHeight();
-    }
-    /**
-     * @author Cuong_Tran
-     * @return return an int represent for the height of main window.
-     */
-    public int getWidth() {
-    	return myWindow.getWidth();
-    }
-    /**
-     * This help return the x-coordinate of the main GUI.
-     * @author Cuong_Tran
-     * @return return float value represent for x-coordinate.
-     */
-    public float xCoor() {
-    	return myWindow.getAlignmentX();
-    }
-    /**
-     * This help return the y-coordinate of the main GUI.
-     * @author Cuong_Tran
-     * @return return float value represent for y-coordinate.
-     */
-    public float yCoor() {
-    	return myWindow.getAlignmentY();
-    }
-    /**
-     * This method makes the JFrame visible.
-     */
-    public void start() {
-        myWindow.setLocationRelativeTo(null);
-        myWindow.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        myWindow.setVisible(true);
-    }
+	/**
+	 * Create the application.
+	 */
+	public PiggyGUI()
+	{
+		initialize();
+	}
 
-    /**
-     * A setup for the JFrame.
-     */
-    private void setup() {
-    	
-    	myWindow.add(myGanttPanel, BorderLayout.CENTER);
-    	
-    	
-    	
-//        JPanel panel = new JPanel();
-//        panel.getUI();
-//        panel.setLayout(new BoxLayout(panel, BoxLayout.PAGE_AXIS));
-//        
-//        JLabel jlabel = new JLabel("We are Favorite Piggy!\n");
-//        jlabel.setFont(new Font("Papyrus", 1, 22));
-//        panel.add(jlabel);
-//        
-//        //
-//        JLabel jlabel2 = new JLabel("Arwain Karlin - Coder for hire!\n");
-//        jlabel2.setFont(new Font("Papyrus", 1, 16));
-//        panel.add(jlabel2);
-//        
-//        //
-//        JLabel jlabel3 = new JLabel("Kirtwinder Gulati - 1/2 cup coder, 2 cups baker, 1 tsp vanilla and " +
-//                "1/2 cup chocolate chips.\n Mix thoroughly to combine, bake at 360 for 21 minutes");
-//        jlabel3.setFont(new Font("Papyrus", 1, 16));
-//        panel.add(jlabel3);
-//        
-//        //Cuong's Message
-//        JLabel cuongMess = new JLabel("Cuong Tran - Coffee for Life!\n");
-//        cuongMess.setFont(new Font("Papyrus", 1, 16));
-//        panel.add(cuongMess);
-//        
-//      //Varik Message
-//        JLabel varikLabel = new JLabel("Varik Hoang - Zz.Zz.z.z...");
-//        varikLabel.setFont(new Font("Papyrus", 1, 16));
-//        panel.add(varikLabel);
-//
-//        // Kerry Message
-//        JLabel jlabel8 = new JLabel("Kerry Ferguson - ....");
-//        jlabel8.setFont(new Font("Papyrus", 1, 16));
-//        panel.add(jlabel8);
-//
-//        // Mahad Message
-//        JLabel jlabel9 = new JLabel("Mahad Kaboweyne -  *insert cool fact here*");
-//        jlabel9.setFont(new Font("Courier", 1, 16));
-//        panel.add(jlabel9);
-//
-//        panel.setBorder(new LineBorder(Color.BLACK)); // make it easy to see
-//        myWindow.add(panel);
-
-
-    }
-
-    /**
-     * Below initializes an exit action when the quit button is pushed.
-     */
-    public void propertyChange(final PropertyChangeEvent theEvent) {
-        if ("Goodbye".equals(theEvent.getPropertyName())) {
-            myWindow.dispatchEvent(new WindowEvent(myWindow, WindowEvent.WINDOW_CLOSING));
-        }
-    }
+	/**
+	 * Initialize the contents of the frame.
+	 */
+	private void initialize()
+	{
+		setBounds(100, 100, 450, 300);
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		
+		piggyMenu = new PiggyMenu();
+		setJMenuBar(piggyMenu);
+		
+		managementPanel = new ManagementPanel();
+		ganttchartPanel = new GanttChartPanel();
+		
+		tabbedPane = createTabbedPane();
+		getContentPane().add(tabbedPane, BorderLayout.CENTER);
+	}
+	
+	/**
+	 * @author Varik Hoang
+	 * @return the tabbed pane
+	 */
+	private JTabbedPane createTabbedPane()
+	{
+		JTabbedPane tabbedPane = new JTabbedPane();
+//		tabbedPane.addTab("Management", null, managementPanel); TODO use this line after management panel done
+		tabbedPane.addTab("Management", null, new JPanel());
+//		tabbedPane.addTab("Project", null, ganttchartPanel); TODO use this line after gantt chart panel done
+		tabbedPane.addTab("Project", null, new JPanel());
+		return tabbedPane;
+	}
 
 }
-
-
-
