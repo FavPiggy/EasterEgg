@@ -8,7 +8,7 @@ import junit.framework.TestCase;
 
 /**
  * The test case for the category DAO
- * @author Varik Hoang
+ * @author Kerry Ferguson
  */
 public class CategoryDAOTest
 extends TestCase
