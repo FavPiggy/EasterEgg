@@ -8,6 +8,7 @@ import java.util.Observer;
 import javax.swing.JPanel;
 
 import edu.uw.tacoma.piggy.view.PiggyGUI;
+import edu.uw.tacoma.piggy.view.panel.GanttChartPanel;
 
 /**
  * The class draws the grantt objects
@@ -18,9 +19,9 @@ extends JPanel
 implements Observer
 {
 	/**
-	 * The main Piggy GUI.
+	 * The main Gantt Chart panel.
 	 */
-	private PiggyGUI myGUI;
+	private GanttChartPanel myGanttPanel;
 	
 	/**
 	 * The task list data.
@@ -31,9 +32,9 @@ implements Observer
 	 * The constructor for graphic panel
 	 * @param theGUI the main GUI passed in
 	 */
-	public GraphicPanel(PiggyGUI theGUI)
+	public GraphicPanel(GanttChartPanel theGUI)
 	{
-		myGUI = theGUI;
+		myGanttPanel = theGUI;
 	}
 
 	@Override

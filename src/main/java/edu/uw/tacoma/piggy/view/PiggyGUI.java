@@ -2,15 +2,6 @@ package edu.uw.tacoma.piggy.view;
 
 import java.awt.EventQueue;
 
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.JTabbedPane;
-
-import edu.uw.tacoma.piggy.view.panel.GanttChartPanel;
-import edu.uw.tacoma.piggy.view.panel.ManagementPanel;
-
-import java.awt.BorderLayout;
-
 /**
  * The GUI class for the application
  * @author Varik Hoang
