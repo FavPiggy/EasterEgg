@@ -4,6 +4,23 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Observable;
 
+
+import java.awt.Dimension;
+import java.awt.event.ComponentEvent;
+import java.awt.event.ComponentListener;
+
+
+import org.swiftgantt.GanttChart;
+
+import org.swiftgantt.common.EventLogger;
+import org.swiftgantt.common.Time;
+import org.swiftgantt.model.GanttModel;
+import org.swiftgantt.model.Task;
+import org.swiftgantt.ui.TimeUnit;
+
+
+
+
 import edu.uw.tacoma.piggy.model.entity.TaskEntity;
 /**
  * 
@@ -11,7 +28,7 @@ import edu.uw.tacoma.piggy.model.entity.TaskEntity;
  *
  */
 public class TaskListData
-extends Observable
+extends GanttChart
 {	
 	private List<TaskEntity> listTask;
 	
@@ -61,5 +78,20 @@ extends Observable
 	public boolean isEmpty() 
 	{	
 		return listTask.isEmpty();
+	}
+	
+	/**
+	 * 
+	 */
+	public void initDailyModel() {
+		
+	}
+	
+	/**
+	 * 
+	 * @return
+	 */
+	public GanttModel getGanttModel() {
+		return this.getModel();
 	}
 }
