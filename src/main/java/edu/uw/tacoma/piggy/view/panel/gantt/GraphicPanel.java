@@ -7,7 +7,6 @@ import java.util.Observer;
 
 import javax.swing.JPanel;
 
-import edu.uw.tacoma.piggy.view.PiggyGUI;
 import edu.uw.tacoma.piggy.view.panel.GanttChartPanel;
 
 /**
@@ -21,11 +20,13 @@ implements Observer
 	/**
 	 * The main Gantt Chart panel.
 	 */
+	@SuppressWarnings("unused")
 	private GanttChartPanel myGanttPanel;
 	
 	/**
 	 * The task list data.
 	 */
+	@SuppressWarnings("unused")
 	private TaskListData myData;
 	
 	/**

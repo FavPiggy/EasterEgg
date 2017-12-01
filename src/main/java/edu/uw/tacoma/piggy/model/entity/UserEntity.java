@@ -3,6 +3,7 @@ package edu.uw.tacoma.piggy.model.entity;
 import java.io.FileOutputStream;
 import java.io.ObjectOutputStream;
 
+
 /**
  * This class represents for a User
  * @author Cuong Tran
@@ -68,8 +69,7 @@ public class UserEntity
 	public void setPhoneNumber(String _PhoneNumber) { this._PhoneNumber = _PhoneNumber; }
 
 	/**
-	 * @author Varik Hoang
-	 * The method initialize the default value for fields
+	 * The method initializes fields
 	 */
 	public void initialUser()
 	{
@@ -78,7 +78,7 @@ public class UserEntity
 		setLastName("");
 		setPhoneNumber("");
 	}
-
+	
 	/**
 	 * @author Cuong_Tran
 	 * The default constructor for User
@@ -91,7 +91,6 @@ public class UserEntity
 	 */
 	public UserEntity(Integer _UserID,String _FirstName,String _LastName,String _PhoneNumber) // need to be data type default value
 	{
-		initialUser();
 		setUserID(_UserID);
 		setFirstName(_FirstName);
 		setLastName(_LastName);

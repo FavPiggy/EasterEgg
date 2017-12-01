@@ -7,12 +7,14 @@ import edu.uw.tacoma.piggy.model.entity.TaskEntity;
 import edu.uw.tacoma.piggy.view.panel.GanttChartPanel;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
+
 public class TaskListPanel
 extends JPanel
 {
 	/**
 	 * The Gantt Chart Panel
 	 */
+	@SuppressWarnings("unused")
 	private GanttChartPanel myGanttPanel;
 	/**
 	 * The task list data.

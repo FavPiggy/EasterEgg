@@ -1,10 +1,11 @@
 package edu.uw.tacoma.piggy.model.dao;
 
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.List;
+
 import java.util.ArrayList;
 
 import edu.uw.tacoma.piggy.PiggyUtilities;
@@ -12,102 +13,169 @@ import edu.uw.tacoma.piggy.model.entity.RoleEntity;
 
 /**
  * This class contains static method to check DAO for Role.
- * @author Cuong Tran, Varik Hoang
+ * @author Varik Hoang
  */
 public class RoleDAO
 {
+	private static final String SELECT = "select * from Role ";
+	
 	/**
-	 * The method checks DAO of Role.
-	 * @author Cuong Tran
-	 * @return return arraylist of Role.
-	 * @throws Exception
+	 * The method return a list of Role.
+	 * @author Varik Hoang
+	 * @return return a list of Role
+	 * @throws SQLException
 	 */
 	public static List<RoleEntity> listRole()
 	{
 		List<RoleEntity> list = new ArrayList<RoleEntity>();
+		
 		try
 		{
-
-			// Load the driver.
-			Class.forName("org.relique.jdbc.csv.CsvDriver");
-
-			// Create a connection. The first command line parameter is
-			// the directory containing the .csv files.
-			// A single connection is thread-safe for use by several threads.
-			Connection conn = DriverManager.getConnection(PiggyUtilities.getDriver());
-
-			// Create a Statement object to execute the query with.
-			// A Statement is not thread-safe.
-			Statement stmt = conn.createStatement();
-
-			// Select the ID and NAME columns from sample.csv
-			ResultSet results = stmt.executeQuery("select * from Role");
-			while (results.next())
+			Connection conn = PiggyUtilities.getConnection();
+			Statement statement = conn.createStatement();
+			ResultSet resultset = statement.executeQuery(SELECT);
+			
+			while(resultset.next())
 			{
 				RoleEntity entity = new RoleEntity();
-				entity.setRoleID(results.getInt(1));
-				entity.setRoleName(results.getString(2));
-				entity.setDescription(results.getString(3));
-				entity.setDateCreated(results.getDate(4));
+				entity.setRoleID(resultset.getInt("RoleID"));
+				entity.setRoleName(resultset.getString("RoleName"));
+				entity.setDescription(resultset.getString("Description"));
+				entity.setDateCreated(resultset.getDate("DateCreated"));
 				list.add(entity);
-			}
-
-			conn.close();
+            }
 		}
-		catch (Exception ex)
-		{
-		}
+		catch (SQLException e) { e.printStackTrace();	}
 
 		return list;
-
 	}
-
+	
 	/**
-	 * The method checks DAO with specific information input.
-	 * @author Cuong Tran
-	 * @return return array list of Role.
-	 * @param field the field specified.
-	 * @param value the value specified.
-	 * @throws Exception
+	 * The method returns a list of Role with condition
+	 * @author Varik Hoang
+	 * @return return a list of Role with condition
+	 * @throws SQLException
 	 */
-	public static List<RoleEntity> listRole(String field, String value)
+	public static List<RoleEntity> listRole(String condition)
 	{
 		List<RoleEntity> list = new ArrayList<RoleEntity>();
+		
 		try
 		{
-
-			// Load the driver.
-			Class.forName("org.relique.jdbc.csv.CsvDriver");
-
-			// Create a connection. The first command line parameter is
-			// the directory containing the .csv files.
-			// A single connection is thread-safe for use by several threads.
-			Connection conn = DriverManager.getConnection(PiggyUtilities.getDriver());
-
-			// Create a Statement object to execute the query with.
-			// A Statement is not thread-safe.
-			Statement stmt = conn.createStatement();
-
-			// Select the ID and NAME columns from sample.csv
-			ResultSet results = stmt.executeQuery("select * from Role where " + field + " = '" + value + "'");
-			while (results.next())
+			Connection conn = PiggyUtilities.getConnection();
+			Statement statement = conn.createStatement();
+			ResultSet resultset = statement.executeQuery(SELECT + condition);
+			
+			while(resultset.next())
 			{
 				RoleEntity entity = new RoleEntity();
-				entity.setRoleID(results.getInt(1));
-				entity.setRoleName(results.getString(2));
-				entity.setDescription(results.getString(3));
-				entity.setDateCreated(results.getDate(4));
+				entity.setRoleID(resultset.getInt("RoleID"));
+				entity.setRoleName(resultset.getString("RoleName"));
+				entity.setDescription(resultset.getString("Description"));
+				entity.setDateCreated(resultset.getDate("DateCreated"));
 				list.add(entity);
-			}
-
-			conn.close();
+            }
 		}
-		catch (Exception ex)
-		{
-		}
+		catch (SQLException e) { e.printStackTrace();	}
 
 		return list;
+	}
+	
+	/**
+	 * The method inserts a Role
+	 * @author Varik Hoang
+	 * @return return true if inserting successfully
+	 * @throws SQLException
+	 */
+	public static boolean insert(RoleEntity entity)
+	{
+		int resultset = 0;
+		
+		try
+		{
+			Connection conn = PiggyUtilities.getConnection();
+			Statement statement = conn.createStatement();
+			
+			StringBuilder builder = new StringBuilder();
+			builder.append("insert into Role values(");
+			builder.append("").append(entity.getRoleID()).append(",");
+			builder.append("'").append(entity.getRoleName()).append("',");
+			builder.append("'").append(entity.getDescription()).append("',");
+			builder.append("#").append(entity.getDateCreated()).append("#,");
+			builder.delete(builder.length() - 1, builder.length());
+			builder.append(");");
+			
+			resultset = statement.executeUpdate(builder.toString());
+		}
+		catch (SQLException e) { e.printStackTrace();	}
 
+		return resultset > 0;
+	}
+	
+	/**
+	 * The method updates a Role
+	 * @author Varik Hoang
+	 * @return return true if updating successfully
+	 * @throws SQLException
+	 */
+	public static boolean update(RoleEntity entity)
+	{
+		int resultset = 0;
+		
+		try
+		{
+			Connection conn = PiggyUtilities.getConnection();
+			Statement statement = conn.createStatement();
+			
+			StringBuilder builder = new StringBuilder();
+			builder.append("update Role set ");
+			builder.append("RoleID=").append("").append(entity.getRoleID()).append(", ");
+			builder.append("RoleName=").append("'").append(entity.getRoleName()).append("', ");
+			builder.append("Description=").append("'").append(entity.getDescription()).append("', ");
+			builder.append("DateCreated=").append("#").append(entity.getDateCreated()).append("#, ");
+			
+			builder.delete(builder.length() - 2, builder.length());
+			builder.append(" where");
+			builder.append(" RoleID=").append(entity.getRoleID()).append(" and");
+			
+			builder.delete(builder.length() - 4, builder.length());
+			builder.append(";");
+			
+			resultset = statement.executeUpdate(builder.toString());
+		}
+		catch (SQLException e) { e.printStackTrace();	}
+
+		return resultset > 0;
+	}
+	
+	/**
+	 * The method deletes a Role
+	 * @author Varik Hoang
+	 * @return return true if deleting successfully
+	 * @throws SQLException
+	 */
+	public static boolean delete(RoleEntity entity)
+	{
+		int resultset = 0;
+		
+		try
+		{
+			Connection conn = PiggyUtilities.getConnection();
+			Statement statement = conn.createStatement();
+			
+			StringBuilder builder = new StringBuilder();
+			builder.append("delete from Role");
+			builder.append(" where");
+			builder.append(" RoleID=").append(entity.getRoleID()).append(" and");
+			
+			builder.delete(builder.length() - 4, builder.length());
+			builder.append(";");
+			
+			resultset = statement.executeUpdate(builder.toString());
+		}
+		catch (SQLException e) { e.printStackTrace();	}
+
+		return resultset > 0;
 	}
 
 }

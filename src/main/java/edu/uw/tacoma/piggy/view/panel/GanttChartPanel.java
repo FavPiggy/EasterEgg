@@ -8,10 +8,12 @@ import edu.uw.tacoma.piggy.view.PiggyGUI;
 import edu.uw.tacoma.piggy.view.panel.gantt.GraphicPanel;
 import edu.uw.tacoma.piggy.view.panel.gantt.TaskListPanel;
 
+@SuppressWarnings("serial")
 public class GanttChartPanel extends JPanel {
 	/**
 	 * The main Piggy GUI.
 	 */
+	@SuppressWarnings("unused")
 	private PiggyGUI myGUI;
 	/**
 	 * 

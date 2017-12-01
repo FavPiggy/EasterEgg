@@ -2,7 +2,9 @@ package edu.uw.tacoma.piggy.model.entity;
 
 import java.io.FileOutputStream;
 import java.io.ObjectOutputStream;
-import java.util.Date;
+
+import java.util.Calendar;
+import java.sql.Date;
 
 /**
  * This class represents for a Member
@@ -69,17 +71,16 @@ public class MemberEntity
 	public void setDateJoined(Date _DateJoined) { this._DateJoined = _DateJoined; }
 
 	/**
-	 * @author Varik Hoang
-	 * The method initialize the default value for fields
+	 * The method initializes fields
 	 */
 	public void initialMember()
 	{
 		setMemberID(0);
 		setProjectID(0);
 		setUserID(0);
-		setDateJoined(null);
+		setDateJoined(new Date(Calendar.getInstance().getTime().getTime()));
 	}
-
+	
 	/**
 	 * @author Cuong_Tran
 	 * The default constructor for Member
@@ -92,7 +93,6 @@ public class MemberEntity
 	 */
 	public MemberEntity(Integer _MemberID,Integer _ProjectID,Integer _UserID,Date _DateJoined) // need to be data type default value
 	{
-		initialMember();
 		setMemberID(_MemberID);
 		setProjectID(_ProjectID);
 		setUserID(_UserID);
