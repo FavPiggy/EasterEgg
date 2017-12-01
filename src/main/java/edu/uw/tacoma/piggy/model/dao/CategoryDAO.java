@@ -1,11 +1,22 @@
 package edu.uw.tacoma.piggy.model.dao;
 
+import java.io.File;
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.List;
+import java.util.Locale.Category;
+
+import com.healthmarketscience.jackcess.Database;
+import com.healthmarketscience.jackcess.DatabaseBuilder;
+import com.healthmarketscience.jackcess.Row;
+import com.healthmarketscience.jackcess.Table;
+
 import java.util.ArrayList;
+import java.util.Date;
 
 import edu.uw.tacoma.piggy.PiggyUtilities;
 import static edu.uw.tacoma.piggy.PiggyUtilities.DateFormatter;
@@ -13,12 +24,14 @@ import edu.uw.tacoma.piggy.model.entity.CategoryEntity;
 
 /**
  * This class contains static method to check DAO for Category.
+ * 
  * @author Cuong Tran, Varik Hoang
  */
 public class CategoryDAO
 {
 	/**
 	 * The method checks DAO of Category.
+	 * 
 	 * @author Cuong Tran
 	 * @return return arraylist of Category.
 	 * @throws Exception
@@ -26,87 +39,40 @@ public class CategoryDAO
 	public static List<CategoryEntity> listCategory()
 	{
 		List<CategoryEntity> list = new ArrayList<CategoryEntity>();
+		
 		try
 		{
-
-			// Load the driver.
-			Class.forName("org.relique.jdbc.csv.CsvDriver");
-
-			// Create a connection. The first command line parameter is
-			// the directory containing the .csv files.
-			// A single connection is thread-safe for use by several threads.
-			Connection conn = DriverManager.getConnection(PiggyUtilities.getDriver());
-
-			// Create a Statement object to execute the query with.
-			// A Statement is not thread-safe.
-			Statement stmt = conn.createStatement();
-
-			// Select the ID and NAME columns from sample.csv
-			ResultSet results = stmt.executeQuery("select * from category");
-			while (results.next())
+			Class.forName("net.ucanaccess.jdbc.UcanaccessDriver");
+//			Connection conn = PiggyUtilities.getConnection();
+//			jdbc:ucanaccess:///home/varikmp/workspace/EasterEgg/target/test-classes/db/database.mdb
+//			jdbc:ucanaccess:///home/varikmp/workspace/EasterEgg/src/test/resources/db/database.mdb
+//			Statement statement = conn.createStatement();
+//			ResultSet resultset = statement.executeQuery("select * from Category");
+			
+//			Class.forName("net.ucanaccess.jdbc.UcanaccessDriver");
+//			Connection conn = DriverManager.getConnection("jdbc:ucanaccess:///home/varikmp/workspace/EasterEgg/src/test/resources/db/database.mdb");
+			Connection conn = DriverManager.getConnection("jdbc:ucanaccess:///home/varikmp/workspace/EasterEgg/target/test-classes/db/database.mdb");
+			Statement statement = conn.createStatement();
+			ResultSet resultset = statement.executeQuery("select * from Category");
+			
+			while(resultset.next())
 			{
 				CategoryEntity entity = new CategoryEntity();
-				entity.setCatID(results.getInt(1));
-				entity.setCatName(results.getString(2));
-				entity.setDescription(results.getString(3));
-				entity.setDateCreated(DateFormatter.parse(results.getString(4)));
+				entity.setCatID(resultset.getInt("CatID"));
+				entity.setCatName(resultset.getString("CatName"));
+				entity.setDescription(resultset.getString("Description"));
+				entity.setDateCreated(resultset.getDate("DateCreated"));
 				list.add(entity);
-			}
-
-			conn.close();
+            }
 		}
-		catch (Exception ex)
+		catch (SQLException e)
 		{
-			ex.printStackTrace();
+			e.printStackTrace();
 		}
-
-		return list;
-
-	}
-
-	/**
-	 * The method checks DAO with specific information input.
-	 * @author Cuong Tran
-	 * @return return array list of Category.
-	 * @param field the field specified.
-	 * @param value the value specified.
-	 * @throws Exception
-	 */
-	public static List<CategoryEntity> listCategory(String field, String value)
-	{
-		List<CategoryEntity> list = new ArrayList<CategoryEntity>();
-		try
+		catch (ClassNotFoundException e)
 		{
-
-			// Load the driver.
-			Class.forName("org.relique.jdbc.csv.CsvDriver");
-
-			// Create a connection. The first command line parameter is
-			// the directory containing the .csv files.
-			// A single connection is thread-safe for use by several threads.
-			Connection conn = DriverManager.getConnection(PiggyUtilities.getDriver());
-
-			// Create a Statement object to execute the query with.
-			// A Statement is not thread-safe.
-			Statement stmt = conn.createStatement();
-
-			// Select the ID and NAME columns from sample.csv
-			ResultSet results = stmt.executeQuery("select * from category where " + field + " = '" + value + "'");
-			while (results.next())
-			{
-				CategoryEntity entity = new CategoryEntity();
-				entity.setCatID(results.getInt(1));
-				entity.setCatName(results.getString(2));
-				entity.setDescription(results.getString(3));
-				entity.setDateCreated(DateFormatter.parse(results.getString(4)));
-				list.add(entity);
-			}
-
-			conn.close();
-		}
-		catch (Exception ex)
-		{
-			ex.printStackTrace();
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 
 		return list;
