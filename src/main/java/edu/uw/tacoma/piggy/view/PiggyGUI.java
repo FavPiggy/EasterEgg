@@ -1,6 +1,13 @@
 package edu.uw.tacoma.piggy.view;
 
+import java.awt.BorderLayout;
 import java.awt.EventQueue;
+
+import javax.swing.JFrame;
+import javax.swing.JTabbedPane;
+
+import edu.uw.tacoma.piggy.view.panel.GanttChartPanel;
+import edu.uw.tacoma.piggy.view.panel.ManagementPanel;
 
 /**
  * The GUI class for the application
@@ -57,7 +64,7 @@ extends JFrame
 		setJMenuBar(piggyMenu);
 		
 		managementPanel = new ManagementPanel();
-		ganttchartPanel = new GanttChartPanel();
+		ganttchartPanel = new GanttChartPanel(this);
 		
 		tabbedPane = createTabbedPane();
 		getContentPane().add(tabbedPane, BorderLayout.CENTER);
@@ -70,10 +77,8 @@ extends JFrame
 	private JTabbedPane createTabbedPane()
 	{
 		JTabbedPane tabbedPane = new JTabbedPane();
-//		tabbedPane.addTab("Management", null, managementPanel); TODO use this line after management panel done
-		tabbedPane.addTab("Management", null, new JPanel());
-//		tabbedPane.addTab("Project", null, ganttchartPanel); TODO use this line after gantt chart panel done
-		tabbedPane.addTab("Project", null, new JPanel());
+		tabbedPane.addTab("Management", null, managementPanel);
+		tabbedPane.addTab("Project", null, ganttchartPanel); 
 		return tabbedPane;
 	}
 
