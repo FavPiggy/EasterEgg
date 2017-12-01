@@ -1,5 +1,10 @@
 package edu.uw.tacoma.piggy.view.panel;
 
-public class ManagementPanel {
+import javax.swing.JPanel;
+
+@SuppressWarnings("serial")
+public class ManagementPanel
+extends JPanel
+{
 
 }
