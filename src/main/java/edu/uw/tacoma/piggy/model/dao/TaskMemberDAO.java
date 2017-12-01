@@ -9,25 +9,25 @@ import java.util.List;
 import java.util.ArrayList;
 
 import edu.uw.tacoma.piggy.PiggyUtilities;
-import edu.uw.tacoma.piggy.model.entity.MemberRoleEntity;
+import edu.uw.tacoma.piggy.model.entity.TaskMemberEntity;
 
 /**
- * This class contains static method to check DAO for MemberRole.
+ * This class contains static method to check DAO for TaskMember.
  * @author Varik Hoang
  */
-public class MemberRoleDAO
+public class TaskMemberDAO
 {
-	private static final String SELECT = "select * from MemberRole ";
+	private static final String SELECT = "select * from TaskMember ";
 	
 	/**
-	 * The method return a list of MemberRole.
+	 * The method return a list of TaskMember.
 	 * @author Varik Hoang
-	 * @return return a list of MemberRole
+	 * @return return a list of TaskMember
 	 * @throws SQLException
 	 */
-	public static List<MemberRoleEntity> listMemberRole()
+	public static List<TaskMemberEntity> listTaskMember()
 	{
-		List<MemberRoleEntity> list = new ArrayList<MemberRoleEntity>();
+		List<TaskMemberEntity> list = new ArrayList<TaskMemberEntity>();
 		
 		try
 		{
@@ -37,10 +37,9 @@ public class MemberRoleDAO
 			
 			while(resultset.next())
 			{
-				MemberRoleEntity entity = new MemberRoleEntity();
+				TaskMemberEntity entity = new TaskMemberEntity();
+				entity.setTaskID(resultset.getInt("TaskID"));
 				entity.setMemberID(resultset.getInt("MemberID"));
-				entity.setRoleID(resultset.getInt("RoleID"));
-				entity.setDateCreated(resultset.getDate("DateCreated"));
 				list.add(entity);
             }
 		}
@@ -50,14 +49,14 @@ public class MemberRoleDAO
 	}
 	
 	/**
-	 * The method returns a list of MemberRole with condition
+	 * The method returns a list of TaskMember with condition
 	 * @author Varik Hoang
-	 * @return return a list of MemberRole with condition
+	 * @return return a list of TaskMember with condition
 	 * @throws SQLException
 	 */
-	public static List<MemberRoleEntity> listMemberRole(String condition)
+	public static List<TaskMemberEntity> listTaskMember(String condition)
 	{
-		List<MemberRoleEntity> list = new ArrayList<MemberRoleEntity>();
+		List<TaskMemberEntity> list = new ArrayList<TaskMemberEntity>();
 		
 		try
 		{
@@ -67,10 +66,9 @@ public class MemberRoleDAO
 			
 			while(resultset.next())
 			{
-				MemberRoleEntity entity = new MemberRoleEntity();
+				TaskMemberEntity entity = new TaskMemberEntity();
+				entity.setTaskID(resultset.getInt("TaskID"));
 				entity.setMemberID(resultset.getInt("MemberID"));
-				entity.setRoleID(resultset.getInt("RoleID"));
-				entity.setDateCreated(resultset.getDate("DateCreated"));
 				list.add(entity);
             }
 		}
@@ -80,12 +78,12 @@ public class MemberRoleDAO
 	}
 	
 	/**
-	 * The method inserts a MemberRole
+	 * The method inserts a TaskMember
 	 * @author Varik Hoang
 	 * @return return true if inserting successfully
 	 * @throws SQLException
 	 */
-	public static boolean insert(MemberRoleEntity entity)
+	public static boolean insert(TaskMemberEntity entity)
 	{
 		int resultset = 0;
 		
@@ -95,10 +93,9 @@ public class MemberRoleDAO
 			Statement statement = conn.createStatement();
 			
 			StringBuilder builder = new StringBuilder();
-			builder.append("insert into MemberRole values(");
+			builder.append("insert into TaskMember values(");
+			builder.append("").append(entity.getTaskID()).append(",");
 			builder.append("").append(entity.getMemberID()).append(",");
-			builder.append("").append(entity.getRoleID()).append(",");
-			builder.append("#").append(entity.getDateCreated()).append("#,");
 			builder.delete(builder.length() - 1, builder.length());
 			builder.append(");");
 			
@@ -110,12 +107,12 @@ public class MemberRoleDAO
 	}
 	
 	/**
-	 * The method updates a MemberRole
+	 * The method updates a TaskMember
 	 * @author Varik Hoang
 	 * @return return true if updating successfully
 	 * @throws SQLException
 	 */
-	public static boolean update(MemberRoleEntity entity)
+	public static boolean update(TaskMemberEntity entity)
 	{
 		int resultset = 0;
 		
@@ -125,15 +122,14 @@ public class MemberRoleDAO
 			Statement statement = conn.createStatement();
 			
 			StringBuilder builder = new StringBuilder();
-			builder.append("update MemberRole set ");
+			builder.append("update TaskMember set ");
+			builder.append("TaskID=").append("").append(entity.getTaskID()).append(", ");
 			builder.append("MemberID=").append("").append(entity.getMemberID()).append(", ");
-			builder.append("RoleID=").append("").append(entity.getRoleID()).append(", ");
-			builder.append("DateCreated=").append("#").append(entity.getDateCreated()).append("#, ");
 			
 			builder.delete(builder.length() - 2, builder.length());
 			builder.append(" where");
+			builder.append(" TaskID=").append(entity.getTaskID()).append(" and");
 			builder.append(" MemberID=").append(entity.getMemberID()).append(" and");
-			builder.append(" RoleID=").append(entity.getRoleID()).append(" and");
 			
 			builder.delete(builder.length() - 4, builder.length());
 			builder.append(";");
@@ -146,12 +142,12 @@ public class MemberRoleDAO
 	}
 	
 	/**
-	 * The method deletes a MemberRole
+	 * The method deletes a TaskMember
 	 * @author Varik Hoang
 	 * @return return true if deleting successfully
 	 * @throws SQLException
 	 */
-	public static boolean delete(MemberRoleEntity entity)
+	public static boolean delete(TaskMemberEntity entity)
 	{
 		int resultset = 0;
 		
@@ -161,10 +157,10 @@ public class MemberRoleDAO
 			Statement statement = conn.createStatement();
 			
 			StringBuilder builder = new StringBuilder();
-			builder.append("delete from MemberRole");
+			builder.append("delete from TaskMember");
 			builder.append(" where");
+			builder.append(" TaskID=").append(entity.getTaskID()).append(" and");
 			builder.append(" MemberID=").append(entity.getMemberID()).append(" and");
-			builder.append(" RoleID=").append(entity.getRoleID()).append(" and");
 			
 			builder.delete(builder.length() - 4, builder.length());
 			builder.append(";");

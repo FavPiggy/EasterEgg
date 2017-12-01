@@ -15,6 +15,7 @@ import org.swiftgantt.model.TaskTreeModel;
 import org.swiftgantt.ui.TimeUnit;
 
 import edu.uw.tacoma.piggy.view.PiggyGUI;
+
 import edu.uw.tacoma.piggy.view.panel.GanttChartPanel;
 
 /**
@@ -25,52 +26,25 @@ public class GraphicPanel
 extends JPanel
 //implements Observer
 {
-//	/**
-//	 * The main Gantt Chart panel.
-//	 */
-//	private GanttChartPanel myGanttPanel;
-//	
-//	/**
-//	 * The task list data.
-//	 */
-//	private TaskListData myData;
-//	
-//	/**
-//	 * The constructor for graphic panel
-//	 * @param theGUI the main GUI passed in
-//	 */
-//	public GraphicPanel(GanttChartPanel theGUI)
-//	{
-//		myGanttPanel = theGUI;
-//	}
-//
-//	@Override
-//    public void paintComponent(Graphics g)
-//	{
-//        super.paintComponent(g);
-//        Graphics2D g2= (Graphics2D) g;
-//        
-//        // fill up your code here
-//        g2.drawLine(1, 1, 5, 5);
-//    }
-//	
-//	/**
-//	 * The method receives the data from observable objects
-//	 */
-//	public void update(Observable o, Object data)
-//	{
-//		if (o instanceof TaskListData)
-//		{
-//			myData = (TaskListData) o;
-//			repaint();
-//		}
-//	}
+
 	private  ScheduleTab scheduleTab;
 	
 	public GraphicPanel(GanttChartPanel theGantt) {
 		
 		initComponents();
-		
+
+	/**
+	 * The main Gantt Chart panel.
+	 */
+	@SuppressWarnings("unused")
+	private GanttChartPanel myGanttPanel;
+	
+	/**
+	 * The task list data.
+	 */
+	@SuppressWarnings("unused")
+	private TaskListData myData;
+
 	
 		// Init for schedule tab
 		//scheduleTab = new ScheduleTab(ganttChartDemoComp);

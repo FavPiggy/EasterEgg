@@ -7,10 +7,10 @@ import junit.framework.Assert;
 import junit.framework.TestCase;
 
 /**
- * The test case for the Category entity
+ * The test case for the Task entity
  * @author Kirtwinder Gulati
  */
-public class CategoryEntityTest
+public class TaskEntityTest
 extends TestCase
 {
 	public void testConstructor()
@@ -19,7 +19,7 @@ extends TestCase
 		
 		try
 		{
-			new CategoryEntity();
+			new TaskEntity();
 			succeed = true;
 		}
 		catch (Exception ex) {}
@@ -33,10 +33,14 @@ extends TestCase
 		
 		try
 		{
-			CategoryEntity entity = new CategoryEntity();
-			entity.setCatID(0);
-			entity.setCatName("");
+			TaskEntity entity = new TaskEntity();
+			entity.setTaskID(0);
+			entity.setProjectID(0);
+			entity.setStartDate(new Date(Calendar.getInstance().getTime().getTime()));
+			entity.setDuration(0);
 			entity.setDescription("");
+			entity.setUserID(0);
+			entity.setParentTask(0);
 			entity.setDateCreated(new Date(Calendar.getInstance().getTime().getTime()));
 			succeed = true;
 		}

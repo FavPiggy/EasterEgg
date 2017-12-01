@@ -2,7 +2,10 @@ package edu.uw.tacoma.piggy.model.entity;
 
 import java.io.FileOutputStream;
 import java.io.ObjectOutputStream;
-import java.util.Date;
+
+import java.util.Calendar;
+import java.sql.Date;
+
 /**
  * This class represents for a Category
  * @author Cuong Tran
@@ -68,17 +71,16 @@ public class CategoryEntity
 	public void setDateCreated(Date _DateCreated) { this._DateCreated = _DateCreated; }
 
 	/**
-	 * @author Varik Hoang
-	 * The method initialize the default value for fields
+	 * The method initializes fields
 	 */
 	public void initialCategory()
 	{
 		setCatID(0);
 		setCatName("");
 		setDescription("");
-		setDateCreated(null);
+		setDateCreated(new Date(Calendar.getInstance().getTime().getTime()));
 	}
-
+	
 	/**
 	 * @author Cuong_Tran
 	 * The default constructor for Category
@@ -91,7 +93,6 @@ public class CategoryEntity
 	 */
 	public CategoryEntity(Integer _CatID,String _CatName,String _Description,Date _DateCreated) // need to be data type default value
 	{
-		initialCategory();
 		setCatID(_CatID);
 		setCatName(_CatName);
 		setDescription(_Description);

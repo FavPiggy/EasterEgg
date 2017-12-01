@@ -2,7 +2,9 @@ package edu.uw.tacoma.piggy.model.entity;
 
 import java.io.FileOutputStream;
 import java.io.ObjectOutputStream;
-import java.util.Date;
+
+import java.util.Calendar;
+import java.sql.Date;
 
 /**
  * This class represents for a Role
@@ -69,17 +71,16 @@ public class RoleEntity
 	public void setDateCreated(Date _DateCreated) { this._DateCreated = _DateCreated; }
 
 	/**
-	 * @author Varik Hoang
-	 * The method initialize the default value for fields
+	 * The method initializes fields
 	 */
 	public void initialRole()
 	{
 		setRoleID(0);
 		setRoleName("");
 		setDescription("");
-		setDateCreated(null);
+		setDateCreated(new Date(Calendar.getInstance().getTime().getTime()));
 	}
-
+	
 	/**
 	 * @author Cuong_Tran
 	 * The default constructor for Role
@@ -92,7 +93,6 @@ public class RoleEntity
 	 */
 	public RoleEntity(Integer _RoleID,String _RoleName,String _Description,Date _DateCreated) // need to be data type default value
 	{
-		initialRole();
 		setRoleID(_RoleID);
 		setRoleName(_RoleName);
 		setDescription(_Description);
