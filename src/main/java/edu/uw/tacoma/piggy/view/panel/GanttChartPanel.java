@@ -35,7 +35,7 @@ public class GanttChartPanel extends JPanel {
 		setSubPanel();
 	}
 	public void setSubPanel() {
-		add(myTaskPanel, BorderLayout.WEST);
+		//add(myTaskPanel, BorderLayout.WEST);
 		add(myGraphicPanel, BorderLayout.CENTER);
 	}
 }
