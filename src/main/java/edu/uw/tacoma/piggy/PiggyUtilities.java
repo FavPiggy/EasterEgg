@@ -7,6 +7,8 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Locale;
 
+import net.ucanaccess.jdbc.UcanaccessDriver;
+
 /**
  * The class for project utilities
  * 
@@ -15,9 +17,9 @@ import java.util.Locale;
 public class PiggyUtilities
 {
 	/**
-	 * The driver classs
+	 * The driver class
 	 */
-	private static final String DRIVER_CLASS = "net.ucanaccess.jdbc.UcanaccessDriver";
+	private static final String DRIVER_CLASS = UcanaccessDriver.class.getName();
 	
 	/**
 	 * The connection string
@@ -74,7 +76,6 @@ public class PiggyUtilities
 	{
 		try
 		{
-			System.out.println(getDriver());
 			return DriverManager.getConnection(getDriver());
 		}
 		catch (SQLException e)

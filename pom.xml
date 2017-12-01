@@ -86,7 +86,7 @@
 				<artifactId>maven-resources-plugin</artifactId>
 				<configuration>
 					<nonFilteredFileExtensions>
-						<nonFilteredFileExtension>p12</nonFilteredFileExtension>
+						<nonFilteredFileExtension>mdb</nonFilteredFileExtension>
 					</nonFilteredFileExtensions>
 				</configuration>
 			</plugin>
