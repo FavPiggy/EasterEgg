@@ -4,62 +4,102 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Observable;
 
-
-import java.awt.Dimension;
-import java.awt.event.ComponentEvent;
-import java.awt.event.ComponentListener;
-
-
-import org.swiftgantt.GanttChart;
-
-import org.swiftgantt.common.EventLogger;
-import org.swiftgantt.common.Time;
-import org.swiftgantt.model.GanttModel;
-import org.swiftgantt.model.Task;
-import org.swiftgantt.ui.TimeUnit;
-
-
-
-
+import edu.uw.tacoma.piggy.model.entity.ProjectEntity;
 import edu.uw.tacoma.piggy.model.entity.TaskEntity;
+
 /**
- * 
- * @author Cuong_Tran
- *
+ * .... Java doc please
+ * @author Cuong Tran, Varik Hoang
  */
 public class TaskListData
-extends GanttChart
+extends Observable
 {	
-	private List<TaskEntity> listTask;
+	ProjectEntity project;
+	private List<TaskEntity> tasks;
 	
-	public TaskListData()
+	public TaskListData(ProjectEntity theProject)
 	{
-		listTask = new ArrayList<TaskEntity>();
+		project = theProject;
+		tasks = new ArrayList<TaskEntity>();
 	}
 	
 	/**
 	 * Add new task into the list.
-	 * @author Cuong_Tran
-	 * @param theTask assign new task.
+	 * @author Varik Hoang
+	 * @param theTask the task to add
 	 */
-	public void add(TaskEntity theTask)
+	public void add(final TaskEntity task)
 	{
-		TaskEntity newTask = theTask;
-		listTask.add(newTask);
+		if (tasks.add(task))
+		{
+			setChanged();
+			notifyObservers(tasks);
+		}
 	}
 	
 	/**
-	 * 
-	 * @param ent
+	 * update the task in the list
+	 * @author Varik Hoang
+	 * @param task the task to update
 	 */
-	public void delete(TaskEntity ent) {
-		listTask.remove(ent);
+	public void update(final TaskEntity task)
+	{
+		for (int index = 0; index < tasks.size() - 1; index++)
+		{
+			TaskEntity current = tasks.get(index);
+			if (current.getTaskID() == task.getTaskID())
+			{
+				current.setDescription(task.getDescription());
+				current.setStartDate(task.getStartDate());
+				current.setDuration(task.getDuration());
+				current.setParentTask(task.getParentTask());
+			}
+		}
+		
+		setChanged();
+		notifyObservers(tasks);
 	}
 	
-	public TaskEntity getEntity(int index) {
-		final TaskEntity entity = listTask.get(index);
-		
-		return entity;
+	/**
+	 * delete the task in the list
+	 * @author Cuong Tran
+	 * @param task the task needs to be deleted
+	 */
+	public void delete(final TaskEntity task)
+	{
+		if (tasks.remove(task))
+		{
+			setChanged();
+			notifyObservers(tasks);
+		}
+	}
+	
+	/**
+	 * The method return the task
+	 * @param index the index of the task
+	 * @return the task at the given index
+	 */
+	public TaskEntity get(int index)
+	{
+		if (index < tasks.size() - 1)
+			return tasks.get(index);
+		return null;
+	}
+	
+	public void clear()
+	{
+		tasks.clear();
+		setChanged();
+		notifyObservers(tasks);
+	}
+	
+	/**
+	 * The method returns the list of tasks
+	 * @return
+	 */
+	public List<TaskEntity> get()
+	{
+		return tasks;
 	}
 	
 	/**
@@ -67,9 +107,9 @@ extends GanttChart
 	 * @author Cuong_Tran
 	 * @return integer value of size.
 	 */
-	public int sizeOfList() 
+	public int size() 
 	{
-		return listTask.size();
+		return tasks.size();
 	}
 	/**
 	 * @author Cuong_Tran
@@ -77,21 +117,18 @@ extends GanttChart
 	 */
 	public boolean isEmpty() 
 	{	
-		return listTask.isEmpty();
+		return tasks.isEmpty();
 	}
 	
-	/**
-	 * 
-	 */
-	public void initDailyModel() {
-		
-	}
-	
-	/**
-	 * 
-	 * @return
-	 */
-	public GanttModel getGanttModel() {
-		return this.getModel();
-	}
+//	// JUST FOR DEBUG
+//	public String toString()
+//	{
+//		StringBuilder builder = new StringBuilder();
+//		builder.append("List: \n");
+//		for (TaskEntity task: tasks)
+//			builder.append(task).append("\n");
+//		
+//		return builder.toString();
+//	}
+
 }

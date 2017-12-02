@@ -6,6 +6,7 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JTabbedPane;
 
+import edu.uw.tacoma.piggy.model.entity.ProjectEntity;
 import edu.uw.tacoma.piggy.view.panel.GanttChartPanel;
 import edu.uw.tacoma.piggy.view.panel.ManagementPanel;
 
@@ -64,7 +65,12 @@ extends JFrame
 		setJMenuBar(piggyMenu);
 		
 		managementPanel = new ManagementPanel();
-		ganttchartPanel = new GanttChartPanel(this);
+//		ganttchartPanel = new GanttChartPanel(this, null);
+		
+		ProjectEntity project = new ProjectEntity();
+		project.setProjectID(1);
+		project.setProjectName("Where is the project name coming from?");
+		ganttchartPanel = new GanttChartPanel(this, project);
 		
 		tabbedPane = createTabbedPane();
 		getContentPane().add(tabbedPane, BorderLayout.CENTER);
