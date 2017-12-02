@@ -214,21 +214,21 @@ public class ScheduleTab extends javax.swing.JPanel {
 
 	private void cmbTimeUnitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbTimeUnitActionPerformed
 		if (cmbTimeUnit.getSelectedItem().equals("Hour")) {
-			ganttComp.initHourlyModel();
+	//		ganttComp.initHourlyModel();
 		} else if (cmbTimeUnit.getSelectedItem().equals("AllDay")) {
-			ganttComp.initAllDayModel();
+	//		ganttComp.initAllDayModel();
 		} else if (cmbTimeUnit.getSelectedItem().equals("Day")) {
-			ganttComp.initDailyModel();
+	//		ganttComp.initDailyModel();
 		} else if (cmbTimeUnit.getSelectedItem().equals("Week")) {
-			ganttComp.initWeeklyModel();
+	//		ganttComp.initWeeklyModel();
 		} else if (cmbTimeUnit.getSelectedItem().equals("Month")) {
-			ganttComp.initMonthlyModel();
+	//		ganttComp.initMonthlyModel();
 		} else if (cmbTimeUnit.getSelectedItem().equals("Year")) {
-			ganttComp.initYearModel();
+	//		ganttComp.initYearModel();
 		}
-		taskTree.setTreeModel(ganttComp.getGanttModel().getTaskTreeModel());
+		//taskTree.setTreeModel(ganttComp.getGanttModel().getTaskTreeModel());
 		taskTree.updateUI();
-		taskTree.expandAllTreeNode((DefaultMutableTreeNode) ganttComp.getGanttModel().getTaskTreeModel().getRoot());
+		//taskTree.expandAllTreeNode((DefaultMutableTreeNode) ganttComp.getGanttModel().getTaskTreeModel().getRoot());
 	}//GEN-LAST:event_cmbTimeUnitActionPerformed
 
 	private void btnAddTaskToRootActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddTaskToRootActionPerformed
