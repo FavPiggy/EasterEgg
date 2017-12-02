@@ -36,10 +36,10 @@ extends JPanel
 	 * The constructor for the task list panel
 	 * @param theGUI the main Piggy GUI
 	 */
-	public TaskListPanel(GanttChartPanel theGcp)
+	public TaskListPanel(GanttChartPanel theGcp, TaskListData TheData)
 	{
+		myData = TheData;
 		myGanttPanel = theGcp;
-		myData = new TaskListData();
 		myTable = new JTable();
 		data = new Object[] { "Task ID", "Project ID", "Start Date", "Duration", "Description", "User ID", "Parent Task", "Date Created" };
 		model = new DefaultTableModel(data, 0);
@@ -80,9 +80,9 @@ extends JPanel
 	{
 		//access.setActivity(AccountConst.SELECT_ALL);
 		//entities = access.executeQuery(new AccountEntity());
-		for(int i =0; i < myData.sizeOfList(); i++) {
-			addRow(myData.getEntity(i));
-		}
+//		for(int i =0; i < myData.sizeOfList(); i++) {
+//			addRow(myData.getEntity(i));
+//		}
 	}
 	
 	public void clearData()
