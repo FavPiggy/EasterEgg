@@ -1,41 +1,83 @@
 package edu.uw.tacoma.piggy.view.panel;
 
 import java.awt.BorderLayout;
+import java.util.List;
 
 import javax.swing.JPanel;
 
+import edu.uw.tacoma.piggy.model.dao.TaskDAO;
+import edu.uw.tacoma.piggy.model.entity.ProjectEntity;
+import edu.uw.tacoma.piggy.model.entity.TaskEntity;
 import edu.uw.tacoma.piggy.view.PiggyGUI;
 import edu.uw.tacoma.piggy.view.panel.gantt.GraphicPanel;
+import edu.uw.tacoma.piggy.view.panel.gantt.TaskListData;
 import edu.uw.tacoma.piggy.view.panel.gantt.TaskListPanel;
 
 @SuppressWarnings("serial")
-public class GanttChartPanel extends JPanel {
+public class GanttChartPanel
+extends JPanel
+{
+	
 	/**
 	 * The main Piggy GUI.
 	 */
-	@SuppressWarnings("unused")
 	private PiggyGUI myGUI;
+	
+	/**
+	 * The current project
+	 */
+	private ProjectEntity myProject;
+	
 	/**
 	 * 
 	 */
 	private TaskListPanel myTaskPanel;
+	
 	/**
 	 * 
 	 */
 	private GraphicPanel myGraphicPanel;
+	
 	/**
-	 * 
-	 * @param theGui
+	 * DO NOT REMOVE THIS FIELD
 	 */
+	private TaskListData data;
+	
 	public GanttChartPanel(PiggyGUI theGui)
 	{
+		this(theGui, null);
+	}
+	
+	/**
+	 * @param theGui
+	 */
+	public GanttChartPanel(PiggyGUI theGui, ProjectEntity theProject)
+	{
 		myGUI = theGui;
-		myTaskPanel = new TaskListPanel(this);
-		myGraphicPanel = new GraphicPanel(this);
+		myProject = theProject;
+		
+		data = new TaskListData(theProject);
+		myTaskPanel = new TaskListPanel(this, data);
+		myGraphicPanel = new GraphicPanel(this, theProject);
+		
+		data.addObserver(myGraphicPanel);
+		fetch(data, theProject);
 		setSubPanel();
 	}
-	public void setSubPanel() {
-		//add(myTaskPanel, BorderLayout.WEST);
+	
+	public void setSubPanel()
+	{
+		add(myTaskPanel, BorderLayout.WEST);
 		add(myGraphicPanel, BorderLayout.CENTER);
+	}
+	
+	public void fetch(TaskListData data, ProjectEntity theProject)
+	{
+		if (theProject != null)
+		{
+			List<TaskEntity> tasks = TaskDAO.listTask("where ProjectID=" + theProject.getProjectID());
+			for (TaskEntity task: tasks)
+				data.add(task);
+		}
 	}
 }
