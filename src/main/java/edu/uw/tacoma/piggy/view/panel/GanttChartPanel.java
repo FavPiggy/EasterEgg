@@ -5,6 +5,8 @@ import java.util.List;
 
 import javax.swing.JPanel;
 
+import org.swiftgantt.demo.tab.ScheduleTab;
+
 import edu.uw.tacoma.piggy.model.dao.TaskDAO;
 import edu.uw.tacoma.piggy.model.entity.ProjectEntity;
 import edu.uw.tacoma.piggy.model.entity.TaskEntity;
@@ -43,6 +45,10 @@ extends JPanel
 	 */
 	private TaskListData data;
 	
+	/**
+	 * 
+	 * @param theGui
+	 */	
 	public GanttChartPanel(PiggyGUI theGui)
 	{
 		this(theGui, null);
@@ -59,7 +65,6 @@ extends JPanel
 		data = new TaskListData(theProject);
 		myTaskPanel = new TaskListPanel(this, data);
 		myGraphicPanel = new GraphicPanel(this, theProject);
-		
 		data.addObserver(myGraphicPanel);
 		fetch(data, theProject);
 		setSubPanel();
@@ -67,8 +72,9 @@ extends JPanel
 	
 	public void setSubPanel()
 	{
-		add(myTaskPanel, BorderLayout.WEST);
+
 		add(myGraphicPanel, BorderLayout.CENTER);
+		
 	}
 	
 	public void fetch(TaskListData data, ProjectEntity theProject)

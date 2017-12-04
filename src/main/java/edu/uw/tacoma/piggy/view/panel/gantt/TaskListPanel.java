@@ -104,28 +104,6 @@ extends JPanel
 		data[11-3] = entity.getDateCreated();
 		model.addRow(data);
 	}
-//	
-//	@Override
-//	public boolean isCellEditable(int row, int column)
-//	{  
-//        return false;  
-//    }
-//	
-//	/**
-//	 * @author Cuong_Tran
-//	 * @param tld
-//	 * @return
-//	 */
-//	public String getTaskData(TaskListData tld) 
-//	{
-//	
-//		StringBuilder builder = new StringBuilder();
-//		while(!tld.isEmpty()) {
-//			builder.append(tld.toString());
-//		}
-//		return builder.toString();
-//	}
-	
 	
 	/**
 	 * The serial version UID.

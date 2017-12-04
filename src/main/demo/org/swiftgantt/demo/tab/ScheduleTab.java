@@ -5,6 +5,7 @@
  */
 package org.swiftgantt.demo.tab;
 
+import org.swiftgantt.GanttChart;
 import org.swiftgantt.common.ExTree;
 import org.swiftgantt.demo.GanttChartDemoComponent;
 import org.swiftgantt.event.SelectionChangeEvent;
@@ -12,6 +13,9 @@ import org.swiftgantt.event.SelectionChangeListener;
 import org.swiftgantt.model.Task;
 import org.swiftgantt.model.TaskTreeModel;
 import org.swiftgantt.ui.TimeUnit;
+
+import edu.uw.tacoma.piggy.model.entity.TaskEntity;
+
 import java.awt.GridLayout;
 import javax.swing.event.TreeModelEvent;
 import javax.swing.tree.DefaultMutableTreeNode;
@@ -26,14 +30,14 @@ public class ScheduleTab extends javax.swing.JPanel {
 
 	private GanttChartDemoComponent ganttComp = null;
 	private ExTree taskTree = null;
-
+	private GanttChart ganttChart = null;
 	public ScheduleTab() {
 		initComponents();
 	}
-
-	public ScheduleTab(GanttChartDemoComponent gantt) {
-		this.ganttComp = gantt;
-		this.ganttComp.addSelectionChangeListener(new SelectionChangeListener() {
+	
+	public ScheduleTab(GanttChart gantt) {
+		this.ganttChart = gantt;
+		this.ganttChart.addSelectionChangeListener(new SelectionChangeListener() {
 
 			public void selectionChanged(SelectionChangeEvent e) {
 				Task task = e.getSelection();
@@ -64,6 +68,40 @@ public class ScheduleTab extends javax.swing.JPanel {
 			}
 			cmbTimeUnit.setSelectedIndex(index);
 	}
+	
+//	public ScheduleTab(GanttChartDemoComponent gantt) {
+//		this.ganttComp = gantt;
+//		this.ganttComp.addSelectionChangeListener(new SelectionChangeListener() {
+//
+//			public void selectionChanged(SelectionChangeEvent e) {
+//				Task task = e.getSelection();
+//				((ExTree) taskTree).select(task);
+//				if (task != null) {
+//					taskTree.expandTreeNode(task);
+//				}
+//				taskTree.updateUI();
+//			}
+//		});
+//		initComponents();
+//		taskTree = new ExTree();
+//		pnlTreeView.setLayout(new GridLayout());
+//		pnlTreeView.add(taskTree);
+//			int index = 0;
+//			if (gantt.getTimeUnit() == TimeUnit.Hour) {
+//				index = 0;
+//			} else if (gantt.getTimeUnit() == TimeUnit.AllDay) {
+//				index = 1;
+//			} else if (gantt.getTimeUnit() == TimeUnit.Day) {
+//				index = 2;
+//			} else if (gantt.getTimeUnit() == TimeUnit.Week) {
+//				index = 3;
+//			} else if (gantt.getTimeUnit() == TimeUnit.Month) {
+//				index = 4;
+//			} else if (gantt.getTimeUnit() == TimeUnit.Year) {
+//				index = 5;
+//			}
+//			cmbTimeUnit.setSelectedIndex(index);
+//	}
 
 	public void setTaskTreeModel(TaskTreeModel taskTreeModel) {
 		this.taskTree.setTreeModel(taskTreeModel);
@@ -226,9 +264,9 @@ public class ScheduleTab extends javax.swing.JPanel {
 		} else if (cmbTimeUnit.getSelectedItem().equals("Year")) {
 	//		ganttComp.initYearModel();
 		}
-		//taskTree.setTreeModel(ganttComp.getGanttModel().getTaskTreeModel());
+		//taskTree.setTreeModel(ganttChart.getModel().getTaskTreeModel());
 		taskTree.updateUI();
-		//taskTree.expandAllTreeNode((DefaultMutableTreeNode) ganttComp.getGanttModel().getTaskTreeModel().getRoot());
+		//taskTree.expandAllTreeNode((DefaultMutableTreeNode) ganttChart.getModel().getTaskTreeModel().getRoot());
 	}//GEN-LAST:event_cmbTimeUnitActionPerformed
 
 	private void btnAddTaskToRootActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddTaskToRootActionPerformed
@@ -248,12 +286,12 @@ public class ScheduleTab extends javax.swing.JPanel {
 		if (selectedTask == null) {
 			return;
 		}
-		ganttComp.suspendUI();
+		ganttChart.suspendUI();
 		TaskDialog td = new TaskDialog(selectedTask);
 		td.setVisible(true);// Display
 		selectedTask.copy(td.getTask());
 		taskTree.updateUI();
-		ganttComp.resumeUI();
+		ganttChart.resumeUI();
 	}//GEN-LAST:event_btnEditSelectedTaskActionPerformed
 
 	private void btnAddTaskToSelectTaskActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddTaskToSelectTaskActionPerformed
@@ -278,7 +316,7 @@ public class ScheduleTab extends javax.swing.JPanel {
 	}//GEN-LAST:event_btnRemoveTaskActionPerformed
 
 	private void btnRemoveAllTasksActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRemoveAllTasksActionPerformed
-		ganttComp.getModel().removeAll();
+		ganttChart.getModel().removeAll();
 	}//GEN-LAST:event_btnRemoveAllTasksActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
