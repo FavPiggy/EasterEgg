@@ -3,14 +3,23 @@ package edu.uw.tacoma.piggy.view.panel.management;
 import javax.swing.JPanel;
 import javax.swing.JLabel;
 import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 import javax.swing.JTextField;
+
+import edu.uw.tacoma.piggy.model.entity.MemberEntity;
+
 import javax.swing.JButton;
 
 public class MemberPanel extends JPanel {
-	private JTextField textField;
-	private JTextField textField_1;
-	private JTextField textField_2;
-	private JTextField textField_3;
+	private JTextField mIdField;
+	private JTextField pIdField;
+	private JTextField uIdField;
+	private JTextField dateJoinedField;
 
 	/**
 	 * Create the panel.
@@ -39,28 +48,44 @@ public class MemberPanel extends JPanel {
 		lblDateJoined.setBounds(25, 177, 74, 16);
 		add(lblDateJoined);
 		
-		textField = new JTextField();
-		textField.setBounds(111, 84, 130, 26);
-		add(textField);
-		textField.setColumns(10);
+		mIdField = new JTextField();
+		mIdField.setBounds(111, 84, 130, 26);
+		add(mIdField);
+		mIdField.setColumns(10);
 		
-		textField_1 = new JTextField();
-		textField_1.setBounds(111, 114, 130, 26);
-		add(textField_1);
-		textField_1.setColumns(10);
+		pIdField = new JTextField();
+		pIdField.setBounds(111, 114, 130, 26);
+		add(pIdField);
+		pIdField.setColumns(10);
 		
-		textField_2 = new JTextField();
-		textField_2.setBounds(111, 142, 130, 26);
-		add(textField_2);
-		textField_2.setColumns(10);
+		uIdField = new JTextField();
+		uIdField.setBounds(111, 142, 130, 26);
+		add(uIdField);
+		uIdField.setColumns(10);
 		
-		textField_3 = new JTextField();
-		textField_3.setBounds(111, 172, 130, 26);
-		add(textField_3);
-		textField_3.setColumns(10);
+		dateJoinedField = new JTextField();
+		dateJoinedField.setBounds(111, 172, 130, 26);
+		add(dateJoinedField);
+		dateJoinedField.setColumns(10);
 		
 		JButton btnSave = new JButton("Save");
 		btnSave.setBounds(25, 252, 117, 29);
+		btnSave.addActionListener(new ActionListener(){
+
+			public void actionPerformed(ActionEvent e) {
+				// MemberEntity(Integer _MemberID,Integer _ProjectID,Integer _UserID,Date _DateJoined)
+				try {
+					MemberEntity member = new MemberEntity(Integer.parseInt(mIdField.getText()),Integer.parseInt(pIdField.getText()),
+							Integer.parseInt(uIdField.getText()), new SimpleDateFormat("dd/MM/yyyy").parse(dateJoinedField.getText()));
+				} catch (NumberFormatException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				} catch (ParseException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+				
+			}});
 		add(btnSave);
 		
 		JButton btnCancel = new JButton("Cancel");

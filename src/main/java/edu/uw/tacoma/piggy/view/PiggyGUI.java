@@ -7,6 +7,8 @@ import java.beans.PropertyChangeListener;
 import javax.swing.*;
 import javax.swing.border.LineBorder;
 
+import edu.uw.tacoma.piggy.view.panel.ManagementPanel;
+
 /**
  * The following class represents a GUI for the Easter Egg.
  * Random change 3
@@ -32,6 +34,7 @@ public class PiggyGUI implements PropertyChangeListener {
         myWindow = new JFrame("Favorite Piggy");
         setup();
         myWindow.setIconImage(myPiggyLogo.getImage());
+        
         myWindow.pack();
     }
 
@@ -48,6 +51,8 @@ public class PiggyGUI implements PropertyChangeListener {
      * A setup for the JFrame.
      */
     private void setup() {
+//    	ManagementPanel mp = new ManagementPanel();
+//    	myWindow.add(mp);
         JPanel panel = new JPanel();
         panel.getUI();
         panel.setLayout(new BoxLayout(panel, BoxLayout.PAGE_AXIS));

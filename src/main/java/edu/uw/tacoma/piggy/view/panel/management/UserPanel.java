@@ -3,14 +3,20 @@ package edu.uw.tacoma.piggy.view.panel.management;
 import javax.swing.JPanel;
 import javax.swing.JLabel;
 import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
 import javax.swing.JTextField;
+
+import edu.uw.tacoma.piggy.model.entity.UserEntity;
+
 import javax.swing.JButton;
 
 public class UserPanel extends JPanel {
-	private JTextField textField;
-	private JTextField textField_1;
-	private JTextField textField_2;
-	private JTextField textField_3;
+	private JTextField IDField;
+	private JTextField fNameField;
+	private JTextField lNameField;
+	private JTextField numField;
 
 	/**
 	 * Create the panel.
@@ -39,28 +45,34 @@ public class UserPanel extends JPanel {
 		lblPhoneNumber.setBounds(31, 203, 100, 16);
 		add(lblPhoneNumber);
 		
-		textField = new JTextField();
-		textField.setBounds(89, 80, 130, 26);
-		add(textField);
-		textField.setColumns(10);
+		IDField = new JTextField();
+		IDField.setBounds(89, 80, 130, 26);
+		add(IDField);
+		IDField.setColumns(10);
 		
-		textField_1 = new JTextField();
-		textField_1.setBounds(112, 116, 130, 26);
-		add(textField_1);
-		textField_1.setColumns(10);
+		fNameField = new JTextField();
+		fNameField.setBounds(112, 116, 130, 26);
+		add(fNameField);
+		fNameField.setColumns(10);
 		
-		textField_2 = new JTextField();
-		textField_2.setBounds(112, 159, 130, 26);
-		add(textField_2);
-		textField_2.setColumns(10);
+		lNameField = new JTextField();
+		lNameField.setBounds(112, 159, 130, 26);
+		add(lNameField);
+		lNameField.setColumns(10);
 		
-		textField_3 = new JTextField();
-		textField_3.setBounds(135, 198, 130, 26);
-		add(textField_3);
-		textField_3.setColumns(10);
+		numField = new JTextField();
+		numField.setBounds(135, 198, 130, 26);
+		add(numField);
+		numField.setColumns(10);
 		
 		JButton btnSave = new JButton("Save");
 		btnSave.setBounds(89, 247, 117, 29);
+		btnSave.addActionListener(new ActionListener() {
+
+			public void actionPerformed(ActionEvent e) {
+				UserEntity user = new UserEntity(Integer.parseInt(IDField.getText()), fNameField.getText(),
+						lNameField.getText(), numField.getText());
+			}});
 		add(btnSave);
 		
 		JButton btnCancel = new JButton("Cancel");

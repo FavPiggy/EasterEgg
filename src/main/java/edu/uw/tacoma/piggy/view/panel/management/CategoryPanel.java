@@ -3,14 +3,23 @@ package edu.uw.tacoma.piggy.view.panel.management;
 import javax.swing.JPanel;
 import javax.swing.JLabel;
 import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 import javax.swing.JTextField;
+
+import edu.uw.tacoma.piggy.model.entity.CategoryEntity;
+
 import javax.swing.JButton;
 
 public class CategoryPanel extends JPanel {
-	private JTextField textField;
-	private JTextField textField_1;
-	private JTextField textField_2;
-	private JTextField textField_3;
+	private JTextField cIdField;
+	private JTextField cNameField;
+	private JTextField descriptionField;
+	private JTextField dateCreatedField;
 
 	/**
 	 * Create the panel.
@@ -39,29 +48,45 @@ public class CategoryPanel extends JPanel {
 		lblDateCreated.setBounds(47, 206, 81, 16);
 		add(lblDateCreated);
 		
-		textField = new JTextField();
-		textField.setBounds(131, 81, 130, 26);
-		add(textField);
-		textField.setColumns(10);
+		cIdField = new JTextField();
+		cIdField.setBounds(131, 81, 130, 26);
+		add(cIdField);
+		cIdField.setColumns(10);
 		
-		textField_1 = new JTextField();
-		textField_1.setBounds(131, 121, 130, 26);
-		add(textField_1);
-		textField_1.setColumns(10);
+		cNameField = new JTextField();
+		cNameField.setBounds(131, 121, 130, 26);
+		add(cNameField);
+		cNameField.setColumns(10);
 		
-		textField_2 = new JTextField();
-		textField_2.setBounds(131, 161, 130, 26);
-		add(textField_2);
-		textField_2.setColumns(10);
+		descriptionField = new JTextField();
+		descriptionField.setBounds(131, 161, 130, 26);
+		add(descriptionField);
+		descriptionField.setColumns(10);
 		
-		textField_3 = new JTextField();
-		textField_3.setBounds(141, 201, 130, 26);
-		add(textField_3);
-		textField_3.setColumns(10);
+		dateCreatedField = new JTextField();
+		dateCreatedField.setBounds(141, 201, 130, 26);
+		add(dateCreatedField);
+		dateCreatedField.setColumns(10);
 		
-		JButton btnNewButton = new JButton("Save");
-		btnNewButton.setBounds(54, 254, 117, 29);
-		add(btnNewButton);
+		JButton saveBtn = new JButton("Save");
+		saveBtn.setBounds(54, 254, 117, 29);
+		saveBtn.addActionListener(new ActionListener(){
+
+			public void actionPerformed(ActionEvent e) {
+				//CategoryEntity(Integer _CatID,String _CatName,String _Description,Date _DateCreated)
+				try {
+					CategoryEntity category = new CategoryEntity(Integer.parseInt(cIdField.getText()), cNameField.getText(),
+							descriptionField.getText(),new SimpleDateFormat("dd/MM/yyyy").parse(dateCreatedField.getText()));
+				} catch (NumberFormatException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				} catch (ParseException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+				
+			}});
+		add(saveBtn);
 		
 		JButton btnCancel = new JButton("Cancel");
 		btnCancel.setBounds(258, 254, 117, 29);

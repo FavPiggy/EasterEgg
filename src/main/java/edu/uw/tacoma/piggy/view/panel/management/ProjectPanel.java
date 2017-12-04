@@ -3,17 +3,26 @@ package edu.uw.tacoma.piggy.view.panel.management;
 import javax.swing.JPanel;
 import javax.swing.JLabel;
 import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 import javax.swing.JTextField;
+
+import edu.uw.tacoma.piggy.model.entity.ProjectEntity;
+
 import javax.swing.JButton;
 
 public class ProjectPanel extends JPanel {
-	private JTextField textField;
-	private JTextField textField_1;
-	private JTextField textField_2;
-	private JTextField textField_3;
-	private JTextField textField_4;
-	private JTextField textField_5;
-	private JTextField textField_6;
+	private JTextField pIdField;
+	private JTextField pNameField;
+	private JTextField AbbrField;
+	private JTextField descriptionField;
+	private JTextField sDateField;
+	private JTextField cIdField;
+	private JTextField uCreatedField;
 
 	/**
 	 * Create the panel.
@@ -54,48 +63,64 @@ public class ProjectPanel extends JPanel {
 		lblUserCreated.setBounds(28, 285, 92, 16);
 		add(lblUserCreated);
 		
-		textField = new JTextField();
-		textField.setBounds(162, 102, 130, 26);
-		add(textField);
-		textField.setColumns(10);
+		pIdField = new JTextField();
+		pIdField.setBounds(162, 102, 130, 26);
+		add(pIdField);
+		pIdField.setColumns(10);
 		
-		textField_1 = new JTextField();
-		textField_1.setBounds(162, 130, 130, 26);
-		add(textField_1);
-		textField_1.setColumns(10);
+		pNameField = new JTextField();
+		pNameField.setBounds(162, 130, 130, 26);
+		add(pNameField);
+		pNameField.setColumns(10);
 		
-		textField_2 = new JTextField();
-		textField_2.setBounds(162, 161, 130, 26);
-		add(textField_2);
-		textField_2.setColumns(10);
+		AbbrField = new JTextField();
+		AbbrField.setBounds(162, 161, 130, 26);
+		add(AbbrField);
+		AbbrField.setColumns(10);
 		
-		textField_3 = new JTextField();
-		textField_3.setBounds(162, 194, 130, 26);
-		add(textField_3);
-		textField_3.setColumns(10);
+		descriptionField = new JTextField();
+		descriptionField.setBounds(162, 194, 130, 26);
+		add(descriptionField);
+		descriptionField.setColumns(10);
 		
-		textField_4 = new JTextField();
-		textField_4.setBounds(162, 220, 130, 26);
-		add(textField_4);
-		textField_4.setColumns(10);
+		sDateField = new JTextField();
+		sDateField.setBounds(162, 220, 130, 26);
+		add(sDateField);
+		sDateField.setColumns(10);
 		
-		textField_5 = new JTextField();
-		textField_5.setBounds(162, 250, 130, 26);
-		add(textField_5);
-		textField_5.setColumns(10);
+		cIdField = new JTextField();
+		cIdField.setBounds(162, 250, 130, 26);
+		add(cIdField);
+		cIdField.setColumns(10);
 		
-		textField_6 = new JTextField();
-		textField_6.setBounds(162, 280, 130, 26);
-		add(textField_6);
-		textField_6.setColumns(10);
+		uCreatedField = new JTextField();
+		uCreatedField.setBounds(162, 280, 130, 26);
+		add(uCreatedField);
+		uCreatedField.setColumns(10);
 		
-		JButton btnNewButton = new JButton("Save");
-		btnNewButton.setBounds(58, 375, 117, 29);
-		add(btnNewButton);
+		JButton saveBtn = new JButton("Save");
+		saveBtn.setBounds(58, 375, 117, 29);
+		saveBtn.addActionListener(new ActionListener() {
+
+			public void actionPerformed(ActionEvent e) {
+				//ProjectEntity(Integer _ProjectID,String _ProjectName,String _ProjectAbbr,String _Description,Date _StartDate,Integer _CategoryID,Date _DateCreated)
+				try {
+					ProjectEntity project = new ProjectEntity(Integer.parseInt(pIdField.getText()), pNameField.getText(),
+							AbbrField.getText(), descriptionField.getText(), new SimpleDateFormat("dd/MM/yyyy").parse(sDateField.getText()),
+							Integer.parseInt(cIdField.getText()), new SimpleDateFormat("dd/MM/yyyy").parse(uCreatedField.getText()));
+				} catch (NumberFormatException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				} catch (ParseException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+			}});
+		add(saveBtn);
 		
-		JButton btnCancel = new JButton("Cancel");
-		btnCancel.setBounds(215, 375, 117, 29);
-		add(btnCancel);
+		JButton cancelBtn = new JButton("Cancel");
+		cancelBtn.setBounds(215, 375, 117, 29);
+		add(cancelBtn);
 
 	}
 }
