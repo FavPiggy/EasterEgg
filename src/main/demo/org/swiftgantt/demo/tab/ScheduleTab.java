@@ -15,8 +15,12 @@ import org.swiftgantt.model.TaskTreeModel;
 import org.swiftgantt.ui.TimeUnit;
 
 import edu.uw.tacoma.piggy.model.entity.TaskEntity;
+import edu.uw.tacoma.piggy.view.panel.gantt.GraphicPanel;
+import edu.uw.tacoma.piggy.view.panel.gantt.TaskListData;
 
 import java.awt.GridLayout;
+import java.util.Date;
+
 import javax.swing.event.TreeModelEvent;
 import javax.swing.tree.DefaultMutableTreeNode;
 import org.apache.commons.lang.StringUtils;
@@ -31,16 +35,22 @@ public class ScheduleTab extends javax.swing.JPanel {
 	private GanttChartDemoComponent ganttComp = null;
 	private ExTree taskTree = null;
 	private GanttChart ganttChart = null;
+	private TaskListData myListData = null;
+	
 	public ScheduleTab() {
 		initComponents();
 	}
 	
-	public ScheduleTab(GanttChart gantt) {
-		this.ganttChart = gantt;
+	public ScheduleTab(GraphicPanel graphic) {
+		
+		myListData = new TaskListData();
+		
+		this.ganttChart = graphic.getGanttChart();
 		this.ganttChart.addSelectionChangeListener(new SelectionChangeListener() {
 
 			public void selectionChanged(SelectionChangeEvent e) {
 				Task task = e.getSelection();
+				System.out.println(task.toSimpleString());
 				((ExTree) taskTree).select(task);
 				if (task != null) {
 					taskTree.expandTreeNode(task);
@@ -52,21 +62,21 @@ public class ScheduleTab extends javax.swing.JPanel {
 		taskTree = new ExTree();
 		pnlTreeView.setLayout(new GridLayout());
 		pnlTreeView.add(taskTree);
-			int index = 0;
-			if (gantt.getTimeUnit() == TimeUnit.Hour) {
-				index = 0;
-			} else if (gantt.getTimeUnit() == TimeUnit.AllDay) {
-				index = 1;
-			} else if (gantt.getTimeUnit() == TimeUnit.Day) {
-				index = 2;
-			} else if (gantt.getTimeUnit() == TimeUnit.Week) {
-				index = 3;
-			} else if (gantt.getTimeUnit() == TimeUnit.Month) {
-				index = 4;
-			} else if (gantt.getTimeUnit() == TimeUnit.Year) {
-				index = 5;
-			}
-			cmbTimeUnit.setSelectedIndex(index);
+//			int index = 0;
+//			if (graphic.getGanttChart().getTimeUnit() == TimeUnit.Hour) {
+//				index = 0;
+//			} else if (graphic.getGanttChart().getTimeUnit() == TimeUnit.AllDay) {
+//				index = 1;
+//			} else if (graphic.getGanttChart().getTimeUnit() == TimeUnit.Day) {
+//				index = 2;
+//			} else if (graphic.getGanttChart().getTimeUnit() == TimeUnit.Week) {
+//				index = 3;
+//			} else if (graphic.getGanttChart().getTimeUnit() == TimeUnit.Month) {
+//				index = 4;
+//			} else if (graphic.getGanttChart().getTimeUnit() == TimeUnit.Year) {
+//				index = 5;
+//			}
+//			cmbTimeUnit.setSelectedIndex(index);
 	}
 	
 //	public ScheduleTab(GanttChartDemoComponent gantt) {
@@ -119,7 +129,7 @@ public class ScheduleTab extends javax.swing.JPanel {
 			public void treeStructureChanged(TreeModelEvent e) {
 			}
 		});
-		//        System.err.println("[setTaskTreeModel] Is TaskTreeModel?" + (taskTree.getTreeModel() instanceof TaskTreeModel));
+		        System.err.println("[setTaskTreeModel] Is TaskTreeModel?" + (taskTree.getTreeModel() instanceof TaskTreeModel));
 		this.taskTree.expandAllTreeNode((DefaultMutableTreeNode) taskTreeModel.getRoot());
 	}
 
@@ -251,22 +261,22 @@ public class ScheduleTab extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
 	private void cmbTimeUnitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbTimeUnitActionPerformed
-		if (cmbTimeUnit.getSelectedItem().equals("Hour")) {
-	//		ganttComp.initHourlyModel();
-		} else if (cmbTimeUnit.getSelectedItem().equals("AllDay")) {
-	//		ganttComp.initAllDayModel();
-		} else if (cmbTimeUnit.getSelectedItem().equals("Day")) {
-	//		ganttComp.initDailyModel();
-		} else if (cmbTimeUnit.getSelectedItem().equals("Week")) {
-	//		ganttComp.initWeeklyModel();
-		} else if (cmbTimeUnit.getSelectedItem().equals("Month")) {
-	//		ganttComp.initMonthlyModel();
-		} else if (cmbTimeUnit.getSelectedItem().equals("Year")) {
-	//		ganttComp.initYearModel();
+		//if (cmbTimeUnit.getSelectedItem().equals("Hour")) {
+			//ganttChart.setTimeUnit(TimeUnit.Hour);
+//		} else if (cmbTimeUnit.getSelectedItem().equals("AllDay")) {
+//	//		ganttComp.initAllDayModel();
+		if (cmbTimeUnit.getSelectedItem().equals("Day")) {
+			ganttChart.setTimeUnit(TimeUnit.Day);
+//		} else if (cmbTimeUnit.getSelectedItem().equals("Week")) {
+//			ganttChart.getTimeUnit();
+//		} else if (cmbTimeUnit.getSelectedItem().equals("Month")) {
+//	//		ganttComp.initMonthlyModel();
+//		} else if (cmbTimeUnit.getSelectedItem().equals("Year")) {
+//	//		ganttComp.initYearModel();
 		}
-		//taskTree.setTreeModel(ganttChart.getModel().getTaskTreeModel());
+		taskTree.setTreeModel(ganttChart.getModel().getTaskTreeModel());
 		taskTree.updateUI();
-		//taskTree.expandAllTreeNode((DefaultMutableTreeNode) ganttChart.getModel().getTaskTreeModel().getRoot());
+		taskTree.expandAllTreeNode((DefaultMutableTreeNode) ganttChart.getModel().getTaskTreeModel().getRoot());
 	}//GEN-LAST:event_cmbTimeUnitActionPerformed
 
 	private void btnAddTaskToRootActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddTaskToRootActionPerformed
@@ -276,10 +286,20 @@ public class ScheduleTab extends javax.swing.JPanel {
 		if(td.getTask() == null || StringUtils.isEmpty(td.getTask().getName())){
 			return;
 		}
-		TaskTreeModel ttm = (TaskTreeModel) taskTree.getTreeModel();
+		
+		//TaskTreeModel ttm = (TaskTreeModel) taskTree.getTreeModel();
+		TaskEntity task = new TaskEntity();
+		task.setDescription(td.getTask().getDescription());
+		task.setDuration(td.getTask().getDuration());
+		myListData.add(task);
+		//Cuong create new tree to test display on gantt graphic panel. 
+		TaskTreeModel ttm = new TaskTreeModel();
+		
 		ttm.add(td.getTask());
 		taskTree.updateUI();
 	}//GEN-LAST:event_btnAddTaskToRootActionPerformed
+	
+
 
 	private void btnEditSelectedTaskActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditSelectedTaskActionPerformed
 		Task selectedTask = (Task) taskTree.getSelectedNode();

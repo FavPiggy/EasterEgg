@@ -28,7 +28,7 @@ public class GanttChartDemo extends javax.swing.JFrame {
 		this.setTitle(this.getTitle());
 
 		// Init for schedule tab
-		scheduleTab = new ScheduleTab(this.ganttChartDemoComp);
+		//scheduleTab = new ScheduleTab(this.ganttChartDemoComp);
 		propertiesPane.addTab("Schedule", scheduleTab);
 		propertiesPane.setMnemonicAt(0, KeyEvent.VK_1);
 

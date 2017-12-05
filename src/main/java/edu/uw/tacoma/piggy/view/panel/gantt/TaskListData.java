@@ -19,12 +19,16 @@ extends Observable
 	ProjectEntity project;
 	private List<TaskEntity> tasks;
 	
-	public TaskListData(ProjectEntity theProject)
+//	public TaskListData(ProjectEntity theProject)
+//	{
+//		project = theProject;
+//		tasks = new ArrayList<TaskEntity>();
+//	}
+	
+	public TaskListData()
 	{
-		project = theProject;
 		tasks = new ArrayList<TaskEntity>();
 	}
-	
 	/**
 	 * Add new task into the list.
 	 * @author Varik Hoang

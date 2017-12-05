@@ -30,10 +30,6 @@ extends JPanel
 	 */
 	private ProjectEntity myProject;
 	
-	/**
-	 * 
-	 */
-	private TaskListPanel myTaskPanel;
 	
 	/**
 	 * 
@@ -62,11 +58,15 @@ extends JPanel
 		myGUI = theGui;
 		myProject = theProject;
 		
-		data = new TaskListData(theProject);
-		myTaskPanel = new TaskListPanel(this, data);
+		data = new TaskListData();
+		
+		
+		//data = new TaskListData(theProject); ==>comment this out if need to pass projectEntity to TaskListData
+		//myTaskPanel = new TaskListPanel(this, data);
 		myGraphicPanel = new GraphicPanel(this, theProject);
 		data.addObserver(myGraphicPanel);
 		fetch(data, theProject);
+		
 		setSubPanel();
 	}
 	
@@ -85,5 +85,6 @@ extends JPanel
 			for (TaskEntity task: tasks)
 				data.add(task);
 		}
+	
 	}
 }
