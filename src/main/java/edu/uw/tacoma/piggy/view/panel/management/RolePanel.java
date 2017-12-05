@@ -73,24 +73,24 @@ public class RolePanel extends JPanel {
 		
 		JButton btnSave = new JButton("Save");
 		btnSave.setBounds(110, 253, 117, 29);
-		btnSave.addActionListener(new ActionListener() {
-
-			public void actionPerformed(ActionEvent e) {
-			
-				try {
-					RoleEntity role = new RoleEntity(Integer.parseInt(IDField.getText()), roleNameField.getText(), descriptionField.getText(),
-							new SimpleDateFormat("dd/MM/yyyy").parse(dateField.getText()));
-				} catch (NumberFormatException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				} catch (ParseException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				}
-				
-				
-				
-			}});
+//		btnSave.addActionListener(new ActionListener() {
+//
+//			public void actionPerformed(ActionEvent e) {
+//			
+//				try {
+//					RoleEntity role = new RoleEntity(Integer.parseInt(IDField.getText()), roleNameField.getText(), descriptionField.getText(),
+//							new SimpleDateFormat("dd/MM/yyyy").parse(dateField.getText()));
+//				} catch (NumberFormatException e1) {
+//					// TODO Auto-generated catch block
+//					e1.printStackTrace();
+//				} catch (ParseException e1) {
+//					// TODO Auto-generated catch block
+//					e1.printStackTrace();
+//				}
+//				
+//				
+//				
+//			}});
 		add(btnSave);
 		
 		JButton btnCancel = new JButton("Cancel");
