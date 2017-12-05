@@ -74,6 +74,7 @@ extends JFrame
 		
 		tabbedPane = createTabbedPane();
 		getContentPane().add(tabbedPane, BorderLayout.CENTER);
+		pack();
 	}
 	
 	/**

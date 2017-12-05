@@ -1,5 +1,6 @@
 package edu.uw.tacoma.piggy.view.panel.gantt;
 
+import java.awt.BorderLayout;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -10,6 +11,7 @@ import javax.swing.JPanel;
 
 import org.swiftgantt.GanttChart;
 import org.swiftgantt.common.Time;
+import org.swiftgantt.demo.tab.ScheduleTab;
 import org.swiftgantt.model.GanttModel;
 import org.swiftgantt.model.Task;
 import org.swiftgantt.ui.TimeUnit;
@@ -65,6 +67,11 @@ implements Observer
 	private Map<Integer, Task> taskmap;
 	
 	/**
+	 * 
+	 */
+	private ScheduleTab mySchedule;
+	
+	/**
 	 * The constructor
 	 * @param theGantt the parent panel
 	 */
@@ -73,12 +80,15 @@ implements Observer
 		myProject = theProject;
 		taskmap = new HashMap<Integer, Task>();
 		
+
 		chart = new GanttChart();
 		chart.setTimeUnit(TimeUnit.Day);
-		
+		mySchedule = new ScheduleTab(chart);
 		model = new GanttModel();
 		
-		add(chart);
+		setLayout(new BorderLayout());
+		add(mySchedule, BorderLayout.NORTH);
+		add(chart, BorderLayout.SOUTH);
 	}
 
 	/**
@@ -132,5 +142,5 @@ implements Observer
 				return entity;
 		return null;
 	}
-	
+
 }

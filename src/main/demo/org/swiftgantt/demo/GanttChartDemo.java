@@ -36,18 +36,18 @@ public class GanttChartDemo extends javax.swing.JFrame {
 		System.out.println("[DEMO] Set new Config to the ScrollableGanttChart");
 		ganttChartDemoComp.getConfig();
 
-		this.ganttChartDemoComp.initDailyModel();
-		TaskTreeModel taskTreeModel = this.ganttChartDemoComp.getGanttModel().getTaskTreeModel();
-		scheduleTab.setTaskTreeModel(taskTreeModel);
+//		this.ganttChartDemoComp.initDailyModel();
+//		TaskTreeModel taskTreeModel = this.ganttChartDemoComp.getGanttModel().getTaskTreeModel();
+//		scheduleTab.setTaskTreeModel(taskTreeModel);
 
 		// Init the Gantt Chart component
-		pnlContent.setLayout(new GridLayout());
-		pnlContent.add(ganttChartDemoComp, null);
-
-		List<Task> tasks = this.ganttChartDemoComp.getModel().getTasksByBFS();
-		if (tasks != null && tasks.size() > 2) {
-			this.ganttChartDemoComp.setSelectedTasks(tasks.get(0), tasks.get(2));
-		}
+//		pnlContent.setLayout(new GridLayout());
+//		pnlContent.add(ganttChartDemoComp, null);
+//
+//		List<Task> tasks = this.ganttChartDemoComp.getModel().getTasksByBFS();
+//		if (tasks != null && tasks.size() > 2) {
+//			this.ganttChartDemoComp.setSelectedTasks(tasks.get(0), tasks.get(2));
+//		}
 	}
 
 	// <editor-fold defaultstate="collapsed" desc="Generated

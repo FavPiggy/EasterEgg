@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Observable;
 
+import org.swiftgantt.model.GanttModel;
+
 import edu.uw.tacoma.piggy.model.entity.ProjectEntity;
 import edu.uw.tacoma.piggy.model.entity.TaskEntity;
 
@@ -119,6 +121,8 @@ extends Observable
 	{	
 		return tasks.isEmpty();
 	}
+	
+
 	
 //	// JUST FOR DEBUG
 //	public String toString()

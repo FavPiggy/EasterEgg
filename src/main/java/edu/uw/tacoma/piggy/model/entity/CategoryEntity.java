@@ -147,7 +147,7 @@ public class CategoryEntity
 		result.append("CatID=").append(getCatID() == null ? "NULL" : getCatID()).append(",");
 		result.append("CatName=").append(getCatName() == null ? "NULL" : getCatName()).append(",");
 		result.append("Description=").append(getDescription() == null ? "NULL" : getDescription()).append(",");
-		result.append("DateCreated=").append(getDateCreated() == null ? "NULL" : getDateCreated()).append(",");
+		result.append("DateCreated=").append(getDateCreated() == null ? "NULL" : getDateCreated());
 		// result = result.substring(0, result.length() - 1);
 		return "{" + result.toString() + "}";
 	}
