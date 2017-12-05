@@ -17,11 +17,12 @@ import edu.uw.tacoma.piggy.view.panel.management.UserPanel;
 public class ManagementPanel extends JPanel {
 
 	public static String myPanel;
-	JPanel toolPanel = new JPanel();
+	JPanel toolPanel;
 	/**
 	 * Create the Panel.
 	 */
 	public ManagementPanel() {
+		toolPanel = new JPanel();
 		setLayout(null);
 		toolPanel.setLayout(null);
 		//final ManagementPanel mp = new ManagementPanel();
