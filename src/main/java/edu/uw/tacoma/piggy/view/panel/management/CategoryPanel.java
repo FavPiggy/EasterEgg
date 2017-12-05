@@ -70,22 +70,23 @@ public class CategoryPanel extends JPanel {
 		
 		JButton saveBtn = new JButton("Save");
 		saveBtn.setBounds(54, 254, 117, 29);
-		saveBtn.addActionListener(new ActionListener(){
-
-			public void actionPerformed(ActionEvent e) {
-				//CategoryEntity(Integer _CatID,String _CatName,String _Description,Date _DateCreated)
-				try {
-					CategoryEntity category = new CategoryEntity(Integer.parseInt(cIdField.getText()), cNameField.getText(),
-							descriptionField.getText(),new SimpleDateFormat("dd/MM/yyyy").parse(dateCreatedField.getText()));
-				} catch (NumberFormatException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				} catch (ParseException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				}
-				
-			}});
+//		saveBtn.addActionListener(new ActionListener(){
+//
+//			public void actionPerformed(ActionEvent e) {
+//				//CategoryEntity(Integer _CatID,String _CatName,String _Description,Date _DateCreated)
+//				try {
+//					CategoryEntity category = new CategoryEntity();
+//					CategoryEntity category = new CategoryEntity(Integer.parseInt(cIdField.getText()), cNameField.getText(),
+//							descriptionField.getText(),new SimpleDateFormat("dd/MM/yyyy").parse(dateCreatedField.getText()));
+//				} catch (NumberFormatException e1) {
+//					// TODO Auto-generated catch block
+//					e1.printStackTrace();
+//				} catch (ParseException e1) {
+//					// TODO Auto-generated catch block
+//					e1.printStackTrace();
+//				}
+//				
+//			}});
 		add(saveBtn);
 		
 		JButton btnCancel = new JButton("Cancel");
