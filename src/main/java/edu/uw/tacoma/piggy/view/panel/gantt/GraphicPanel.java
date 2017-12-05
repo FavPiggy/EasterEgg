@@ -12,6 +12,7 @@ import javax.swing.JPanel;
 import org.swiftgantt.GanttChart;
 import org.swiftgantt.common.Time;
 import org.swiftgantt.demo.tab.ScheduleTab;
+import org.swiftgantt.demo.tab.TaskDialog;
 import org.swiftgantt.model.GanttModel;
 import org.swiftgantt.model.Task;
 import org.swiftgantt.ui.TimeUnit;
@@ -58,8 +59,8 @@ implements Observer
 	 * The gantt chart panel
 	 */
 	private GanttChartPanel parent;
-	
 	private ProjectEntity myProject;
+	private TaskDialog myDialog; 
 	
 	/**
 	 * The task map
@@ -83,8 +84,24 @@ implements Observer
 
 		chart = new GanttChart();
 		chart.setTimeUnit(TimeUnit.Day);
-		mySchedule = new ScheduleTab(chart);
+		
+		mySchedule = new ScheduleTab(this);
 		model = new GanttModel();
+		myDialog = new TaskDialog();
+		
+		chart.getConfig();
+		
+//		this.chart.
+//		TaskTreeModel taskTreeModel = this.chart.getGanttModel().getTaskTreeModel();
+//		scheduleTab.setTaskTreeModel(taskTreeModel);
+//
+//		// Init the Gantt Chart component
+//		pnlContent.setLayout(new GridLayout());
+//		pnlContent.add(ganttChartDemoComp, null);
+//
+//		List<Task> tasks = this.ganttChartDemoComp.getModel().getTasksByBFS();
+//		if (tasks != null && tasks.size() > 2) {			this.ganttChartDemoComp.setSelectedTasks(tasks.get(0), tasks.get(2));
+////		}
 		
 		setLayout(new BorderLayout());
 		add(mySchedule, BorderLayout.NORTH);
@@ -128,11 +145,16 @@ implements Observer
 				task.addPredecessor(taskmap.get(parent.getTaskID()));
 			
 			taskRoot.add(task);
+			myDialog.setTask(task);
 		}
 		
 		// add tasks -> model -> chart
 		model.addTask(taskRoot);
 		chart.setModel(model);
+	}
+	
+	public GanttChart getGanttChart() {
+		return chart;
 	}
 	
 	public TaskEntity find(List<TaskEntity> tasklist, int taskID)
