@@ -22,35 +22,75 @@
 			<scope>test</scope>
 		</dependency>
 		<dependency>
-			<groupId>net.sourceforge.csvjdbc</groupId>
-			<artifactId>csvjdbc</artifactId>
-			<version>1.0.28</version>
+			<groupId>net.sf.ucanaccess</groupId>
+			<artifactId>ucanaccess</artifactId>
+			<version>3.0.2</version>
 		</dependency>
+		<dependency>
+			<groupId>com.healthmarketscience.jackcess</groupId>
+			<artifactId>jackcess</artifactId>
+			<version>2.1.9</version>
+		</dependency>
+
 	</dependencies>
 
 	<build>
-		<sourceDirectory>src/main\java</sourceDirectory>
-		<scriptSourceDirectory>src/main\scripts</scriptSourceDirectory>
-		<testSourceDirectory>src/test\java</testSourceDirectory>
+		<sourceDirectory>src/main/java</sourceDirectory>
+		<scriptSourceDirectory>src/main/scripts</scriptSourceDirectory>
+		<testSourceDirectory>src/test/java</testSourceDirectory>
 		<outputDirectory>target/classes</outputDirectory>
 		<testOutputDirectory>target/test-classes</testOutputDirectory>
 		<resources>
 			<resource>
 				<directory>src/main/resources</directory>
-				<filtering>true</filtering>
+				<filtering>false</filtering>
 				<includes>
-					<include>**/*.*</include>
+					<include>**/*</include>
 				</includes>
 			</resource>
 		</resources>
 		<testResources>
 			<testResource>
 				<directory>src/test/resources</directory>
-				<filtering>true</filtering>
+				<filtering>false</filtering>
 				<includes>
-					<include>**/*.*</include>
+					<include>**/*</include>
 				</includes>
 			</testResource>
 		</testResources>
+
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-shade-plugin</artifactId>
+				<version>2.1</version>
+				<executions>
+					<execution>
+						<phase>package</phase>
+						<goals>
+							<goal>shade</goal>
+						</goals>
+						<configuration>
+							<transformers>
+								<transformer
+									implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
+									<mainClass>edu.uw.tacoma.piggy.PiggyMain</mainClass>
+								</transformer>
+							</transformers>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-resources-plugin</artifactId>
+				<configuration>
+					<overwrite>true</overwrite>
+					<nonFilteredFileExtensions>
+						<nonFilteredFileExtension>mdb</nonFilteredFileExtension>
+					</nonFilteredFileExtensions>
+				</configuration>
+			</plugin>
+		</plugins>
 	</build>
 </project>

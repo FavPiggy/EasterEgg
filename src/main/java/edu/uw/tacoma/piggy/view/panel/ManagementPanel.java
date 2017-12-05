@@ -14,6 +14,7 @@ import edu.uw.tacoma.piggy.view.panel.management.RolePanel;
 import edu.uw.tacoma.piggy.view.panel.management.ToolPanel;
 import edu.uw.tacoma.piggy.view.panel.management.UserPanel;
 
+@SuppressWarnings("serial")
 public class ManagementPanel extends JPanel {
 
 	public static String myPanel;
@@ -143,3 +144,4 @@ public class ManagementPanel extends JPanel {
 		myPanel = currPanel;
 	}
 }
+

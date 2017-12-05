@@ -1,8 +1,10 @@
 package edu.uw.tacoma.piggy.model.entity;
 
-
 import java.io.FileOutputStream;
 import java.io.ObjectOutputStream;
+
+import java.util.Calendar;
+import java.sql.Date;
 
 /**
  * This class represents for a MemberRole
@@ -11,24 +13,18 @@ import java.io.ObjectOutputStream;
 public class MemberRoleEntity
 {
 	/**
-	 * The field TaskID
-	 */
-	private Integer _TaskID;
-	/**
 	 * The field MemberID
 	 */
 	private Integer _MemberID;
-
-
 	/**
-	 * The getter method for TaskID
+	 * The field RoleID
 	 */
-	public Integer getTaskID() { return _TaskID; }
-	
+	private Integer _RoleID;
 	/**
-	 * The setter method for TaskID
+	 * The field DateCreated
 	 */
-	public void setTaskID(Integer _TaskID) { this._TaskID = _TaskID; }
+	private Date _DateCreated;
+
 
 	/**
 	 * The getter method for MemberID
@@ -41,15 +37,35 @@ public class MemberRoleEntity
 	public void setMemberID(Integer _MemberID) { this._MemberID = _MemberID; }
 
 	/**
-	 * @author Varik Hoang
-	 * The method initialize the default value for fields
+	 * The getter method for RoleID
+	 */
+	public Integer getRoleID() { return _RoleID; }
+	
+	/**
+	 * The setter method for RoleID
+	 */
+	public void setRoleID(Integer _RoleID) { this._RoleID = _RoleID; }
+
+	/**
+	 * The getter method for DateCreated
+	 */
+	public Date getDateCreated() { return _DateCreated; }
+	
+	/**
+	 * The setter method for DateCreated
+	 */
+	public void setDateCreated(Date _DateCreated) { this._DateCreated = _DateCreated; }
+
+	/**
+	 * The method initializes fields
 	 */
 	public void initialMemberRole()
 	{
-		setTaskID(0);
 		setMemberID(0);
+		setRoleID(0);
+		setDateCreated(new Date(Calendar.getInstance().getTime().getTime()));
 	}
-
+	
 	/**
 	 * @author Cuong_Tran
 	 * The default constructor for MemberRole
@@ -60,11 +76,11 @@ public class MemberRoleEntity
 	 * @author Cuong_Tran
 	 * The constructor with given fields' values for MemberRole
 	 */
-	public MemberRoleEntity(Integer _TaskID,Integer _MemberID) // need to be data type default value
+	public MemberRoleEntity(Integer _MemberID,Integer _RoleID,Date _DateCreated) // need to be data type default value
 	{
-		initialMemberRole();
-		setTaskID(_TaskID);
 		setMemberID(_MemberID);
+		setRoleID(_RoleID);
+		setDateCreated(_DateCreated);
 	}
 	
 	/**
@@ -112,8 +128,9 @@ public class MemberRoleEntity
 	public String toString()
 	{
 		StringBuilder result = new StringBuilder();
-		result.append("TaskID=").append(getTaskID() == null ? "NULL" : getTaskID()).append(",");
 		result.append("MemberID=").append(getMemberID() == null ? "NULL" : getMemberID()).append(",");
+		result.append("RoleID=").append(getRoleID() == null ? "NULL" : getRoleID()).append(",");
+		result.append("DateCreated=").append(getDateCreated() == null ? "NULL" : getDateCreated()).append(",");
 		// result = result.substring(0, result.length() - 1);
 		return "{" + result.toString() + "}";
 	}

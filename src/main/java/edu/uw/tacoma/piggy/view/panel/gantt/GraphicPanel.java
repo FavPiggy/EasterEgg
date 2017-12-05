@@ -1,65 +1,168 @@
 package edu.uw.tacoma.piggy.view.panel.gantt;
 
-import java.awt.Graphics;
-import java.awt.Graphics2D;
+import java.awt.BorderLayout;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.Observable;
 import java.util.Observer;
 
 import javax.swing.JPanel;
 
-import edu.uw.tacoma.piggy.view.PiggyGUI;
+import org.swiftgantt.GanttChart;
+import org.swiftgantt.common.Time;
+import org.swiftgantt.demo.tab.ScheduleTab;
+import org.swiftgantt.demo.tab.TaskDialog;
+import org.swiftgantt.model.GanttModel;
+import org.swiftgantt.model.Task;
+import org.swiftgantt.ui.TimeUnit;
+
+import edu.uw.tacoma.piggy.model.entity.ProjectEntity;
+import edu.uw.tacoma.piggy.model.entity.TaskEntity;
+import edu.uw.tacoma.piggy.view.panel.GanttChartPanel;
 
 /**
  * The class draws the grantt objects
  * @author Varik Hoang
  */
+@SuppressWarnings("serial")
 public class GraphicPanel
 extends JPanel
 implements Observer
 {
 	/**
-	 * The main Piggy GUI.
+	 * The gantt model
 	 */
-	private PiggyGUI myGUI;
+	private GanttModel model;
 	
 	/**
-	 * The task list data.
+	 * The gantt chart
 	 */
-	private TaskListData myData;
+	private GanttChart chart;
 	
 	/**
-	 * The constructor for graphic panel
-	 * @param theGUI the main GUI passed in
+	 * The starting time
 	 */
-	public GraphicPanel(PiggyGUI theGUI)
+	private Time startTime;
+	
+	/**
+	 * The ending time
+	 */
+	private Time endTime;
+	
+	/**
+	 * The task root
+	 */
+	private Task taskRoot;
+	
+	/**
+	 * The gantt chart panel
+	 */
+	private GanttChartPanel parent;
+	private ProjectEntity myProject;
+	private TaskDialog myDialog; 
+	
+	/**
+	 * The task map
+	 */
+	private Map<Integer, Task> taskmap;
+	
+	/**
+	 * 
+	 */
+	private ScheduleTab mySchedule;
+	
+	/**
+	 * The constructor
+	 * @param theGantt the parent panel
+	 */
+	public GraphicPanel(GanttChartPanel theGantt, ProjectEntity theProject)
 	{
-		myGUI = theGUI;
+		myProject = theProject;
+		taskmap = new HashMap<Integer, Task>();
+		
+
+		chart = new GanttChart();
+		chart.setTimeUnit(TimeUnit.Day);
+		
+		mySchedule = new ScheduleTab(this);
+		model = new GanttModel();
+		myDialog = new TaskDialog();
+		
+		chart.getConfig();
+		
+//		this.chart.
+//		TaskTreeModel taskTreeModel = this.chart.getGanttModel().getTaskTreeModel();
+//		scheduleTab.setTaskTreeModel(taskTreeModel);
+//
+//		// Init the Gantt Chart component
+//		pnlContent.setLayout(new GridLayout());
+//		pnlContent.add(ganttChartDemoComp, null);
+//
+//		List<Task> tasks = this.ganttChartDemoComp.getModel().getTasksByBFS();
+//		if (tasks != null && tasks.size() > 2) {			this.ganttChartDemoComp.setSelectedTasks(tasks.get(0), tasks.get(2));
+////		}
+		
+		setLayout(new BorderLayout());
+		add(mySchedule, BorderLayout.NORTH);
+		add(chart, BorderLayout.SOUTH);
 	}
 
-	@Override
-    public void paintComponent(Graphics g)
-	{
-        super.paintComponent(g);
-        Graphics2D g2= (Graphics2D) g;
-        
-        // fill up your code here
-        g2.drawLine(1, 1, 5, 5);
-    }
-	
 	/**
-	 * The method receives the data from observable objects
+	 * The method update the new task list data
+	 * @author Varik Hoang
 	 */
-	public void update(Observable o, Object data)
+	@SuppressWarnings("unchecked")
+	public void update(Observable o, Object arg)
 	{
 		if (o instanceof TaskListData)
-		{
-			myData = (TaskListData) o;
-			repaint();
-		}
+			update((List<TaskEntity>) arg);
 	}
 
-	/**
-	 * The serial version UID
-	 */
-	private static final long serialVersionUID = -2958717085891811031L;
+	public void update(List<TaskEntity> tasklist)
+	{
+		model.removeAll();
+		
+		startTime = new Time();
+		endTime = new Time();
+		
+		taskRoot = new Task(myProject.getProjectName(), startTime, endTime, null);
+		
+		for (TaskEntity entity: tasklist)
+		{
+			// convert the date from sql package to util package
+			java.util.Date utilDate = new java.util.Date(entity.getStartDate().getTime());
+			startTime.setDate(utilDate.getDate()); // TODO find a better way to cast dates
+			endTime.add(Time.DATE, entity.getDuration());
+			
+			// put the task into the map
+			Task task = new Task(entity.getDescription(), startTime, endTime);
+			taskmap.put(entity.getTaskID(), task);
+			
+			// connect the child task to the parent task
+			TaskEntity parent = find(tasklist, entity.getParentTask());
+			if (parent != null && taskmap.get(parent.getTaskID()) != task)
+				task.addPredecessor(taskmap.get(parent.getTaskID()));
+			
+			taskRoot.add(task);
+			myDialog.setTask(task);
+		}
+		
+		// add tasks -> model -> chart
+		model.addTask(taskRoot);
+		chart.setModel(model);
+	}
+	
+	public GanttChart getGanttChart() {
+		return chart;
+	}
+	
+	public TaskEntity find(List<TaskEntity> tasklist, int taskID)
+	{
+		for (TaskEntity entity: tasklist)
+			if (entity.getTaskID() == taskID)
+				return entity;
+		return null;
+	}
+
 }

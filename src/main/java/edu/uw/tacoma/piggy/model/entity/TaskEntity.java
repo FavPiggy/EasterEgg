@@ -2,7 +2,9 @@ package edu.uw.tacoma.piggy.model.entity;
 
 import java.io.FileOutputStream;
 import java.io.ObjectOutputStream;
-import java.util.Date;
+
+import java.util.Calendar;
+import java.sql.Date;
 
 /**
  * This class represents for a Task
@@ -125,21 +127,20 @@ public class TaskEntity
 	public void setDateCreated(Date _DateCreated) { this._DateCreated = _DateCreated; }
 
 	/**
-	 * @author Varik Hoang
-	 * The method initialize the default value for fields
+	 * The method initializes fields
 	 */
 	public void initialTask()
 	{
 		setTaskID(0);
 		setProjectID(0);
-		setStartDate(null);
+		setStartDate(new Date(Calendar.getInstance().getTime().getTime()));
 		setDuration(0);
 		setDescription("");
 		setUserID(0);
 		setParentTask(0);
-		setDateCreated(null);
+		setDateCreated(new Date(Calendar.getInstance().getTime().getTime()));
 	}
-
+	
 	/**
 	 * @author Cuong_Tran
 	 * The default constructor for Task
@@ -152,7 +153,6 @@ public class TaskEntity
 	 */
 	public TaskEntity(Integer _TaskID,Integer _ProjectID,Date _StartDate,Integer _Duration,String _Description,Integer _UserID,Integer _ParentTask,Date _DateCreated) // need to be data type default value
 	{
-		initialTask();
 		setTaskID(_TaskID);
 		setProjectID(_ProjectID);
 		setStartDate(_StartDate);
