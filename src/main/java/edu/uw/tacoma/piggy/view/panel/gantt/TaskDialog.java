@@ -1,4 +1,4 @@
-package org.swiftgantt.demo.tab;
+package edu.uw.tacoma.piggy.view.panel.gantt;
 
 import org.swiftgantt.common.Constants;
 import org.swiftgantt.common.EventLogger;

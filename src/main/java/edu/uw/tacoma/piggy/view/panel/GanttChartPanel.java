@@ -5,13 +5,12 @@ import java.util.List;
 
 import javax.swing.JPanel;
 
-import org.swiftgantt.demo.tab.ScheduleTab;
-
 import edu.uw.tacoma.piggy.model.dao.TaskDAO;
 import edu.uw.tacoma.piggy.model.entity.ProjectEntity;
 import edu.uw.tacoma.piggy.model.entity.TaskEntity;
 import edu.uw.tacoma.piggy.view.PiggyGUI;
 import edu.uw.tacoma.piggy.view.panel.gantt.GraphicPanel;
+import edu.uw.tacoma.piggy.view.panel.gantt.ScheduleTab;
 import edu.uw.tacoma.piggy.view.panel.gantt.TaskListData;
 import edu.uw.tacoma.piggy.view.panel.gantt.TaskListPanel;
 
@@ -58,13 +57,13 @@ extends JPanel
 		myGUI = theGui;
 		myProject = theProject;
 		
-		data = new TaskListData();
+		data = new TaskListData(theProject.getProjectID());
 		
 		
 		//data = new TaskListData(theProject); ==>comment this out if need to pass projectEntity to TaskListData
 		//myTaskPanel = new TaskListPanel(this, data);
 		myGraphicPanel = new GraphicPanel(this, theProject);
-		data.addObserver(myGraphicPanel);
+		//data.addObserver(myGraphicPanel);
 		fetch(data, theProject);
 		
 		setSubPanel();

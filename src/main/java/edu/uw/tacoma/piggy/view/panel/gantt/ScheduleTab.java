@@ -1,13 +1,11 @@
 /*
  * ScheduleTab.java
  *
- * Created on 2009-1-3, 23:23:27
  */
-package org.swiftgantt.demo.tab;
+package edu.uw.tacoma.piggy.view.panel.gantt;
 
 import org.swiftgantt.GanttChart;
 import org.swiftgantt.common.ExTree;
-import org.swiftgantt.demo.GanttChartDemoComponent;
 import org.swiftgantt.event.SelectionChangeEvent;
 import org.swiftgantt.event.SelectionChangeListener;
 import org.swiftgantt.model.Task;
@@ -16,11 +14,8 @@ import org.swiftgantt.ui.TimeUnit;
 
 import edu.uw.tacoma.piggy.model.dao.TaskDAO;
 import edu.uw.tacoma.piggy.model.entity.TaskEntity;
-import edu.uw.tacoma.piggy.view.panel.gantt.GraphicPanel;
-import edu.uw.tacoma.piggy.view.panel.gantt.TaskListData;
 
 import java.awt.GridLayout;
-import java.util.Date;
 
 import javax.swing.event.TreeModelEvent;
 import javax.swing.tree.DefaultMutableTreeNode;
@@ -28,27 +23,40 @@ import org.apache.commons.lang.StringUtils;
 
 /**
  * Schedule tabed panel
- * @author Wang Yuxing
+ * @author Cuong_Tran
  */
 @SuppressWarnings("serial")
 public class ScheduleTab extends javax.swing.JPanel {
-
-	private GanttChartDemoComponent ganttComp = null;
+	/**
+	 * 
+	 */
 	private ExTree taskTree = null;
+	/**
+	 * 
+	 */
 	private GanttChart ganttChart = null;
+	/**
+	 * 
+	 */
 	private TaskListData myListData = null;
 	
-	///**Add task tree model variable.**/
-	//private TaskTreeModel ttm;
-	
+
+	/**
+	 * @author Cuong_Tran
+	 * Default Constructor.
+	 */
 	public ScheduleTab() {
 		initComponents();
-		//ttm = new TaskTreeModel();
 	}
 	
-	public ScheduleTab(GraphicPanel graphic) {
+	/**
+	 * @author Cuong_Tran
+	 * @param graphic assign graphic panel
+	 * @param projectId assign int value of project id.
+	 */
+	public ScheduleTab(GraphicPanel graphic, int projectId) {
 		
-		myListData = new TaskListData();
+		myListData = new TaskListData(projectId);
 		
 		this.ganttChart = graphic.getGanttChart();
 		this.ganttChart.addSelectionChangeListener(new SelectionChangeListener() {
@@ -67,57 +75,12 @@ public class ScheduleTab extends javax.swing.JPanel {
 		taskTree = new ExTree();
 		pnlTreeView.setLayout(new GridLayout());
 		pnlTreeView.add(taskTree);
-//			int index = 0;
-//			if (graphic.getGanttChart().getTimeUnit() == TimeUnit.Hour) {
-//				index = 0;
-//			} else if (graphic.getGanttChart().getTimeUnit() == TimeUnit.AllDay) {
-//				index = 1;
-//			} else if (graphic.getGanttChart().getTimeUnit() == TimeUnit.Day) {
-//				index = 2;
-//			} else if (graphic.getGanttChart().getTimeUnit() == TimeUnit.Week) {
-//				index = 3;
-//			} else if (graphic.getGanttChart().getTimeUnit() == TimeUnit.Month) {
-//				index = 4;
-//			} else if (graphic.getGanttChart().getTimeUnit() == TimeUnit.Year) {
-//				index = 5;
-//			}
-//			cmbTimeUnit.setSelectedIndex(index);
 	}
 	
-//	public ScheduleTab(GanttChartDemoComponent gantt) {
-//		this.ganttComp = gantt;
-//		this.ganttComp.addSelectionChangeListener(new SelectionChangeListener() {
-//
-//			public void selectionChanged(SelectionChangeEvent e) {
-//				Task task = e.getSelection();
-//				((ExTree) taskTree).select(task);
-//				if (task != null) {
-//					taskTree.expandTreeNode(task);
-//				}
-//				taskTree.updateUI();
-//			}
-//		});
-//		initComponents();
-//		taskTree = new ExTree();
-//		pnlTreeView.setLayout(new GridLayout());
-//		pnlTreeView.add(taskTree);
-//			int index = 0;
-//			if (gantt.getTimeUnit() == TimeUnit.Hour) {
-//				index = 0;
-//			} else if (gantt.getTimeUnit() == TimeUnit.AllDay) {
-//				index = 1;
-//			} else if (gantt.getTimeUnit() == TimeUnit.Day) {
-//				index = 2;
-//			} else if (gantt.getTimeUnit() == TimeUnit.Week) {
-//				index = 3;
-//			} else if (gantt.getTimeUnit() == TimeUnit.Month) {
-//				index = 4;
-//			} else if (gantt.getTimeUnit() == TimeUnit.Year) {
-//				index = 5;
-//			}
-//			cmbTimeUnit.setSelectedIndex(index);
-//	}
-
+	/**
+	 * Set Task Tree Model for task tree.
+	 * @param taskTreeModel assign task tree model.
+	 */
 	public void setTaskTreeModel(TaskTreeModel taskTreeModel) {
 		this.taskTree.setTreeModel(taskTreeModel);
 		taskTreeModel.addTreeModelListener(new javax.swing.event.TreeModelListener() {
@@ -139,7 +102,10 @@ public class ScheduleTab extends javax.swing.JPanel {
 	}
 
 	@SuppressWarnings({ "unchecked", "rawtypes" })
-    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
+	
+	/**
+	 * Set up component for schedule tab.
+	 */
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
@@ -263,9 +229,12 @@ public class ScheduleTab extends javax.swing.JPanel {
                     .add(org.jdesktop.layout.GroupLayout.LEADING, jPanel1, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
-    }// </editor-fold>//GEN-END:initComponents
-
-	private void cmbTimeUnitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbTimeUnitActionPerformed
+    }
+	/**
+	 * 
+	 * @param evt
+	 */
+	private void cmbTimeUnitActionPerformed(java.awt.event.ActionEvent evt) {
 		if (cmbTimeUnit.getSelectedItem().equals("Hour")) {
 			ganttChart.setTimeUnit(TimeUnit.Hour);
 		} else if (cmbTimeUnit.getSelectedItem().equals("Day")) {
@@ -280,8 +249,12 @@ public class ScheduleTab extends javax.swing.JPanel {
 		taskTree.setTreeModel(ganttChart.getModel().getTaskTreeModel());
 		taskTree.updateUI();
 		taskTree.expandAllTreeNode((DefaultMutableTreeNode) ganttChart.getModel().getTaskTreeModel().getRoot());
-	}//GEN-LAST:event_cmbTimeUnitActionPerformed
-
+	}
+	
+	/**
+	 * 
+	 * @param evt
+	 */
 	private void btnAddTaskToRootActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddTaskToRootActionPerformed
 		TaskDialog td = new TaskDialog();
 		td.setVisible(true);
@@ -290,24 +263,26 @@ public class ScheduleTab extends javax.swing.JPanel {
 			return;
 		}
 		
-		//TaskTreeModel ttm = (TaskTreeModel) taskTree.getTreeModel();
+
 		TaskEntity task = new TaskEntity();
 		task.setDescription(td.getTask().getDescription());
 		task.setDuration(td.getTask().getDuration());
 		myListData.add(task);
-		System.out.println(TaskDAO.listTask());
+
 		
 		TaskTreeModel ttm = (TaskTreeModel) taskTree.getTreeModel();
 			
-		
 		ttm.add(td.getTask());
 		taskTree.updateUI();
 		ganttChart.resumeUI();
-	}//GEN-LAST:event_btnAddTaskToRootActionPerformed
+	}
 	
 
-
-	private void btnEditSelectedTaskActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditSelectedTaskActionPerformed
+	/**
+	 * 
+	 * @param evt
+	 */
+	private void btnEditSelectedTaskActionPerformed(java.awt.event.ActionEvent evt) {
 		Task selectedTask = (Task) taskTree.getSelectedNode();
 		if (selectedTask == null) {
 			return;
@@ -316,11 +291,22 @@ public class ScheduleTab extends javax.swing.JPanel {
 		TaskDialog td = new TaskDialog(selectedTask);
 		td.setVisible(true);// Display
 		selectedTask.copy(td.getTask());
+		
+		TaskEntity task = new TaskEntity();
+		task.setDescription(td.getTask().getDescription());
+		task.setDuration(td.getTask().getDuration());		
+		myListData.update(task);
+
+		
+		System.out.println(TaskDAO.listTask());
 		taskTree.updateUI();
 		ganttChart.resumeUI();
-	}//GEN-LAST:event_btnEditSelectedTaskActionPerformed
-
-	private void btnAddTaskToSelectTaskActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddTaskToSelectTaskActionPerformed
+	}
+	/**
+	 * 
+	 * @param evt
+	 */
+	private void btnAddTaskToSelectTaskActionPerformed(java.awt.event.ActionEvent evt) {
 		Task selectedTask = (Task) taskTree.getSelectedNode();
 		if (selectedTask == null) {
 			return;
@@ -329,23 +315,39 @@ public class ScheduleTab extends javax.swing.JPanel {
 		td.setVisible(true);
 		TaskTreeModel model = (TaskTreeModel) taskTree.getTreeModel();
 		model.addTo(selectedTask, td.getTask());
+		
+		TaskEntity task = new TaskEntity();
+		task.setDescription(td.getTask().getDescription());
+		task.setDuration(td.getTask().getDuration());
+		myListData.add(task);
+
+		
 		taskTree.expandTreeNode(selectedTask);
 		taskTree.updateUI();
-	}//GEN-LAST:event_btnAddTaskToSelectTaskActionPerformed
-
-	private void btnRemoveTaskActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRemoveTaskActionPerformed
+	}
+	
+	/**
+	 * 
+	 * @param evt
+	 */
+	private void btnRemoveTaskActionPerformed(java.awt.event.ActionEvent evt) {
 		Task selectedTask = (Task) taskTree.getSelectedNode();
 		if (selectedTask == null) {
 			return;
 		}
 		((TaskTreeModel) taskTree.getTreeModel()).removeTask(selectedTask);
-	}//GEN-LAST:event_btnRemoveTaskActionPerformed
-
+		
+		
+	}
+	/**
+	 * 
+	 * @param evt
+	 */
 	private void btnRemoveAllTasksActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRemoveAllTasksActionPerformed
 		ganttChart.getModel().removeAll();
-	}//GEN-LAST:event_btnRemoveAllTasksActionPerformed
+	}
 
-    // Variables declaration - do not modify//GEN-BEGIN:variables
+    // Variables declaration
     private javax.swing.JButton btnAddTaskToRoot;
     private javax.swing.JButton btnAddTaskToSelectTask;
     private javax.swing.JButton btnEditSelectedTask;
@@ -356,5 +358,5 @@ public class ScheduleTab extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel pnlTreeView;
-    // End of variables declaration//GEN-END:variables
+
 }

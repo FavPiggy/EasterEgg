@@ -5,10 +5,12 @@
  */
 package org.swiftgantt.demo;
 
-import org.swiftgantt.demo.tab.ScheduleTab;
 import org.swiftgantt.model.Task;
 import org.swiftgantt.model.TaskTreeModel;
 import org.swiftgantt.ui.TimeUnit;
+
+import edu.uw.tacoma.piggy.view.panel.gantt.ScheduleTab;
+
 import java.awt.GridLayout;
 import java.awt.event.KeyEvent;
 import java.util.List;
@@ -20,7 +22,7 @@ import java.util.List;
 public class GanttChartDemo extends javax.swing.JFrame {
 	private static final long serialVersionUID = -2642571955243624522L;
 
-	private org.swiftgantt.demo.tab.ScheduleTab scheduleTab;
+	private edu.uw.tacoma.piggy.view.panel.gantt.ScheduleTab scheduleTab;
 
 	/** Creates new form Main */
 	public GanttChartDemo() {

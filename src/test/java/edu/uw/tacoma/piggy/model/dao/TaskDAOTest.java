@@ -24,6 +24,8 @@ extends TestCase
 		List<TaskEntity> list = TaskDAO.listTask();
 		Assert.assertEquals("The test list Task method failed ", 6, list.size());
 		
+		//System.out.println(list);
+		
 		// should set different field values
 		entity = new TaskEntity();
 		entity.setTaskID(10);

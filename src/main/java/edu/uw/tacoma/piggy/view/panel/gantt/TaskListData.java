@@ -1,10 +1,6 @@
 package edu.uw.tacoma.piggy.view.panel.gantt;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Observable;
-
-import org.swiftgantt.model.GanttModel;
 
 import edu.uw.tacoma.piggy.model.dao.TaskDAO;
 import edu.uw.tacoma.piggy.model.entity.ProjectEntity;
@@ -15,21 +11,19 @@ import edu.uw.tacoma.piggy.model.entity.TaskEntity;
  * @author Cuong Tran, Varik Hoang
  */
 public class TaskListData
-extends Observable
 {	
 	ProjectEntity project;
 	private List<TaskEntity> tasks;
 	
-//	public TaskListData(ProjectEntity theProject)
-//	{
-//		project = theProject;
-//		tasks = new ArrayList<TaskEntity>();
-//	}
-	
-	public TaskListData()
+	/**
+	 * @author Cuong_Tran
+	 * 
+	 */
+	public TaskListData(int projectID)
 	{
-		tasks = new ArrayList<TaskEntity>();
+		tasks = TaskDAO.listTask("where ProjectID = " + projectID);
 	}
+
 	/**
 	 * Add new task into the list.
 	 * @author Varik Hoang
@@ -41,8 +35,6 @@ extends Observable
 		{
 			TaskDAO.insert(task); //Cuong test insert to Data base
 			
-			setChanged();
-			notifyObservers(tasks);
 		}
 	}
 	
@@ -65,8 +57,6 @@ extends Observable
 			}
 		}
 		TaskDAO.update(task);
-		setChanged();
-		notifyObservers(tasks);
 	}
 	
 	/**
@@ -79,8 +69,6 @@ extends Observable
 		if (tasks.remove(task))
 		{
 			TaskDAO.delete(task);
-			setChanged();
-			notifyObservers(tasks);
 		}
 	}
 	
@@ -99,8 +87,7 @@ extends Observable
 	public void clear()
 	{
 		tasks.clear();
-		setChanged();
-		notifyObservers(tasks);
+		
 	}
 	
 	/**
@@ -130,17 +117,19 @@ extends Observable
 		return tasks.isEmpty();
 	}
 	
-
-	
-//	// JUST FOR DEBUG
-//	public String toString()
-//	{
-//		StringBuilder builder = new StringBuilder();
-//		builder.append("List: \n");
-//		for (TaskEntity task: tasks)
-//			builder.append(task).append("\n");
-//		
-//		return builder.toString();
-//	}
+	/**
+	 * @author Cuong_Tran
+	 * Print out element in the list data to debug.
+	 */
+	// JUST FOR DEBUG
+	public String toString()
+	{
+		StringBuilder builder = new StringBuilder();
+		builder.append("List: \n");
+		for (TaskEntity task: tasks)
+			builder.append(task).append("\n");
+		
+		return builder.toString();
+	}
 
 }

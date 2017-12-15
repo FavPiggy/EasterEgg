@@ -1,19 +1,14 @@
 package edu.uw.tacoma.piggy.view.panel.gantt;
 
 import java.awt.BorderLayout;
-import java.sql.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Observable;
-import java.util.Observer;
 
 import javax.swing.JPanel;
 
 import org.swiftgantt.GanttChart;
 import org.swiftgantt.common.Time;
-import org.swiftgantt.demo.tab.ScheduleTab;
-import org.swiftgantt.demo.tab.TaskDialog;
 import org.swiftgantt.model.GanttModel;
 import org.swiftgantt.model.Task;
 import org.swiftgantt.model.TaskTreeModel;
@@ -31,7 +26,6 @@ import edu.uw.tacoma.piggy.view.panel.GanttChartPanel;
 @SuppressWarnings("serial")
 public class GraphicPanel
 extends JPanel
-implements Observer
 {
 	/**
 	 * The gantt model
@@ -59,10 +53,12 @@ implements Observer
 	private Task taskRoot;
 	
 	/**
-	 * The gantt chart panel
+	 * 
 	 */
-	private GanttChartPanel parent;
 	private ProjectEntity myProject;
+	/**
+	 * 
+	 */
 	private TaskDialog myDialog; 
 
 	/**
@@ -71,12 +67,13 @@ implements Observer
 	private Map<Integer, Task> taskmap;
 	
 	/**
-	 * 
+	 * Schedule variable.
 	 */
 	private ScheduleTab mySchedule;
 	
 	
 	/**
+	 * @author Cuong_Tran
 	 * The constructor
 	 * @param theGantt the parent panel
 	 */
@@ -84,7 +81,6 @@ implements Observer
 	{
 		myProject = theProject;
 		taskmap = new HashMap<Integer, Task>();
-		Date myStartDate = theProject.getStartDate();
 		
 		List<TaskEntity> tasks = TaskDAO.listTask("WHERE ProjectID = "+ theProject.getProjectID());
 		for (TaskEntity task: tasks)
@@ -94,10 +90,10 @@ implements Observer
 		chart = new GanttChart();
 		chart.setTimeUnit(TimeUnit.Day);
 		
-		mySchedule = new ScheduleTab(this);
+		mySchedule = new ScheduleTab(this, theProject.getProjectID());
 		model = new GanttModel();
 		myDialog = new TaskDialog();
-
+		update(tasks);
 		setupGantt();
 	}
 	
@@ -107,11 +103,9 @@ implements Observer
 	 */
 	public void setupGantt() {
 		chart.getConfig();
-		
-		
+				
 		TaskTreeModel taskTreeModel = new TaskTreeModel();
 		mySchedule.setTaskTreeModel(taskTreeModel);
-
 		
 		setLayout(new BorderLayout());
 		add(mySchedule, BorderLayout.NORTH);
@@ -119,16 +113,10 @@ implements Observer
 	}
 	
 	/**
-	 * The method update the new task list data
+	 * Method update data from list of task into gantt panel.
 	 * @author Varik Hoang
+	 * @param tasklist assign a list of task.
 	 */
-	@SuppressWarnings("unchecked")
-	public void update(Observable o, Object arg)
-	{
-		if (o instanceof TaskListData)
-			update((List<TaskEntity>) arg);
-	}
-
 	public void update(List<TaskEntity> tasklist)
 	{
 		model.removeAll();
@@ -163,10 +151,21 @@ implements Observer
 		chart.setModel(model);
 	}
 	
+	/**
+	 * @author Cuong_Tran
+	 * Get Gantt Chart model.
+	 * @return gantt chart model.
+	 */
 	public GanttChart getGanttChart() {
 		return chart;
 	}
 	
+	/**
+	 * @author Cuong_Tran
+	 * @param tasklist assign list of task
+	 * @param taskID assign int variale of TaskID.
+	 * @return return task entity.
+	 */
 	public TaskEntity find(List<TaskEntity> tasklist, int taskID)
 	{
 		for (TaskEntity entity: tasklist)
