@@ -58,7 +58,7 @@ extends JPanel
 		myGUI = theGui;
 		myProject = theProject;
 		
-		data = new TaskListData();
+		data = new TaskListData(theProject.getProjectID());
 		
 		
 		//data = new TaskListData(theProject); ==>comment this out if need to pass projectEntity to TaskListData
