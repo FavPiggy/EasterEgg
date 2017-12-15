@@ -13,6 +13,7 @@ public class CategoryDAOTest
 {
 	public static void main(String[] args)
 	{
+
 		List<UserEntity> list1 = UserDAO.listUser();		
 		
 		for(int i = 0; i < list1.size();i++) {

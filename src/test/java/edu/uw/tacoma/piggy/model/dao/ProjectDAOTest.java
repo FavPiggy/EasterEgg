@@ -1,22 +1,19 @@
 package edu.uw.tacoma.piggy.model.dao;
 
-import java.sql.Date;
-
-import java.util.Calendar;
 import java.util.List;
 
+import edu.uw.tacoma.piggy.model.entity.ProjectEntity;
 import junit.framework.Assert;
 import junit.framework.TestCase;
 
-import edu.uw.tacoma.piggy.model.entity.ProjectEntity;
-
 /**
- * The test case for the Project DAO
+ * The test case for the category DAO
  * @author Kerry Ferguson
  */
 public class ProjectDAOTest
 extends TestCase
 {
+
 	public void testProject()
 	{
 		ProjectEntity entity;

@@ -2,6 +2,7 @@ package edu.uw.tacoma.piggy.model.dao;
 
 import java.util.List;
 
+
 import junit.framework.Assert;
 import junit.framework.TestCase;
 
@@ -14,6 +15,7 @@ import edu.uw.tacoma.piggy.model.entity.UserEntity;
 public class UserDAOTest
 extends TestCase
 {
+
 	public void testUser()
 	{
 		UserEntity entity;

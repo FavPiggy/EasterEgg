@@ -1,5 +1,6 @@
 package edu.uw.tacoma.piggy.model.dao;
 
+
 import java.sql.Date;
 
 import java.util.Calendar;
@@ -10,6 +11,7 @@ import junit.framework.TestCase;
 
 import edu.uw.tacoma.piggy.model.entity.MemberEntity;
 
+
 /**
  * The test case for the Member DAO
  * @author Kerry Ferguson
@@ -17,6 +19,7 @@ import edu.uw.tacoma.piggy.model.entity.MemberEntity;
 public class MemberDAOTest
 extends TestCase
 {
+
 	public void testMember()
 	{
 		MemberEntity entity;

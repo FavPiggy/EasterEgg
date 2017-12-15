@@ -1,5 +1,6 @@
 package edu.uw.tacoma.piggy.model.dao;
 
+
 import java.sql.Date;
 
 import java.util.Calendar;
@@ -17,6 +18,7 @@ import edu.uw.tacoma.piggy.model.entity.MemberRoleEntity;
 public class MemberRoleDAOTest
 extends TestCase
 {
+
 	public void testMemberRole()
 	{
 		MemberRoleEntity entity;
