@@ -19,9 +19,9 @@ extends JMenuBar
 	/**
 	 * The constructor for the menu
 	 */
-	public PiggyMenu()
+	public PiggyMenu(PiggyGUI gui)
 	{
-		listener = new MenuListener();
+		listener = new MenuListener(gui);
 		
 		createFileMenu();
 		createHelpMenu();

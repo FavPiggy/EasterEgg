@@ -61,7 +61,7 @@ extends JFrame
 		setBounds(100, 100, 450, 300);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
-		piggyMenu = new PiggyMenu();
+		piggyMenu = new PiggyMenu(this);
 		setJMenuBar(piggyMenu);
 		
 		managementPanel = new ManagementPanel();
