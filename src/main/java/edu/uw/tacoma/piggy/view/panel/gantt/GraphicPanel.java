@@ -1,7 +1,6 @@
 package edu.uw.tacoma.piggy.view.panel.gantt;
 
 import java.awt.BorderLayout;
-import java.sql.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -54,11 +53,12 @@ extends JPanel
 	private Task taskRoot;
 	
 	/**
-	 * The gantt chart panel
+	 * 
 	 */
-	@SuppressWarnings("unused")
-	private GanttChartPanel parent;
 	private ProjectEntity myProject;
+	/**
+	 * 
+	 */
 	private TaskDialog myDialog; 
 
 	/**
@@ -67,12 +67,13 @@ extends JPanel
 	private Map<Integer, Task> taskmap;
 	
 	/**
-	 * 
+	 * Schedule variable.
 	 */
 	private ScheduleTab mySchedule;
 	
 	
 	/**
+	 * @author Cuong_Tran
 	 * The constructor
 	 * @param theGantt the parent panel
 	 */
@@ -80,8 +81,6 @@ extends JPanel
 	{
 		myProject = theProject;
 		taskmap = new HashMap<Integer, Task>();
-		@SuppressWarnings("unused")
-		Date myStartDate = theProject.getStartDate();
 		
 		List<TaskEntity> tasks = TaskDAO.listTask("WHERE ProjectID = "+ theProject.getProjectID());
 		for (TaskEntity task: tasks)
@@ -91,10 +90,10 @@ extends JPanel
 		chart = new GanttChart();
 		chart.setTimeUnit(TimeUnit.Day);
 		
-		mySchedule = new ScheduleTab(this);
+		mySchedule = new ScheduleTab(this, theProject.getProjectID());
 		model = new GanttModel();
 		myDialog = new TaskDialog();
-
+		update(tasks);
 		setupGantt();
 	}
 	
@@ -104,17 +103,20 @@ extends JPanel
 	 */
 	public void setupGantt() {
 		chart.getConfig();
-		
-		
+				
 		TaskTreeModel taskTreeModel = new TaskTreeModel();
 		mySchedule.setTaskTreeModel(taskTreeModel);
-
 		
 		setLayout(new BorderLayout());
 		add(mySchedule, BorderLayout.NORTH);
 		add(chart, BorderLayout.SOUTH);
 	}
-
+	
+	/**
+	 * Method update data from list of task into gantt panel.
+	 * @author Varik Hoang
+	 * @param tasklist assign a list of task.
+	 */
 	@SuppressWarnings("deprecation")
 	public void update(List<TaskEntity> tasklist)
 	{
@@ -150,10 +152,21 @@ extends JPanel
 		chart.setModel(model);
 	}
 	
+	/**
+	 * @author Cuong_Tran
+	 * Get Gantt Chart model.
+	 * @return gantt chart model.
+	 */
 	public GanttChart getGanttChart() {
 		return chart;
 	}
 	
+	/**
+	 * @author Cuong_Tran
+	 * @param tasklist assign list of task
+	 * @param taskID assign int variale of TaskID.
+	 * @return return task entity.
+	 */
 	public TaskEntity find(List<TaskEntity> tasklist, int taskID)
 	{
 		for (TaskEntity entity: tasklist)

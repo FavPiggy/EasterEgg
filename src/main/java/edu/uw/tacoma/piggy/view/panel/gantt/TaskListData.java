@@ -1,6 +1,5 @@
 package edu.uw.tacoma.piggy.view.panel.gantt;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import edu.uw.tacoma.piggy.model.dao.TaskDAO;
@@ -16,16 +15,15 @@ public class TaskListData
 	ProjectEntity project;
 	private List<TaskEntity> tasks;
 	
-//	public TaskListData(ProjectEntity theProject)
-//	{
-//		project = theProject;
-//		tasks = new ArrayList<TaskEntity>();
-//	}
-	
-	public TaskListData()
+	/**
+	 * @author Cuong_Tran
+	 * 
+	 */
+	public TaskListData(int projectID)
 	{
-		tasks = new ArrayList<TaskEntity>();
+		tasks = TaskDAO.listTask("where ProjectID = " + projectID);
 	}
+
 	/**
 	 * Add new task into the list.
 	 * @author Varik Hoang
@@ -36,6 +34,7 @@ public class TaskListData
 		if (tasks.add(task))
 		{
 			TaskDAO.insert(task); //Cuong test insert to Data base
+			
 		}
 	}
 	
@@ -88,6 +87,7 @@ public class TaskListData
 	public void clear()
 	{
 		tasks.clear();
+		
 	}
 	
 	/**
@@ -117,17 +117,19 @@ public class TaskListData
 		return tasks.isEmpty();
 	}
 	
-
-	
-//	// JUST FOR DEBUG
-//	public String toString()
-//	{
-//		StringBuilder builder = new StringBuilder();
-//		builder.append("List: \n");
-//		for (TaskEntity task: tasks)
-//			builder.append(task).append("\n");
-//		
-//		return builder.toString();
-//	}
+	/**
+	 * @author Cuong_Tran
+	 * Print out element in the list data to debug.
+	 */
+	// JUST FOR DEBUG
+	public String toString()
+	{
+		StringBuilder builder = new StringBuilder();
+		builder.append("List: \n");
+		for (TaskEntity task: tasks)
+			builder.append(task).append("\n");
+		
+		return builder.toString();
+	}
 
 }
