@@ -10,8 +10,6 @@ import javax.swing.JPanel;
 
 import org.swiftgantt.GanttChart;
 import org.swiftgantt.common.Time;
-import org.swiftgantt.demo.tab.ScheduleTab;
-import org.swiftgantt.demo.tab.TaskDialog;
 import org.swiftgantt.model.GanttModel;
 import org.swiftgantt.model.Task;
 import org.swiftgantt.model.TaskTreeModel;
