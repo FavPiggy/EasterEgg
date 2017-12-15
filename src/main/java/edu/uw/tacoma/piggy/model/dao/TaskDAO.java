@@ -104,6 +104,9 @@ public class TaskDAO
 			Connection conn = PiggyUtilities.getConnection();
 			Statement statement = conn.createStatement();
 			
+			
+			entity.setTaskID(getLastTaskID()+1);
+			
 			StringBuilder builder = new StringBuilder();
 			builder.append("insert into Task values(");
 			builder.append("").append(entity.getTaskID()).append(",");
@@ -122,6 +125,28 @@ public class TaskDAO
 		catch (SQLException e) { e.printStackTrace();	}
 
 		return resultset > 0;
+	}
+	
+	/**
+	 * @author Cuong_Tran
+	 * @return
+	 */
+	public static int getLastTaskID()
+	{
+		int lastID = -1;
+		try
+		{
+			Connection conn = PiggyUtilities.getConnection();
+			Statement statement = conn.createStatement();
+			ResultSet resultset = statement.executeQuery("select top 1 * from Task order by TaskID desc");
+			
+			while(resultset.next())
+			{
+				lastID = resultset.getInt("TaskID");
+            }
+		}
+		catch (SQLException e) { e.printStackTrace();	}
+		return lastID;
 	}
 	
 	/**
@@ -193,5 +218,7 @@ public class TaskDAO
 
 		return resultset > 0;
 	}
+	
+	
 
 }

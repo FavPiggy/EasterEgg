@@ -6,6 +6,7 @@ import java.util.Observable;
 
 import org.swiftgantt.model.GanttModel;
 
+import edu.uw.tacoma.piggy.model.dao.TaskDAO;
 import edu.uw.tacoma.piggy.model.entity.ProjectEntity;
 import edu.uw.tacoma.piggy.model.entity.TaskEntity;
 
@@ -38,6 +39,8 @@ extends Observable
 	{
 		if (tasks.add(task))
 		{
+			TaskDAO.insert(task); //Cuong test insert to Data base
+			
 			setChanged();
 			notifyObservers(tasks);
 		}
@@ -61,7 +64,7 @@ extends Observable
 				current.setParentTask(task.getParentTask());
 			}
 		}
-		
+		TaskDAO.update(task);
 		setChanged();
 		notifyObservers(tasks);
 	}
@@ -75,6 +78,7 @@ extends Observable
 	{
 		if (tasks.remove(task))
 		{
+			TaskDAO.delete(task);
 			setChanged();
 			notifyObservers(tasks);
 		}
