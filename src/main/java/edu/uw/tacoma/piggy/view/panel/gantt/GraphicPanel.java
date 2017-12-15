@@ -63,7 +63,6 @@ implements Observer
 	private ProjectEntity myProject;
 	private TaskDialog myDialog; 
 
-	
 	/**
 	 * The task map
 	 */
