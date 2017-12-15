@@ -100,22 +100,31 @@ public class ProjectPanel extends JPanel {
 		
 		JButton saveBtn = new JButton("Save");
 		saveBtn.setBounds(58, 375, 117, 29);
-//		saveBtn.addActionListener(new ActionListener() {
-//
-//			public void actionPerformed(ActionEvent e) {
-//				//ProjectEntity(Integer _ProjectID,String _ProjectName,String _ProjectAbbr,String _Description,Date _StartDate,Integer _CategoryID,Date _DateCreated)
-//				try {
+		saveBtn.addActionListener(new ActionListener() {
+
+			public void actionPerformed(ActionEvent e) {
+				//ProjectEntity(Integer _ProjectID,String _ProjectName,String _ProjectAbbr,String _Description,Date _StartDate,Integer _CategoryID,Date _DateCreated)
+				try {
 //					ProjectEntity project = new ProjectEntity(Integer.parseInt(pIdField.getText()), pNameField.getText(),
 //							AbbrField.getText(), descriptionField.getText(), new SimpleDateFormat("dd/MM/yyyy").parse(sDateField.getText()),
 //							Integer.parseInt(cIdField.getText()), new SimpleDateFormat("dd/MM/yyyy").parse(uCreatedField.getText()));
-//				} catch (NumberFormatException e1) {
-//					// TODO Auto-generated catch block
-//					e1.printStackTrace();
-//				} catch (ParseException e1) {
-//					// TODO Auto-generated catch block
-//					e1.printStackTrace();
-//				}
-//			}});
+					ProjectEntity project = new ProjectEntity();
+					project.setCategoryID(Integer.parseInt(cIdField.getText()));
+					project.setDateCreated((java.sql.Date) new SimpleDateFormat("dd/MM/yyyy").parse(uCreatedField.getText()));
+					project.setDescription(descriptionField.getText());
+					project.setProjectAbbr(AbbrField.getText());
+					project.setProjectID(Integer.parseInt(pIdField.getText()));
+					project.setProjectName(pNameField.getText());
+					project.setStartDate((java.sql.Date) new SimpleDateFormat("dd/MM/yyyy").parse(sDateField.getText()));
+					
+				} catch (NumberFormatException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				} catch (ParseException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+			}});
 		add(saveBtn);
 		
 		JButton cancelBtn = new JButton("Cancel");

@@ -73,6 +73,22 @@ public class RolePanel extends JPanel {
 		
 		JButton btnSave = new JButton("Save");
 		btnSave.setBounds(110, 253, 117, 29);
+		btnSave.addActionListener(new ActionListener(){
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				RoleEntity role = new RoleEntity();
+				try {
+					role.setDateCreated((java.sql.Date) new SimpleDateFormat("dd/MM/yyyy").parse(dateField.getText()));
+				} catch (ParseException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+				role.setDescription(descriptionField.getText());
+				role.setRoleID(Integer.parseInt(IDField.getText()));
+				
+				
+			}});
 //		btnSave.addActionListener(new ActionListener() {
 //
 //			public void actionPerformed(ActionEvent e) {
