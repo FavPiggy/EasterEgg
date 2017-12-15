@@ -25,7 +25,7 @@ public class MemberPanel extends JPanel {
 	 * Create the panel.
 	 */
 	public MemberPanel() {
-		setLayout(null);
+setLayout(null);
 		
 		JLabel lblMember = new JLabel("Member");
 		lblMember.setFont(new Font("Lucida Grande", Font.PLAIN, 26));
@@ -70,22 +70,19 @@ public class MemberPanel extends JPanel {
 		
 		JButton btnSave = new JButton("Save");
 		btnSave.setBounds(25, 252, 117, 29);
-//		btnSave.addActionListener(new ActionListener(){
-//
-//			public void actionPerformed(ActionEvent e) {
-//				// MemberEntity(Integer _MemberID,Integer _ProjectID,Integer _UserID,Date _DateJoined)
-//				try {
-//					MemberEntity member = new MemberEntity(Integer.parseInt(mIdField.getText()),Integer.parseInt(pIdField.getText()),
-//							Integer.parseInt(uIdField.getText()), new SimpleDateFormat("dd/MM/yyyy").parse(dateJoinedField.getText()));
-//				} catch (NumberFormatException e1) {
-//					// TODO Auto-generated catch block
-//					e1.printStackTrace();
-//				} catch (ParseException e1) {
-//					// TODO Auto-generated catch block
-//					e1.printStackTrace();
-//				}
-//				
-//			}});
+		btnSave.addActionListener(new ActionListener(){
+
+			public void actionPerformed(ActionEvent e) {
+				// MemberEntity(Integer _MemberID,Integer _ProjectID,Integer _UserID,Date _DateJoined)
+			
+
+					MemberEntity member = new MemberEntity();
+					member.setMemberID(Integer.parseInt(mIdField.getText()));
+					member.setProjectID(Integer.parseInt(pIdField.getText()));
+					member.setUserID(Integer.parseInt(uIdField.getText()));
+
+				
+			}});
 		add(btnSave);
 		
 		JButton btnCancel = new JButton("Cancel");
