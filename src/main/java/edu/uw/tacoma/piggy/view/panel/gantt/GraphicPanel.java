@@ -15,6 +15,7 @@ import org.swiftgantt.demo.tab.ScheduleTab;
 import org.swiftgantt.demo.tab.TaskDialog;
 import org.swiftgantt.model.GanttModel;
 import org.swiftgantt.model.Task;
+import org.swiftgantt.model.TaskTreeModel;
 import org.swiftgantt.ui.TimeUnit;
 
 import edu.uw.tacoma.piggy.model.entity.ProjectEntity;
@@ -61,6 +62,7 @@ implements Observer
 	private GanttChartPanel parent;
 	private ProjectEntity myProject;
 	private TaskDialog myDialog; 
+
 	
 	/**
 	 * The task map
@@ -71,6 +73,7 @@ implements Observer
 	 * 
 	 */
 	private ScheduleTab mySchedule;
+	
 	
 	/**
 	 * The constructor
@@ -88,26 +91,26 @@ implements Observer
 		mySchedule = new ScheduleTab(this);
 		model = new GanttModel();
 		myDialog = new TaskDialog();
-		
+		setupGantt();
+	}
+	
+	/**
+	 * @author Cuong_Tran
+	 * setup ganttChart.
+	 */
+	public void setupGantt() {
 		chart.getConfig();
 		
-//		this.chart.
-//		TaskTreeModel taskTreeModel = this.chart.getGanttModel().getTaskTreeModel();
-//		scheduleTab.setTaskTreeModel(taskTreeModel);
-//
-//		// Init the Gantt Chart component
-//		pnlContent.setLayout(new GridLayout());
-//		pnlContent.add(ganttChartDemoComp, null);
-//
-//		List<Task> tasks = this.ganttChartDemoComp.getModel().getTasksByBFS();
-//		if (tasks != null && tasks.size() > 2) {			this.ganttChartDemoComp.setSelectedTasks(tasks.get(0), tasks.get(2));
-////		}
+		
+		TaskTreeModel taskTreeModel = new TaskTreeModel();
+		mySchedule.setTaskTreeModel(taskTreeModel);
+		
 		
 		setLayout(new BorderLayout());
 		add(mySchedule, BorderLayout.NORTH);
 		add(chart, BorderLayout.SOUTH);
 	}
-
+	
 	/**
 	 * The method update the new task list data
 	 * @author Varik Hoang
