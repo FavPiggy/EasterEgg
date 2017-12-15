@@ -1,6 +1,7 @@
 package edu.uw.tacoma.piggy.view.panel.gantt;
 
 import java.awt.BorderLayout;
+import java.sql.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -17,6 +18,7 @@ import org.swiftgantt.model.GanttModel;
 import org.swiftgantt.model.Task;
 import org.swiftgantt.ui.TimeUnit;
 
+import edu.uw.tacoma.piggy.model.dao.TaskDAO;
 import edu.uw.tacoma.piggy.model.entity.ProjectEntity;
 import edu.uw.tacoma.piggy.model.entity.TaskEntity;
 import edu.uw.tacoma.piggy.view.panel.GanttChartPanel;
@@ -80,28 +82,24 @@ implements Observer
 	{
 		myProject = theProject;
 		taskmap = new HashMap<Integer, Task>();
+		Date myStartDate = theProject.getStartDate();
 		
-
+		List<TaskEntity> tasks = TaskDAO.listTask("WHERE ProjectID = "+ theProject.getProjectID());
+		for (TaskEntity task: tasks)
+			System.out.println(task);
+		
+		
 		chart = new GanttChart();
 		chart.setTimeUnit(TimeUnit.Day);
 		
 		mySchedule = new ScheduleTab(this);
 		model = new GanttModel();
 		myDialog = new TaskDialog();
+	
 		
 		chart.getConfig();
 		
-//		this.chart.
-//		TaskTreeModel taskTreeModel = this.chart.getGanttModel().getTaskTreeModel();
-//		scheduleTab.setTaskTreeModel(taskTreeModel);
-//
-//		// Init the Gantt Chart component
-//		pnlContent.setLayout(new GridLayout());
-//		pnlContent.add(ganttChartDemoComp, null);
-//
-//		List<Task> tasks = this.ganttChartDemoComp.getModel().getTasksByBFS();
-//		if (tasks != null && tasks.size() > 2) {			this.ganttChartDemoComp.setSelectedTasks(tasks.get(0), tasks.get(2));
-////		}
+
 		
 		setLayout(new BorderLayout());
 		add(mySchedule, BorderLayout.NORTH);

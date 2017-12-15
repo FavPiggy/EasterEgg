@@ -15,7 +15,7 @@ import java.util.List;
 
 /**
  *
- * @author Anthenthat Happened
+ * 
  */
 public class GanttChartDemo extends javax.swing.JFrame {
 	private static final long serialVersionUID = -2642571955243624522L;
