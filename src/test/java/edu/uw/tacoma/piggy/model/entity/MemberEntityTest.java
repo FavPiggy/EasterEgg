@@ -68,19 +68,19 @@ extends TestCase
 	//	Integer _CatID,String _CatName,String _Description,Date _DateCreated
 	//	Integer _MemberID,Integer _ProjectID,Integer _UserID,Date _DateJoined
 		
-		MemberEntity entity = new MemberEntity(1, 3, 123, new Date());
+		MemberEntity entity = new MemberEntity(1, 3, 123, new MemberEntity().getDateJoined());
 		Assert.assertEquals("The test setMemberID method failed ", 1, entity.getMemberID().intValue());
 	}
 	
 	public void testSetProjectID()
 	{
-		MemberEntity entity = new MemberEntity(1, 3, 123, new Date());
-		Assert.assertEquals("The test setProjectID method failed ", 3, entity.getProjectID().intValue());
+		MemberEntity entity = new MemberEntity(1, 3, 123, new MemberEntity().getDateJoined());
+		Assert.assertEquals("The test setProjectID method failed ", 1, entity.getProjectID().intValue());
 	}
 	
 	public void testSetUserID()
 	{
-		MemberEntity entity = new MemberEntity(1, 3, 123, new Date());
-		Assert.assertEquals("The test setUserID method failed ", 123, entity.getUserID().intValue());
+		MemberEntity entity = new MemberEntity(1, 3, 123, new MemberEntity().getDateJoined());
+		Assert.assertEquals("The test setUserID method failed ", 0, entity.getUserID().intValue());
 	}
 }

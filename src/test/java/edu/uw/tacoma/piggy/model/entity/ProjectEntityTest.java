@@ -73,22 +73,27 @@ extends TestCase
 		Assert.assertEquals("The test setProjectID method failed ", "", new ProjectEntity().getDescription());
 	}
 	
-//	public void testSetProjectID()
-//	{
-//		ProjectEntity entity = new CategoryEntity(10, "Internal Project", "...", new Date());
-//		Assert.assertEquals("The test setCatID method failed ", 10, entity.getCatID().intValue());
-//	}
-//	
-//	public void testSetProjectName()
-//	{
-//		ProjectEntity entity = new CategoryEntity(10, "Internal Project", "...", new Date());
-//		Assert.assertEquals("The test setCatID method failed ", "Internal Project", entity.getCatName());
-//	}
+	public void testSetProjectID()
+	{
+		
+		
+		ProjectEntity entity = new ProjectEntity(0, "Piggy Application", "PIGGY", "The main piggy project", 
+												new ProjectEntity().getStartDate(), 1, new ProjectEntity().getDateCreated());
+		Assert.assertEquals("The test setProjectID method failed ", 0, entity.getProjectID().intValue());
+	}
+	
+	public void testSetProjectName()
+	{
+		ProjectEntity entity = new ProjectEntity(0, "Piggy Application", "PIGGY", "The main piggy project", 
+												new ProjectEntity().getStartDate(), 1, new ProjectEntity().getDateCreated());
+		Assert.assertEquals("The test setProjectName method failed ", "Internal Project", entity.getProjectName());
+	}
 	
 	public void testSetDescription()
 	{
-		CategoryEntity entity = new CategoryEntity(10, "Internal Project", "...", new Date());
-		Assert.assertEquals("The test setCatID method failed ", "...", entity.getDescription());
+		ProjectEntity entity = new ProjectEntity(0, "Piggy Application", "PIGGY", "The main piggy project", 
+												 new ProjectEntity().getStartDate(), 1, new ProjectEntity().getDateCreated());
+		Assert.assertEquals("The test setDescription method failed ", "...", entity.getDescription());
 	}
 
 }

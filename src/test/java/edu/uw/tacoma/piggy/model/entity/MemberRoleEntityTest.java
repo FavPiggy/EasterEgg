@@ -46,9 +46,9 @@ extends TestCase
 		
 		Assert.assertTrue("The test constructor with parameter failed ", succeed);
 	}
-	public void testGetTaskID()
+	public void testGetRoleID()
 	{
-		Assert.assertEquals("The test setTaskID method failed ", 0, new MemberRoleEntity().getTaskID().intValue());
+		Assert.assertEquals("The test setRoleID method failed ", 0, new MemberRoleEntity().getRoleID().intValue());
 	}
 	
 	public void testGetMemberID()
@@ -56,15 +56,15 @@ extends TestCase
 		Assert.assertEquals("The test setMemberID method failed ", 0, new MemberEntity().getMemberID().intValue());
 	}
 	
-	public void testSetTaskID()
+	public void testSetRoleID()
 	{
-		MemberRoleEntity entity = new MemberRoleEntity(2, 1);
-		Assert.assertEquals("The test setTaskID method failed ", 2, entity.getTaskID().intValue());
+		MemberRoleEntity entity = new MemberRoleEntity(1, 2, new MemberRoleEntity().getDateCreated());
+		Assert.assertEquals("The test setRoleID method failed ", 2, entity.getRoleID().intValue());
 	}
 	
 	public void testSetMemberID()
 	{
-		MemberRoleEntity entity = new MemberRoleEntity(2, 1);
+		MemberRoleEntity entity = new MemberRoleEntity(2, 1, new MemberRoleEntity().getDateCreated());
 		Assert.assertEquals("The test setMemberRoleID method failed ", 1, entity.getMemberID().intValue());
 	}
 
