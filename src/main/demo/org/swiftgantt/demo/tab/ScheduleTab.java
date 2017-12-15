@@ -37,8 +37,12 @@ public class ScheduleTab extends javax.swing.JPanel {
 	private GanttChart ganttChart = null;
 	private TaskListData myListData = null;
 	
+	///**Add task tree model variable.**/
+	//private TaskTreeModel ttm;
+	
 	public ScheduleTab() {
 		initComponents();
+		//ttm = new TaskTreeModel();
 	}
 	
 	public ScheduleTab(GraphicPanel graphic) {
@@ -290,10 +294,9 @@ public class ScheduleTab extends javax.swing.JPanel {
 		task.setDescription(td.getTask().getDescription());
 		task.setDuration(td.getTask().getDuration());
 		myListData.add(task);
-		
-		//Cuong create new tree to test display on gantt graphic panel. 
-		TaskTreeModel ttm = new TaskTreeModel();
-		
+				
+		TaskTreeModel ttm = (TaskTreeModel) taskTree.getTreeModel();
+			
 		ttm.add(td.getTask());
 		taskTree.updateUI();
 		ganttChart.resumeUI();
