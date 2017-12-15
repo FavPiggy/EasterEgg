@@ -1,13 +1,14 @@
 package edu.uw.tacoma.piggy.model.entity;
 
-import java.util.Date;
+import java.util.Calendar;
+import java.sql.Date;
 
 import junit.framework.Assert;
 import junit.framework.TestCase;
 
 /**
- * The test case for the category entity
- * @author Varik Hoang
+ * The test case for the Category entity
+ * @author Kirtwinder Gulati
  */
 public class CategoryEntityTest
 extends TestCase
@@ -32,44 +33,16 @@ extends TestCase
 		
 		try
 		{
-			new CategoryEntity(0, "", "", new Date());
+			CategoryEntity entity = new CategoryEntity();
+			entity.setCatID(0);
+			entity.setCatName("");
+			entity.setDescription("");
+			entity.setDateCreated(new Date(Calendar.getInstance().getTime().getTime()));
 			succeed = true;
 		}
 		catch (Exception ex) {}
 		
 		Assert.assertTrue("The test constructor with parameter failed ", succeed);
 	}
-	
-	public void testGetCatID()
-	{
-		Assert.assertEquals("The test setCatID method failed ", 0, new CategoryEntity().getCatID().intValue());
-	}
-	
-	public void testGetCatName()
-	{
-		Assert.assertEquals("The test setCatID method failed ", "", new CategoryEntity().getCatName());
-	}
-	
-	public void testGetDescription()
-	{
-		Assert.assertEquals("The test setCatID method failed ", "", new CategoryEntity().getDescription());
-	}
-	
-	public void testSetCatID()
-	{
-		CategoryEntity entity = new CategoryEntity(10, "Internal Project", "...", new Date());
-		Assert.assertEquals("The test setCatID method failed ", 10, entity.getCatID().intValue());
-	}
-	
-	public void testSetCatName()
-	{
-		CategoryEntity entity = new CategoryEntity(10, "Internal Project", "...", new Date());
-		Assert.assertEquals("The test setCatID method failed ", "Internal Project", entity.getCatName());
-	}
-	
-	public void testSetDescription()
-	{
-		CategoryEntity entity = new CategoryEntity(10, "Internal Project", "...", new Date());
-		Assert.assertEquals("The test setCatID method failed ", "...", entity.getDescription());
-	}
+
 }

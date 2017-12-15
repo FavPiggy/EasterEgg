@@ -1,13 +1,16 @@
 package edu.uw.tacoma.piggy.model.entity;
 
-import java.util.Date;
+
+import java.util.Calendar;
+import java.sql.Date;
+
 
 import junit.framework.Assert;
 import junit.framework.TestCase;
 
 /**
- * The test case for the category entity
- * @author Varik Hoang
+ * The test case for the Project entity
+ * @author Kirtwinder Gulati
  */
 public class ProjectEntityTest
 extends TestCase
@@ -18,7 +21,8 @@ extends TestCase
 		
 		try
 		{
-			new CategoryEntity();
+
+			new ProjectEntity();
 			succeed = true;
 		}
 		catch (Exception ex) {}
@@ -32,13 +36,22 @@ extends TestCase
 		
 		try
 		{
-			new CategoryEntity(0, "", "", new Date());
+
+			ProjectEntity entity = new ProjectEntity();
+			entity.setProjectID(0);
+			entity.setProjectName("");
+			entity.setProjectAbbr("");
+			entity.setDescription("");
+			entity.setStartDate(new Date(Calendar.getInstance().getTime().getTime()));
+			entity.setCategoryID(0);
+			entity.setDateCreated(new Date(Calendar.getInstance().getTime().getTime()));
 			succeed = true;
 		}
 		catch (Exception ex) {}
 		
 		Assert.assertTrue("The test constructor with parameter failed ", succeed);
 	}
+
 	
 	public void testGetProjectID()
 	{
@@ -77,4 +90,5 @@ extends TestCase
 		CategoryEntity entity = new CategoryEntity(10, "Internal Project", "...", new Date());
 		Assert.assertEquals("The test setCatID method failed ", "...", entity.getDescription());
 	}
+
 }

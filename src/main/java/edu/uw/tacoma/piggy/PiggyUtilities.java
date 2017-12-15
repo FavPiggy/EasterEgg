@@ -1,6 +1,13 @@
 package edu.uw.tacoma.piggy;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Locale;
+
+import net.ucanaccess.jdbc.UcanaccessDriver;
 
 /**
  * The class for project utilities
@@ -10,17 +17,42 @@ import java.util.Locale;
 public class PiggyUtilities
 {
 	/**
+	 * The driver class
+	 */
+	private static final String DRIVER_CLASS = UcanaccessDriver.class.getName();
+	
+	/**
 	 * The connection string
 	 */
-	private static final String	DRIVER_PATH	= "jdbc:relique:csv:";
+	private static final String	DRIVER_PATH	= "jdbc:ucanaccess://";
 
 	/**
 	 * The driver to access into the data
 	 */
-	private static String		driver;
+	private static String driver;
 
-	public static String getDriver()
+	private static boolean done = false;
+	
+	/**
+	 * The method returns the driver string
+	 * @return the driver string
+	 */
+	private static String getDriver()
 	{
+		if (!done)
+		{
+			try
+			{
+				Class.forName(DRIVER_CLASS);
+				done = true;
+			}
+			catch (ClassNotFoundException e)
+			{
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		
 		if (driver == null)
 		{
 			StringBuilder builder = new StringBuilder();
@@ -28,12 +60,30 @@ public class PiggyUtilities
 			builder.append(DRIVER_PATH);
 			if (getOperatingSystemType() != OSType.Windows) builder.append("/");
 			builder.append(PiggyUtilities.class.getResource("/").toString().substring(6));
-			builder.append("db");
+			builder.append("db/database.mdb");
 
 			driver = builder.toString();
 		}
 
 		return driver;
+	}
+	
+	/**
+	 * The method returns the connection
+	 * @return
+	 */
+	public static Connection getConnection()
+	{
+		try
+		{
+			return DriverManager.getConnection(getDriver());
+		}
+		catch (SQLException e)
+		{
+			e.printStackTrace();
+		}
+		
+		return null;
 	}
 
 	public static OSType getOperatingSystemType()
@@ -51,4 +101,9 @@ public class PiggyUtilities
 	{
 		Windows, MacOS, Linux, Other
 	};
+	
+	/**
+	 * The date formatter
+	 */
+	public static final DateFormat DateFormatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 }

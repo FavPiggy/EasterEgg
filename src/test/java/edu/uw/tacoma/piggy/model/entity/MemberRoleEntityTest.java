@@ -1,13 +1,16 @@
 package edu.uw.tacoma.piggy.model.entity;
 
-import java.util.Date;
+
+import java.util.Calendar;
+import java.sql.Date;
 
 import junit.framework.Assert;
 import junit.framework.TestCase;
 
 /**
- * The test case for the category entity
- * @author Kerry Ferguson
+
+ * The test case for the MemberRole entity
+ * @author Kirtwinder Gulati
  */
 public class MemberRoleEntityTest
 extends TestCase
@@ -18,7 +21,8 @@ extends TestCase
 		
 		try
 		{
-			new CategoryEntity();
+
+			new MemberRoleEntity();
 			succeed = true;
 		}
 		catch (Exception ex) {}
@@ -32,14 +36,16 @@ extends TestCase
 		
 		try
 		{
-			new CategoryEntity(0, "", "", new Date());
+			MemberRoleEntity entity = new MemberRoleEntity();
+			entity.setMemberID(0);
+			entity.setRoleID(0);
+			entity.setDateCreated(new Date(Calendar.getInstance().getTime().getTime()));
 			succeed = true;
 		}
 		catch (Exception ex) {}
 		
 		Assert.assertTrue("The test constructor with parameter failed ", succeed);
 	}
-	
 	public void testGetTaskID()
 	{
 		Assert.assertEquals("The test setTaskID method failed ", 0, new MemberRoleEntity().getTaskID().intValue());
@@ -61,6 +67,5 @@ extends TestCase
 		MemberRoleEntity entity = new MemberRoleEntity(2, 1);
 		Assert.assertEquals("The test setMemberRoleID method failed ", 1, entity.getMemberID().intValue());
 	}
-	
-	
+
 }

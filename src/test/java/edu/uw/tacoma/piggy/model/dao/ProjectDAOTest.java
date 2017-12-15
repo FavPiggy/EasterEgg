@@ -13,15 +13,34 @@ import junit.framework.TestCase;
 public class ProjectDAOTest
 extends TestCase
 {
-	public void testListCategory()
+
+	public void testProject()
 	{
+		ProjectEntity entity;
+		
 		List<ProjectEntity> list = ProjectDAO.listProject();
-		Assert.assertEquals("The test list project method failed ", 3, list.size());
+		Assert.assertEquals("The test list Project method failed ", 2, list.size());
+		
+		// should set different field values
+		entity = new ProjectEntity();
+		entity.setProjectID(10);
+		entity.setProjectName("");
+		entity.setProjectAbbr("");
+		entity.setDescription("");
+		entity.setStartDate(new Date(Calendar.getInstance().getTime().getTime()));
+		entity.setCategoryID(0);
+		entity.setDateCreated(new Date(Calendar.getInstance().getTime().getTime()));
+		Assert.assertTrue("The test insert method failed ", ProjectDAO.insert(entity));
+		
+		entity.setProjectID(10);
+		entity.setProjectName("");
+		entity.setProjectAbbr("");
+		entity.setDescription("");
+		entity.setStartDate(new Date(Calendar.getInstance().getTime().getTime()));
+		entity.setCategoryID(0);
+		entity.setDateCreated(new Date(Calendar.getInstance().getTime().getTime()));
+		Assert.assertTrue("The test update method failed ", ProjectDAO.update(entity));
+		Assert.assertTrue("The test delete method failed ", ProjectDAO.delete(entity));
 	}
-	
-	public void testListCategoryID()
-	{
-		List<ProjectEntity> list = ProjectDAO.listProject("ID", "0");
-		Assert.assertEquals("The test list project method failed ", 1, list.size());
-	}
+
 }
