@@ -14,6 +14,7 @@ import org.swiftgantt.model.Task;
 import org.swiftgantt.model.TaskTreeModel;
 import org.swiftgantt.ui.TimeUnit;
 
+import edu.uw.tacoma.piggy.model.dao.TaskDAO;
 import edu.uw.tacoma.piggy.model.entity.TaskEntity;
 import edu.uw.tacoma.piggy.view.panel.gantt.GraphicPanel;
 import edu.uw.tacoma.piggy.view.panel.gantt.TaskListData;
@@ -294,9 +295,11 @@ public class ScheduleTab extends javax.swing.JPanel {
 		task.setDescription(td.getTask().getDescription());
 		task.setDuration(td.getTask().getDuration());
 		myListData.add(task);
-				
+		System.out.println(TaskDAO.listTask());
+		
 		TaskTreeModel ttm = (TaskTreeModel) taskTree.getTreeModel();
 			
+		
 		ttm.add(td.getTask());
 		taskTree.updateUI();
 		ganttChart.resumeUI();
