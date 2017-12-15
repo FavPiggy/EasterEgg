@@ -16,6 +16,7 @@ import org.swiftgantt.demo.tab.ScheduleTab;
 import org.swiftgantt.demo.tab.TaskDialog;
 import org.swiftgantt.model.GanttModel;
 import org.swiftgantt.model.Task;
+import org.swiftgantt.model.TaskTreeModel;
 import org.swiftgantt.ui.TimeUnit;
 
 import edu.uw.tacoma.piggy.model.dao.TaskDAO;
@@ -63,7 +64,7 @@ implements Observer
 	private GanttChartPanel parent;
 	private ProjectEntity myProject;
 	private TaskDialog myDialog; 
-	
+
 	/**
 	 * The task map
 	 */
@@ -73,6 +74,7 @@ implements Observer
 	 * 
 	 */
 	private ScheduleTab mySchedule;
+	
 	
 	/**
 	 * The constructor
@@ -95,17 +97,27 @@ implements Observer
 		mySchedule = new ScheduleTab(this);
 		model = new GanttModel();
 		myDialog = new TaskDialog();
+
+		setupGantt();
+	}
 	
-		
+	/**
+	 * @author Cuong_Tran
+	 * setup ganttChart.
+	 */
+	public void setupGantt() {
 		chart.getConfig();
 		
+		
+		TaskTreeModel taskTreeModel = new TaskTreeModel();
+		mySchedule.setTaskTreeModel(taskTreeModel);
 
 		
 		setLayout(new BorderLayout());
 		add(mySchedule, BorderLayout.NORTH);
 		add(chart, BorderLayout.SOUTH);
 	}
-
+	
 	/**
 	 * The method update the new task list data
 	 * @author Varik Hoang

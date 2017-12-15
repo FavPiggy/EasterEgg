@@ -37,8 +37,12 @@ public class ScheduleTab extends javax.swing.JPanel {
 	private GanttChart ganttChart = null;
 	private TaskListData myListData = null;
 	
+	///**Add task tree model variable.**/
+	//private TaskTreeModel ttm;
+	
 	public ScheduleTab() {
 		initComponents();
+		//ttm = new TaskTreeModel();
 	}
 	
 	public ScheduleTab(GraphicPanel graphic) {
@@ -261,18 +265,16 @@ public class ScheduleTab extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
 	private void cmbTimeUnitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbTimeUnitActionPerformed
-		//if (cmbTimeUnit.getSelectedItem().equals("Hour")) {
-			//ganttChart.setTimeUnit(TimeUnit.Hour);
-//		} else if (cmbTimeUnit.getSelectedItem().equals("AllDay")) {
-//	//		ganttComp.initAllDayModel();
-		if (cmbTimeUnit.getSelectedItem().equals("Day")) {
+		if (cmbTimeUnit.getSelectedItem().equals("Hour")) {
+			ganttChart.setTimeUnit(TimeUnit.Hour);
+		} else if (cmbTimeUnit.getSelectedItem().equals("Day")) {
 			ganttChart.setTimeUnit(TimeUnit.Day);
-//		} else if (cmbTimeUnit.getSelectedItem().equals("Week")) {
-//			ganttChart.getTimeUnit();
-//		} else if (cmbTimeUnit.getSelectedItem().equals("Month")) {
-//	//		ganttComp.initMonthlyModel();
-//		} else if (cmbTimeUnit.getSelectedItem().equals("Year")) {
-//	//		ganttComp.initYearModel();
+		} else if (cmbTimeUnit.getSelectedItem().equals("Week")) {
+			ganttChart.setTimeUnit(TimeUnit.Week);
+		} else if (cmbTimeUnit.getSelectedItem().equals("Month")) {
+			ganttChart.setTimeUnit(TimeUnit.Month);
+		} else if (cmbTimeUnit.getSelectedItem().equals("Year")) {
+			ganttChart.setTimeUnit(TimeUnit.Year);
 		}
 		taskTree.setTreeModel(ganttChart.getModel().getTaskTreeModel());
 		taskTree.updateUI();
@@ -292,11 +294,12 @@ public class ScheduleTab extends javax.swing.JPanel {
 		task.setDescription(td.getTask().getDescription());
 		task.setDuration(td.getTask().getDuration());
 		myListData.add(task);
-		//Cuong create new tree to test display on gantt graphic panel. 
-		TaskTreeModel ttm = new TaskTreeModel();
-		
+				
+		TaskTreeModel ttm = (TaskTreeModel) taskTree.getTreeModel();
+			
 		ttm.add(td.getTask());
 		taskTree.updateUI();
+		ganttChart.resumeUI();
 	}//GEN-LAST:event_btnAddTaskToRootActionPerformed
 	
 
