@@ -1,6 +1,5 @@
 package edu.uw.tacoma.piggy.view.panel;
 
-import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -11,7 +10,6 @@ import edu.uw.tacoma.piggy.view.panel.management.CategoryPanel;
 import edu.uw.tacoma.piggy.view.panel.management.MemberPanel;
 import edu.uw.tacoma.piggy.view.panel.management.ProjectPanel;
 import edu.uw.tacoma.piggy.view.panel.management.RolePanel;
-import edu.uw.tacoma.piggy.view.panel.management.ToolPanel;
 import edu.uw.tacoma.piggy.view.panel.management.UserPanel;
 
 @SuppressWarnings("serial")

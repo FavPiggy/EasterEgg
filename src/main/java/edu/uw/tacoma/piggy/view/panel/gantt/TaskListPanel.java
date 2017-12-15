@@ -91,6 +91,7 @@ extends JPanel
 		model.fireTableDataChanged();
 	}
 	
+	@SuppressWarnings("unused")
 	private void addRow(TaskEntity entity)
 	{
 		data[3-3] = entity.getTaskID();

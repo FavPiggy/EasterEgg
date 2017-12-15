@@ -5,8 +5,6 @@ import java.sql.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Observable;
-import java.util.Observer;
 
 import javax.swing.JPanel;
 
@@ -31,7 +29,6 @@ import edu.uw.tacoma.piggy.view.panel.GanttChartPanel;
 @SuppressWarnings("serial")
 public class GraphicPanel
 extends JPanel
-implements Observer
 {
 	/**
 	 * The gantt model
@@ -61,6 +58,7 @@ implements Observer
 	/**
 	 * The gantt chart panel
 	 */
+	@SuppressWarnings("unused")
 	private GanttChartPanel parent;
 	private ProjectEntity myProject;
 	private TaskDialog myDialog; 
@@ -84,6 +82,7 @@ implements Observer
 	{
 		myProject = theProject;
 		taskmap = new HashMap<Integer, Task>();
+		@SuppressWarnings("unused")
 		Date myStartDate = theProject.getStartDate();
 		
 		List<TaskEntity> tasks = TaskDAO.listTask("WHERE ProjectID = "+ theProject.getProjectID());
@@ -117,18 +116,8 @@ implements Observer
 		add(mySchedule, BorderLayout.NORTH);
 		add(chart, BorderLayout.SOUTH);
 	}
-	
-	/**
-	 * The method update the new task list data
-	 * @author Varik Hoang
-	 */
-	@SuppressWarnings("unchecked")
-	public void update(Observable o, Object arg)
-	{
-		if (o instanceof TaskListData)
-			update((List<TaskEntity>) arg);
-	}
 
+	@SuppressWarnings("deprecation")
 	public void update(List<TaskEntity> tasklist)
 	{
 		model.removeAll();

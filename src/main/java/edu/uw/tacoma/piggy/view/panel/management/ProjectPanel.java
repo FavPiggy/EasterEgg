@@ -7,7 +7,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Date;
 
 import javax.swing.JTextField;
 
@@ -15,6 +14,7 @@ import edu.uw.tacoma.piggy.model.entity.ProjectEntity;
 
 import javax.swing.JButton;
 
+@SuppressWarnings("serial")
 public class ProjectPanel extends JPanel {
 	private JTextField pIdField;
 	private JTextField pNameField;

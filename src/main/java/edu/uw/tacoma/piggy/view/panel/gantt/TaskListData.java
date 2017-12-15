@@ -2,9 +2,6 @@ package edu.uw.tacoma.piggy.view.panel.gantt;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Observable;
-
-import org.swiftgantt.model.GanttModel;
 
 import edu.uw.tacoma.piggy.model.dao.TaskDAO;
 import edu.uw.tacoma.piggy.model.entity.ProjectEntity;
@@ -15,7 +12,6 @@ import edu.uw.tacoma.piggy.model.entity.TaskEntity;
  * @author Cuong Tran, Varik Hoang
  */
 public class TaskListData
-extends Observable
 {	
 	ProjectEntity project;
 	private List<TaskEntity> tasks;
@@ -40,9 +36,6 @@ extends Observable
 		if (tasks.add(task))
 		{
 			TaskDAO.insert(task); //Cuong test insert to Data base
-			
-			setChanged();
-			notifyObservers(tasks);
 		}
 	}
 	
@@ -65,8 +58,6 @@ extends Observable
 			}
 		}
 		TaskDAO.update(task);
-		setChanged();
-		notifyObservers(tasks);
 	}
 	
 	/**
@@ -79,8 +70,6 @@ extends Observable
 		if (tasks.remove(task))
 		{
 			TaskDAO.delete(task);
-			setChanged();
-			notifyObservers(tasks);
 		}
 	}
 	
@@ -99,8 +88,6 @@ extends Observable
 	public void clear()
 	{
 		tasks.clear();
-		setChanged();
-		notifyObservers(tasks);
 	}
 	
 	/**
