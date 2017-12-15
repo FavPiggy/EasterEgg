@@ -2,7 +2,6 @@ package edu.uw.tacoma.piggy.model.dao;
 
 import java.util.List;
 
-import edu.uw.tacoma.piggy.model.entity.CategoryEntity;
 import edu.uw.tacoma.piggy.model.entity.MemberEntity;
 import edu.uw.tacoma.piggy.model.entity.MemberRoleEntity;
 import edu.uw.tacoma.piggy.model.entity.ProjectEntity;
