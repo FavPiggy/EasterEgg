@@ -3,15 +3,13 @@ package edu.uw.tacoma.piggy.view.panel.management;
 import javax.swing.JPanel;
 import javax.swing.JLabel;
 import java.awt.Font;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 import javax.swing.JTextField;
 
-import edu.uw.tacoma.piggy.model.entity.UserEntity;
 
 import javax.swing.JButton;
 
+@SuppressWarnings("serial")
 public class UserPanel extends JPanel {
 	private JTextField IDField;
 	private JTextField fNameField;
@@ -67,12 +65,12 @@ public class UserPanel extends JPanel {
 		
 		JButton btnSave = new JButton("Save");
 		btnSave.setBounds(89, 247, 117, 29);
-		btnSave.addActionListener(new ActionListener() {
-
-			public void actionPerformed(ActionEvent e) {
-				UserEntity user = new UserEntity(Integer.parseInt(IDField.getText()), fNameField.getText(),
-						lNameField.getText(), numField.getText());
-			}});
+//		btnSave.addActionListener(new ActionListener() {
+//
+//			public void actionPerformed(ActionEvent e) {
+//				UserEntity user = new UserEntity(Integer.parseInt(IDField.getText()), fNameField.getText(),
+//						lNameField.getText(), numField.getText());
+//			}});
 		add(btnSave);
 		
 		JButton btnCancel = new JButton("Cancel");

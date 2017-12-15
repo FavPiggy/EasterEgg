@@ -5,16 +5,13 @@ import javax.swing.JLabel;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-
 import javax.swing.JTextField;
 
 import edu.uw.tacoma.piggy.model.entity.MemberEntity;
 
 import javax.swing.JButton;
 
+@SuppressWarnings("serial")
 public class MemberPanel extends JPanel {
 	private JTextField mIdField;
 	private JTextField pIdField;

@@ -8,15 +8,14 @@ import java.awt.event.ActionListener;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 
 import javax.swing.JTextField;
 
 import edu.uw.tacoma.piggy.model.entity.RoleEntity;
 
-import javax.management.relation.Role;
 import javax.swing.JButton;
 
+@SuppressWarnings("serial")
 public class RolePanel extends JPanel {
 	private JTextField IDField;
 	private JTextField roleNameField;
