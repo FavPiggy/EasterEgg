@@ -1,6 +1,7 @@
 package edu.uw.tacoma.piggy.view.panel.gantt;
 
 import java.awt.BorderLayout;
+import java.sql.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -18,6 +19,7 @@ import org.swiftgantt.model.Task;
 import org.swiftgantt.model.TaskTreeModel;
 import org.swiftgantt.ui.TimeUnit;
 
+import edu.uw.tacoma.piggy.model.dao.TaskDAO;
 import edu.uw.tacoma.piggy.model.entity.ProjectEntity;
 import edu.uw.tacoma.piggy.model.entity.TaskEntity;
 import edu.uw.tacoma.piggy.view.panel.GanttChartPanel;
@@ -82,14 +84,20 @@ implements Observer
 	{
 		myProject = theProject;
 		taskmap = new HashMap<Integer, Task>();
+		Date myStartDate = theProject.getStartDate();
 		
-
+		List<TaskEntity> tasks = TaskDAO.listTask("WHERE ProjectID = "+ theProject.getProjectID());
+		for (TaskEntity task: tasks)
+			System.out.println(task);
+		
+		
 		chart = new GanttChart();
 		chart.setTimeUnit(TimeUnit.Day);
 		
 		mySchedule = new ScheduleTab(this);
 		model = new GanttModel();
 		myDialog = new TaskDialog();
+
 		setupGantt();
 	}
 	
@@ -103,7 +111,7 @@ implements Observer
 		
 		TaskTreeModel taskTreeModel = new TaskTreeModel();
 		mySchedule.setTaskTreeModel(taskTreeModel);
-		
+
 		
 		setLayout(new BorderLayout());
 		add(mySchedule, BorderLayout.NORTH);
